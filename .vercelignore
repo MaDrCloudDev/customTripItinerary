@@ -1,13 +1,8 @@
 node_modules
-.svelte-kit
-src
-static
-*.md
-*.txt
-*.png
 .git
 .vscode
 debug-pdf.js
 test-pdf.js
 test-simple.js
 logs_result.csv
+*.md

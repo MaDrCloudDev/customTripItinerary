@@ -1,6 +1,8 @@
 import { y as bind_props, z as attr, F as attr_class, G as stringify, J as ensure_array_like, K as head, N as clsx } from "../../chunks/index.js";
 import { e as escape_html } from "../../chunks/context.js";
 import "clsx";
+import "jspdf";
+import "html2canvas";
 const itineraryData = {
   cruise: {
     title: "Cruise Itinerary",
@@ -756,10 +758,12 @@ const calculateDuration = (startTime, endTime) => {
   }
 };
 function PrintButton($$renderer, $$props) {
-  let viewMode = $$props["viewMode"];
-  let dayIndex = $$props["dayIndex"];
-  $$renderer.push(`<button class="px-3 py-1.5 text-xs rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-medium hover:shadow-md hover:scale-105 transition-all duration-300">🖨️ PDF</button>`);
-  bind_props($$props, { viewMode, dayIndex });
+  $$renderer.component(($$renderer2) => {
+    let viewMode = $$props["viewMode"];
+    let dayIndex = $$props["dayIndex"];
+    $$renderer2.push(`<button class="px-3 py-1.5 text-xs rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-medium hover:shadow-md hover:scale-105 transition-all duration-300">🖨️ PDF</button>`);
+    bind_props($$props, { viewMode, dayIndex });
+  });
 }
 function Navigation($$renderer, $$props) {
   $$renderer.component(($$renderer2) => {

@@ -85,6 +85,38 @@ export async function generateClientPDF(
 		// Wait a moment for layout to settle
 		await new Promise((resolve) => setTimeout(resolve, 200));
 
+		// Remove any canvas elements with zero dimensions to prevent createPattern errors
+		const canvases = element.querySelectorAll('canvas');
+		canvases.forEach((canvas) => {
+			if (canvas.width === 0 || canvas.height === 0) {
+				console.warn('Removing canvas with zero dimensions:', canvas);
+				canvas.remove();
+			}
+		});
+
+		// Remove any img elements that might not have loaded or have zero dimensions
+		const images = element.querySelectorAll('img');
+		images.forEach((img) => {
+			if (
+				img.naturalWidth === 0 ||
+				img.naturalHeight === 0 ||
+				!img.complete
+			) {
+				console.warn('Removing problematic image:', img);
+				img.remove();
+			}
+		});
+
+		// Remove any SVG elements that might have zero dimensions
+		const svgs = element.querySelectorAll('svg');
+		svgs.forEach((svg) => {
+			const rect = svg.getBoundingClientRect();
+			if (rect.width === 0 || rect.height === 0) {
+				console.warn('Removing SVG with zero dimensions:', svg);
+				svg.remove();
+			}
+		});
+
 		// Get the full content dimensions
 		const fullWidth = Math.max(
 			element.scrollWidth,
@@ -97,19 +129,76 @@ export async function generateClientPDF(
 
 		console.log('Capturing full content:', { fullWidth, fullHeight });
 
-		// Capture the full content
-		const canvas = await html2canvas(element, {
-			scale: Math.min(scale, 3), // Limit scale to prevent memory issues
-			useCORS: true,
-			allowTaint: true,
-			backgroundColor: '#ffffff',
-			width: fullWidth,
-			height: fullHeight,
-			scrollX: 0,
-			scrollY: 0,
-			windowWidth: fullWidth,
-			windowHeight: fullHeight,
-		});
+		// Capture the full content with error handling
+		let canvas;
+		try {
+			canvas = await html2canvas(element, {
+				scale: Math.min(scale, 2), // Reduced scale to prevent memory issues
+				useCORS: true,
+				allowTaint: false, // Set to false to prevent taint issues
+				backgroundColor: '#ffffff',
+				width: fullWidth,
+				height: fullHeight,
+				scrollX: 0,
+				scrollY: 0,
+				windowWidth: fullWidth,
+				windowHeight: fullHeight,
+				logging: false,
+				foreignObjectRendering: false,
+				removeContainer: true,
+				imageTimeout: 0,
+				ignoreElements: (element) => {
+					// Skip problematic elements that might cause createPattern errors
+					if (element.tagName === 'CANVAS') {
+						const canvas = element as HTMLCanvasElement;
+						return canvas.width === 0 || canvas.height === 0;
+					}
+					if (element.tagName === 'IMG') {
+						const img = element as HTMLImageElement;
+						return (
+							img.naturalWidth === 0 ||
+							img.naturalHeight === 0 ||
+							!img.complete
+						);
+					}
+					if (element.tagName === 'SVG') {
+						const rect = element.getBoundingClientRect();
+						return rect.width === 0 || rect.height === 0;
+					}
+					// Also ignore animations that might cause issues
+					if (
+						element.classList?.contains('shimmer') ||
+						element.classList?.contains('animate-fade-in-up')
+					) {
+						return true;
+					}
+					return false;
+				},
+			});
+		} catch (canvasError) {
+			console.error(
+				'html2canvas failed, trying simpler approach:',
+				canvasError
+			);
+
+			// Fallback with very basic settings
+			canvas = await html2canvas(element, {
+				scale: 1,
+				useCORS: false,
+				allowTaint: false,
+				backgroundColor: '#ffffff',
+				logging: false,
+				foreignObjectRendering: false,
+				ignoreElements: (element) => {
+					// Ignore all potentially problematic elements in fallback
+					return (
+						element.tagName === 'CANVAS' ||
+						element.tagName === 'SVG' ||
+						element.tagName === 'IMG'
+					);
+				},
+			});
+		}
 
 		// Restore all original styles
 		element.style.height = originalStyles.height;

@@ -1,33 +1,28 @@
 <script>
+	import { generateEnhancedClientPDF } from '../utils/enhancedClientPDF.js';
+	
 	export let viewMode;
 	export let dayIndex;
 	
-	async function handlePuppeteerPrint() {
+	async function handleClientPDF() {
 		try {
-			const response = await fetch('/api/generate-pdf', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ viewMode, dayIndex })
+			console.log('Starting client-side PDF generation with:', { viewMode, dayIndex });
+			
+			await generateEnhancedClientPDF({
+				viewMode,
+				dayIndex: dayIndex !== undefined ? dayIndex : undefined
 			});
 			
-			if (response.ok) {
-				const blob = await response.blob();
-				const url = URL.createObjectURL(blob);
-				const a = document.createElement('a');
-				a.href = url;
-				a.download = `itinerary-${viewMode}${dayIndex ? `-day-${dayIndex + 1}` : ''}.pdf`;
-				a.click();
-				URL.revokeObjectURL(url);
-			}
+			console.log('Client-side PDF generated successfully');
 		} catch (error) {
-			console.error('PDF generation failed:', error);
-			window.print(); // Fallback
+			console.error('Client-side PDF generation error:', error);
+			alert(`PDF generation failed: ${error.message}`);
 		}
 	}
 </script>
 
 <button
-	onclick={handlePuppeteerPrint}
+	onclick={handleClientPDF}
 	class="px-3 py-1.5 text-xs rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-medium hover:shadow-md hover:scale-105 transition-all duration-300"
 >
 	🖨️ PDF
