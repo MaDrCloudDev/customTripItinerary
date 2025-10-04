@@ -1,6 +1,8 @@
-@import 'tailwindcss';
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
-@theme {
+:root {
 	--color-dark-sand: #2c2a26;
 	--color-dark-gold: #b8860b;
 	--color-dark-papyrus: #1f1e1b;
