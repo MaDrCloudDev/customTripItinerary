@@ -181,31 +181,31 @@ function convertModernColorsForCanvas(): void {
 		/* Convert activity card gradients to solid colors that match the theme */
 		.bg-gradient-to-br.from-blue-100.to-blue-200,
 		*[class*="from-blue-100"] {
-			background: #dbeafe !important; /* Light blue matching the theme */
+			background: #bfdbfe !important; /* Slightly darker blue for better visibility */
 		}
 		.bg-gradient-to-br.from-orange-100.to-orange-200,
 		*[class*="from-orange-100"] {
-			background: #ffedd5 !important; /* Light orange */
+			background: #fed7aa !important; /* Slightly darker orange */
 		}
 		.bg-gradient-to-br.from-purple-100.to-purple-200,
 		*[class*="from-purple-100"] {
-			background: #f3e8ff !important; /* Light purple */
+			background: #e9d5ff !important; /* Slightly darker purple */
 		}
 		.bg-gradient-to-br.from-green-100.to-green-200,
 		*[class*="from-green-100"] {
-			background: #dcfce7 !important; /* Light green */
+			background: #bbf7d0 !important; /* Slightly darker green */
 		}
 		.bg-gradient-to-br.from-gray-100.to-gray-200,
 		*[class*="from-gray-100"] {
-			background: #f3f4f6 !important; /* Light gray */
+			background: #e5e7eb !important; /* Slightly darker gray */
 		}
 		.bg-gradient-to-br.from-yellow-100.to-yellow-200,
 		*[class*="from-yellow-100"] {
-			background: #fef3c7 !important; /* Light yellow */
+			background: #fde68a !important; /* Slightly darker yellow */
 		}
 		.bg-gradient-to-br.from-red-100.to-red-200,
 		*[class*="from-red-100"] {
-			background: #fee2e2 !important; /* Light red */
+			background: #fecaca !important; /* Slightly darker red */
 		}
 		
 		/* Print button - use solid emerald */
@@ -255,6 +255,27 @@ function convertModernColorsForCanvas(): void {
 			opacity: 1;
 			break-inside: avoid;
 			min-height: 200px;
+		}
+		
+		/* Legend color boxes - ensure they maintain proper size and shape */
+		.w-4 {
+			width: 16px !important;
+			min-width: 16px !important;
+		}
+		
+		.h-4 {
+			height: 16px !important;
+			min-height: 16px !important;
+		}
+		
+		/* Specific legend box styling to ensure visibility */
+		.w-4.h-4[class*="bg-gradient-to-br"] {
+			width: 16px !important;
+			height: 16px !important;
+			min-width: 16px !important;
+			min-height: 16px !important;
+			display: inline-block !important;
+			flex-shrink: 0 !important;
 		}
 	`;
 	document.head.appendChild(styleElement);
@@ -572,25 +593,41 @@ export async function generateEnhancedClientPDF(
 		const pdfWidth = pdf.internal.pageSize.getWidth();
 		const pdfHeight = pdf.internal.pageSize.getHeight();
 
-		// Apply the same scaling logic as Puppeteer using safe dimensions
-		const finalScale = Math.max(optimalScale, 0.4);
-		const scaledWidth = finalWidth * finalScale;
-		const scaledHeight = finalHeight * finalScale;
-
-		// Center content with 0.2 inch margins (same as Puppeteer)
+		// Calculate proper scaling to maintain aspect ratio
 		const marginPt = 14.4; // 0.2 inch = 14.4 points
-		const x = marginPt;
-		const y = marginPt;
+		const availablePdfWidth = pdfWidth - marginPt * 2;
+		const availablePdfHeight = pdfHeight - marginPt * 2;
 
-		// Add the image to PDF
-		pdf.addImage(
-			imgData,
-			'PNG',
-			x,
-			y,
-			Math.min(scaledWidth, pdfWidth - marginPt * 2),
-			Math.min(scaledHeight, pdfHeight - marginPt * 2)
-		);
+		// Calculate scale to fit content while maintaining aspect ratio
+		const scaleForPdfWidth = availablePdfWidth / canvas.width;
+		const scaleForPdfHeight = availablePdfHeight / canvas.height;
+		const finalScale = Math.min(
+			scaleForPdfWidth,
+			scaleForPdfHeight,
+			1.0
+		); // Don't scale up
+
+		// Calculate final dimensions maintaining aspect ratio
+		const scaledWidth = canvas.width * finalScale;
+		const scaledHeight = canvas.height * finalScale;
+
+		// Center the content on the page
+		const x = (pdfWidth - scaledWidth) / 2;
+		const y = (pdfHeight - scaledHeight) / 2;
+
+		console.log('PDF final scaling:', {
+			canvasSize: { width: canvas.width, height: canvas.height },
+			availableSpace: {
+				width: availablePdfWidth,
+				height: availablePdfHeight,
+			},
+			finalScale,
+			scaledSize: { width: scaledWidth, height: scaledHeight },
+			position: { x, y },
+		});
+
+		// Add the image to PDF with proper aspect ratio
+		pdf.addImage(imgData, 'PNG', x, y, scaledWidth, scaledHeight);
 
 		// Step 6: Save the PDF
 		const filename = `itinerary-${viewMode}${
