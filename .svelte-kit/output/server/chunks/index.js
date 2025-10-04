@@ -790,6 +790,15 @@ function slot(renderer, $$props, name, slot_props, fallback_fn) {
     slot_fn(renderer, slot_props);
   }
 }
+function bind_props(props_parent, props_now) {
+  for (const key in props_now) {
+    const initial_value = props_parent[key];
+    const value = props_now[key];
+    if (initial_value === void 0 && value !== void 0 && Object.getOwnPropertyDescriptor(props_parent, key)?.set) {
+      props_parent[key] = value;
+    }
+  }
+}
 function ensure_array_like(array_like_or_iterator) {
   if (array_like_or_iterator) {
     return array_like_or_iterator.length !== void 0 ? array_like_or_iterator : Array.from(array_like_or_iterator);
@@ -802,13 +811,15 @@ export {
   COMMENT_NODE as C,
   DIRTY as D,
   ERROR_VALUE as E,
-  stringify as F,
-  ensure_array_like as G,
+  attr_class as F,
+  stringify as G,
   HYDRATION_ERROR as H,
   INERT as I,
-  head as J,
+  ensure_array_like as J,
+  head as K,
   LEGACY_PROPS as L,
   MAYBE_DIRTY as M,
+  clsx as N,
   ROOT_EFFECT as R,
   STATE_SYMBOL as S,
   UNOWNED as U,
@@ -836,6 +847,6 @@ export {
   render as v,
   experimental_async_ssr as w,
   slot as x,
-  attr as y,
-  attr_class as z
+  bind_props as y,
+  attr as z
 };

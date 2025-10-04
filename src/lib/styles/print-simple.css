@@ -1,0 +1,83 @@
+/* Simple Print Styles - Fallback for browsers with print issues */
+@media print {
+	@page {
+		size: A4;
+		margin: 0.4in;
+	}
+
+	/* Hide navigation and non-essential elements */
+	.no-print,
+	nav,
+	footer,
+	button {
+		display: none !important;
+	}
+
+	/* Basic reset */
+	body {
+		font-size: 10px !important;
+		line-height: 1.2 !important;
+		color: black !important;
+		background: white !important;
+	}
+
+	/* Container adjustments */
+	.container,
+	main {
+		padding: 0 !important;
+		margin: 0 !important;
+		max-width: 100% !important;
+	}
+
+	/* Content scaling - simple approach */
+	.print-single-page {
+		zoom: 0.8;
+		max-height: 10in;
+		overflow: hidden;
+	}
+
+	/* Typography */
+	h1 {
+		font-size: 14px !important;
+		margin: 4px 0 !important;
+	}
+	h2 {
+		font-size: 12px !important;
+		margin: 3px 0 !important;
+	}
+	h3 {
+		font-size: 11px !important;
+		margin: 2px 0 !important;
+	}
+	p {
+		font-size: 9px !important;
+		margin: 1px 0 !important;
+	}
+
+	/* Cards and content */
+	[class*='bg-white'] {
+		background: white !important;
+		border: 1px solid #ccc !important;
+		padding: 4px !important;
+		margin: 2px 0 !important;
+		border-radius: 3px !important;
+	}
+
+	/* Remove shadows and complex styling */
+	* {
+		box-shadow: none !important;
+		text-shadow: none !important;
+		background-image: none !important;
+	}
+
+	/* Grid adjustments */
+	.overview-grid {
+		grid-template-columns: repeat(3, 1fr) !important;
+		gap: 2px !important;
+	}
+
+	/* Force black text */
+	* {
+		color: black !important;
+	}
+}

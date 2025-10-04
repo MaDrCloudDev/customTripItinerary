@@ -101,7 +101,7 @@
       "_index.js"
     ],
     "css": [
-      "_app/immutable/assets/_layout.BDjZJUXG.css"
+      "_app/immutable/assets/_layout.De-QyGqQ.css"
     ]
   },
   "src/routes/+page.svelte": {
@@ -113,5 +113,11 @@
       "_index.js",
       "_context.js"
     ]
+  },
+  "src/routes/api/generate-pdf/+server.ts": {
+    "file": "entries/endpoints/api/generate-pdf/_server.ts.js",
+    "name": "entries/endpoints/api/generate-pdf/_server.ts",
+    "src": "src/routes/api/generate-pdf/+server.ts",
+    "isEntry": true
   }
 }

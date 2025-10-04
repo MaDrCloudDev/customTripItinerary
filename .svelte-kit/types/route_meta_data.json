@@ -1,3 +1,6 @@
 {
-	"/": []
+	"/": [],
+	"/api/generate-pdf": [
+		"src/routes/api/generate-pdf/+server.ts"
+	]
 }

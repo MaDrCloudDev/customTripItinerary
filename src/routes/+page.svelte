@@ -11,10 +11,31 @@
 	// State persistence
 	let currentDayIndex = $state(0);
 	let viewMode = $state<ViewMode>('single');
+	let isPrintMode = $state(false);
 
 	// Load saved state on mount
 	$effect(() => {
 		if (typeof window !== 'undefined') {
+			// Check for URL parameters (used by PDF generator)
+			const urlParams = new URLSearchParams(window.location.search);
+			const printMode = urlParams.get('printMode') === 'true';
+			const urlViewMode = urlParams.get('viewMode') as ViewMode;
+			const urlDayIndex = urlParams.get('dayIndex');
+			
+			if (printMode) {
+				isPrintMode = true;
+				if (urlViewMode && ['single', 'timeline', 'overview'].includes(urlViewMode)) {
+					viewMode = urlViewMode;
+				}
+				if (urlDayIndex) {
+					const dayIndex = parseInt(urlDayIndex);
+					if (dayIndex >= 0 && dayIndex < itineraryData.dailySchedule.length) {
+						currentDayIndex = dayIndex;
+					}
+				}
+				return; // Skip localStorage loading in print mode
+			}
+			
 			const savedDayIndex = localStorage.getItem('cruise-day-index');
 			const savedViewMode = localStorage.getItem('cruise-view-mode');
 			
@@ -61,34 +82,87 @@
 		viewMode = mode;
 	};
 
-	// Print function
-	const printCurrentDay = () => {
-		window.print();
-	};
+
 
 	const currentDay = $derived(itineraryData.dailySchedule[currentDayIndex]);
 </script>
 
 <svelte:head>
 	<title>Viking Egypt Cruise Itinerary - {itineraryData.cruise.passengers}</title>
+	{#if isPrintMode}
+		<style>
+			/* Print mode styles to ensure all content is visible */
+			.print-mode-content {
+				height: auto !important;
+				max-height: none !important;
+				overflow: visible !important;
+			}
+			
+			.print-content-wrapper {
+				height: auto !important;
+				max-height: none !important;
+				overflow: visible !important;
+			}
+			
+			/* Remove any height constraints from child elements in print mode */
+			.print-mode-content * {
+				height: auto !important;
+				max-height: none !important;
+				overflow: visible !important;
+			}
+			
+			/* Ensure space-y classes don't interfere */
+			.space-y-4 > * + * {
+				margin-top: 1rem !important;
+			}
+			
+			/* Make sure all activity cards are visible */
+			.space-y-4,
+			.space-y-6,
+			.space-y-8 {
+				display: flex;
+				flex-direction: column;
+				gap: 1rem;
+			}
+			
+			/* Ensure overview grid is visible in print mode */
+			.overview-grid {
+				display: grid !important;
+				grid-template-columns: repeat(2, 1fr) !important;
+				gap: 1rem !important;
+				width: 100% !important;
+			}
+			
+			.overview-card {
+				display: flex !important;
+				flex-direction: column !important;
+				break-inside: avoid !important;
+			}
+		</style>
+	{/if}
 </svelte:head>
 
 <div class="min-h-screen">
-	<CruiseHeader cruiseInfo={itineraryData.cruise} />
-	
-	<Navigation 
-		{currentDay}
-		{currentDayIndex}
-		totalDays={itineraryData.dailySchedule.length}
-		{viewMode}
-		onPrevDay={prevDay}
-		onNextDay={nextDay}
-		onViewModeChange={handleViewModeChange}
-		onPrint={printCurrentDay}
-	/>
+	{#if !isPrintMode}
+		<CruiseHeader cruiseInfo={itineraryData.cruise} />
+		
+		<Navigation 
+			{currentDay}
+			{currentDayIndex}
+			totalDays={itineraryData.dailySchedule.length}
+			{viewMode}
+			onPrevDay={prevDay}
+			onNextDay={nextDay}
+			onViewModeChange={handleViewModeChange}
+		/>
+	{/if}
 
 	<!-- Main Content -->
-	<main class="container mx-auto px-6 py-8">
+	<main 
+		class="container mx-auto px-6 py-8 {isPrintMode ? 'print-mode-content' : ''}" 
+		data-print-content
+	>
+	<div class={isPrintMode ? 'print-content-wrapper' : ''}>
 		{#if viewMode === 'single' && currentDay}
 			<SingleDayView {currentDay} />
 		{:else if viewMode === 'timeline' && currentDay}
@@ -99,7 +173,10 @@
 				onDaySelect={goToDay} 
 			/>
 		{/if}
-	</main>
+	</div>
+</main>
 
-	<CruiseFooter cruiseInfo={itineraryData.cruise} />
+	{#if !isPrintMode}
+		<CruiseFooter cruiseInfo={itineraryData.cruise} />
+	{/if}
 </div>
