@@ -2431,9 +2431,9 @@ const options = {
   preload_strategy: "modulepreload",
   root,
   service_worker: false,
-  service_worker_options: void 0,
+  service_worker_options: null,
   templates: {
-    app: ({ head, body, assets, nonce, env }) => '<!doctype html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<link rel="icon" href="' + assets + '/favicon.png" />\n		<meta name="viewport" content="width=device-width, initial-scale=1" />\n		<title>Viking Egypt Cruise Itinerary - Travelers</title>\n		<meta name="description" content="Easy-to-read Viking Egypt cruise itinerary for elderly travelers">\n		' + head + '\n	</head>\n	<body data-sveltekit-preload-data="hover" class="bg-cruise-cream text-gray-900">\n		<div style="display: contents">' + body + "</div>\n	</body>\n</html>",
+    app: ({ head, body, assets, nonce, env }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<link rel="icon" href="' + assets + '/favicon.png" />\n		<meta\n			name="viewport"\n			content="width=device-width, initial-scale=1" />\n		<title>\n			Viking Egypt Cruise Itinerary - Travelers\n		</title>\n		<meta\n			name="description"\n			content="Easy-to-read Viking Egypt cruise itinerary for elderly travelers" />\n		' + head + '\n	</head>\n	<body\n		data-sveltekit-preload-data="hover"\n		class="bg-cruise-cream text-gray-900">\n		<div style="display: contents">' + body + "</div>\n	</body>\n</html>\n",
     error: ({ status, message }) => '<!doctype html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<title>' + message + `</title>
 
 		<style>
@@ -2505,7 +2505,7 @@ const options = {
 		<div class="error">
 			<span class="status">` + status + '</span>\n			<div class="message">\n				<h1>' + message + "</h1>\n			</div>\n		</div>\n	</body>\n</html>\n"
   },
-  version_hash: "is5f9b"
+  version_hash: "resgou"
 };
 async function get_hooks() {
   let handle;

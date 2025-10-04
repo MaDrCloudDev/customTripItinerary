@@ -8,6 +8,9 @@ const config = {
 		adapter: adapter({
 			runtime: 'nodejs20.x',
 		}),
+		serviceWorker: {
+			register: false,
+		},
 	},
 };
 
