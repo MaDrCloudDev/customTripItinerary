@@ -12,9 +12,9 @@ return {
 	_: {
 		client: {start:"_app/immutable/entry/start.B9NzPM1L.js",app:"_app/immutable/entry/app.BVvb0kXf.js",imports:["_app/immutable/entry/start.B9NzPM1L.js","_app/immutable/chunks/COrcy5i0.js","_app/immutable/chunks/cH0zU-dw.js","_app/immutable/chunks/BAqvAkuI.js","_app/immutable/chunks/CF1XqHbx.js","_app/immutable/entry/app.BVvb0kXf.js","_app/immutable/chunks/BAqvAkuI.js","_app/immutable/chunks/CF1XqHbx.js","_app/immutable/chunks/DsnmJJEf.js","_app/immutable/chunks/cH0zU-dw.js","_app/immutable/chunks/DIrnttrA.js"],stylesheets:[],fonts:[],uses_env_dynamic_public:false},
 		nodes: [
-			__memo(() => import('./nodes/0.js')),
-			__memo(() => import('./nodes/1.js')),
-			__memo(() => import('./nodes/2.js'))
+			__memo(() => import('../output/server/nodes/0.js')),
+			__memo(() => import('../output/server/nodes/1.js')),
+			__memo(() => import('../output/server/nodes/2.js'))
 		],
 		remotes: {
 			
@@ -32,7 +32,7 @@ return {
 				pattern: /^\/api\/generate-pdf\/?$/,
 				params: [],
 				page: null,
-				endpoint: __memo(() => import('./entries/endpoints/api/generate-pdf/_server.ts.js'))
+				endpoint: __memo(() => import('../output/server/entries/endpoints/api/generate-pdf/_server.ts.js'))
 			}
 		],
 		prerendered_routes: new Set([]),
