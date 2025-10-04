@@ -11,53 +11,108 @@ const itineraryData = {
     passengers: "Travelers",
     stateroom: "XXX",
     dates: {
-      start: "2025-01-17",
-      end: "2025-01-26",
-      totalDays: 10
+      start: "2025-01-15",
+      end: "2025-01-27",
+      totalDays: 13
     }
   },
   dailySchedule: [
+    // Day 0: Nov 18 - Arrival
+    {
+      dayNumber: 0,
+      date: "2025-01-15",
+      dayName: "Monday",
+      location: "Cairo",
+      timeSlots: [
+        {
+          startTime: "9:00",
+          endTime: "12:00",
+          activity: "Arrival in Cairo",
+          description: "Arrive at Cairo International Airport",
+          type: "arrival",
+          color: "travel",
+          icon: "✈️"
+        },
+        {
+          startTime: "12:00",
+          endTime: "15:00",
+          activity: "Check-in at Hotel",
+          description: "Rest and recover from travel",
+          type: "free",
+          color: "free",
+          icon: "🏨"
+        },
+        {
+          startTime: "19:00",
+          endTime: "21:00",
+          activity: "Free Time at Hotel",
+          description: "Dinner at hotel and rest",
+          type: "free",
+          color: "free",
+          icon: "🍽️"
+        }
+      ]
+    },
+    // Day 1: Nov 19 - Cairo Egypt
     {
       dayNumber: 1,
+      date: "2025-01-16",
+      dayName: "Tuesday",
+      location: "Cairo",
+      timeSlots: [
+        {
+          startTime: "7:00",
+          endTime: "9:00",
+          activity: "Breakfast at Hotel",
+          description: "Breakfast at Hotel",
+          type: "meals",
+          color: "meals",
+          icon: "🥐"
+        },
+        {
+          startTime: "9:00",
+          endTime: "18:00",
+          activity: "Free Time in Cairo",
+          description: "Explore Cairo or rest at hotel",
+          type: "free",
+          color: "free",
+          icon: "🚶"
+        },
+        {
+          startTime: "19:00",
+          endTime: "21:00",
+          activity: "Dinner at Hotel",
+          description: "Evening meal and rest",
+          type: "meals",
+          color: "meals",
+          icon: "🍽️"
+        }
+      ]
+    },
+    // Day 2: Nov 20 - Cairo Egypt - 6pm Khan el-Khalili Market and Dinner
+    {
+      dayNumber: 2,
       date: "2025-01-17",
       dayName: "Wednesday",
       location: "Cairo",
       timeSlots: [
         {
           startTime: "7:00",
-          endTime: "8:30",
-          activity: "Wake Up & Breakfast",
-          description: "Continental breakfast aboard ship",
+          endTime: "9:00",
+          activity: "Breakfast at Hotel",
+          description: "Breakfast at Hotel",
           type: "meals",
           color: "meals",
           icon: "☕"
         },
         {
-          startTime: "8:30",
-          endTime: "12:00",
-          activity: "Free Time Aboard Ship",
-          description: "Relax on deck, explore ship amenities",
+          startTime: "9:00",
+          endTime: "18:00",
+          activity: "Free Time in Cairo",
+          description: "Explore Cairo or rest at hotel",
           type: "free",
           color: "free",
-          icon: "⚓"
-        },
-        {
-          startTime: "12:00",
-          endTime: "13:30",
-          activity: "Lunch Aboard Ship",
-          description: "Buffet lunch with Egyptian specialties",
-          type: "meals",
-          color: "meals",
-          icon: "🍽️"
-        },
-        {
-          startTime: "13:30",
-          endTime: "17:30",
-          activity: "Rest & Preparation",
-          description: "Afternoon rest, dress for evening excursion",
-          type: "preparation",
-          color: "free",
-          icon: "🎒"
+          icon: "🚶"
         },
         {
           startTime: "18:00",
@@ -73,25 +128,26 @@ const itineraryData = {
         }
       ]
     },
+    // Day 3: Nov 21 - Cairo Egypt - 9am Giza Pyramid and Grand Egyptian Museum
     {
-      dayNumber: 2,
+      dayNumber: 3,
       date: "2025-01-18",
       dayName: "Thursday",
-      location: "Giza",
+      location: "Cairo/Giza",
       timeSlots: [
         {
           startTime: "7:00",
-          endTime: "8:30",
-          activity: "Early Breakfast",
-          description: "Quick breakfast before excursion",
-          type: "meals",
-          color: "meals",
-          icon: "☕"
+          endTime: "9:00",
+          activity: "Breakfast at Hotel & Flight to Luxor",
+          description: "Check out of Hotel, fly to Luxor",
+          type: "travel",
+          color: "travel",
+          icon: "✈️"
         },
         {
           startTime: "9:00",
           endTime: "13:00",
-          activity: "Giza Pyramids & Sphinx Tour",
+          activity: "Giza Pyramids & Grand Egyptian Museum (Part 1)",
           description: "Marvel at the Great Pyramid and iconic Sphinx",
           location: "Giza Plateau",
           type: "excursion",
@@ -102,85 +158,50 @@ const itineraryData = {
         },
         {
           startTime: "13:00",
-          endTime: "14:00",
-          activity: "Lunch Break",
-          description: "Local restaurant lunch",
-          type: "meals",
-          color: "meals",
-          icon: "🍽️"
-        },
-        {
-          startTime: "14:00",
           endTime: "17:00",
-          activity: "Grand Egyptian Museum",
-          description: "World's largest archaeological museum",
+          activity: "Grand Egyptian Museum (Part 2)",
+          description: "World's largest archaeological museum with King Tut collection",
           location: "Near Giza Pyramids",
           type: "excursion",
-          color: "cultural",
+          color: "excursion",
           icon: "🏺",
           cost: "Included"
         },
         {
-          startTime: "17:30",
-          endTime: "19:00",
-          activity: "Return to Ship",
-          description: "Bus transfer back to ship",
-          type: "travel",
-          color: "travel",
-          icon: "🚌"
-        },
-        {
-          startTime: "19:00",
+          startTime: "17:00",
           endTime: "21:00",
-          activity: "Dinner Aboard Ship",
-          description: "Relax after full day of sightseeing",
-          type: "meals",
-          color: "meals",
-          icon: "🍽️"
+          activity: "Return to Hotel",
+          description: "Return to Hotel",
+          type: "free",
+          color: "free",
+          icon: "🏨"
         }
       ]
     },
+    // Day 4: Nov 22 - Luxor Egypt - 5:30pm Luxor Temple
     {
-      dayNumber: 3,
+      dayNumber: 4,
       date: "2025-01-19",
       dayName: "Friday",
-      location: "Luxor",
+      location: "Cairo to Luxor",
       timeSlots: [
         {
           startTime: "7:00",
-          endTime: "8:30",
-          activity: "Breakfast Aboard Ship",
-          description: "Continental breakfast while sailing",
-          type: "meals",
-          color: "meals",
-          icon: "☕"
+          endTime: "10:00",
+          activity: "Breakfast at Hotel & Flight to Luxor",
+          description: "Check out of Hotel, fly to Luxor",
+          type: "travel",
+          color: "travel",
+          icon: "✈️"
         },
         {
-          startTime: "8:30",
-          endTime: "12:00",
-          activity: "Sailing to Luxor",
-          description: "Scenic Nile cruise, deck time",
-          type: "free",
-          color: "nature",
-          icon: "🌊"
-        },
-        {
-          startTime: "12:00",
-          endTime: "13:30",
-          activity: "Lunch Aboard Ship",
-          description: "Buffet lunch with Nile views",
-          type: "meals",
-          color: "meals",
-          icon: "🍽️"
-        },
-        {
-          startTime: "13:30",
-          endTime: "17:30",
-          activity: "Continue Sailing & Ship Activities",
-          description: "Pool, spa, lectures, Nile scenery",
-          type: "free",
-          color: "free",
-          icon: "⚓"
+          startTime: "10:00",
+          endTime: "15:00",
+          activity: "Board Ship in Luxor",
+          description: "Finally board Viking ship after arriving in Luxor",
+          type: "embarkation",
+          color: "travel",
+          icon: "🚢"
         },
         {
           startTime: "17:30",
@@ -196,280 +217,156 @@ const itineraryData = {
         {
           startTime: "19:30",
           endTime: "21:00",
-          activity: "Dinner & Evening Entertainment",
-          description: "Traditional Egyptian music aboard ship",
-          type: "meals",
-          color: "meals",
-          icon: "🎭"
-        }
-      ]
-    },
-    {
-      dayNumber: 4,
-      date: "2025-01-20",
-      dayName: "Saturday",
-      location: "Luxor",
-      timeSlots: [
-        {
-          startTime: "6:00",
-          endTime: "7:30",
-          activity: "Early Breakfast",
-          description: "Light breakfast before early temple visit",
-          type: "meals",
-          color: "meals",
-          icon: "☕"
-        },
-        {
-          startTime: "8:00",
-          endTime: "12:00",
-          activity: "Valley of the Kings",
-          description: "Explore tombs of ancient pharaohs including Tutankhamun",
-          location: "Luxor West Bank",
-          type: "excursion",
-          color: "excursion",
-          icon: "🏺",
-          cost: "Included",
-          notes: "Bring camera, no flash allowed in tombs"
-        },
-        {
-          startTime: "12:00",
-          endTime: "13:30",
-          activity: "Lunch at Local Restaurant",
-          description: "Traditional Egyptian cuisine with Nile views",
+          activity: "First Dinner Aboard Ship",
+          description: "Welcome dinner aboard Viking ship",
           type: "meals",
           color: "meals",
           icon: "🍽️"
+        }
+      ]
+    },
+    // Day 5: Nov 23 - Luxor Egypt - 1pm Dendera Temple Exploration
+    {
+      dayNumber: 5,
+      date: "2025-01-20",
+      dayName: "Saturday",
+      location: "Luxor/Qena",
+      timeSlots: [
+        {
+          startTime: "7:00",
+          endTime: "12:00",
+          activity: "Free Time Aboard Ship",
+          description: "Relax and enjoy ship amenities",
+          type: "free",
+          color: "free",
+          icon: "⚓"
         },
         {
-          startTime: "13:30",
-          endTime: "16:30",
-          activity: "Temple of Hatshepsut",
-          description: "Stunning mortuary temple of Egypt's female pharaoh",
-          location: "Deir el-Bahari",
+          startTime: "13:00",
+          endTime: "15:30",
+          activity: "Dendera Temple Exploration",
+          description: "Temple of Hathor with stunning ceiling paintings and Dendera zodiac",
+          location: "Dendera Temple Complex",
           type: "excursion",
-          color: "cultural",
+          color: "excursion",
           icon: "🏛️",
           cost: "Included"
         },
         {
-          startTime: "16:30",
-          endTime: "17:30",
-          activity: "Return to Ship",
-          description: "Coach transfer back to Viking ship",
-          type: "travel",
-          color: "travel",
-          icon: "🚌"
-        },
-        {
-          startTime: "17:30",
+          startTime: "15:30",
           endTime: "19:00",
-          activity: "Rest & Refresh",
-          description: "Time to rest and prepare for dinner",
+          activity: "Free Time & Dinner",
+          description: "Return to ship for evening meal and rest",
           type: "free",
           color: "free",
-          icon: "🛏️"
-        },
-        {
-          startTime: "19:00",
-          endTime: "21:30",
-          activity: "Captain's Welcome Dinner",
-          description: "Formal dinner with Egyptian specialties",
-          type: "meals",
-          color: "dining",
-          icon: "🥂",
-          notes: "Dress code: Smart casual"
+          icon: "🍽️"
         }
       ]
     },
+    // Day 6: Nov 24 - Qena Egypt - 8am Valley of the Kings, Hatshepsut and Queen Nefertiti Tomb
     {
-      dayNumber: 5,
+      dayNumber: 6,
       date: "2025-01-21",
       dayName: "Sunday",
-      location: "Luxor",
+      location: "Valley of the Kings",
       timeSlots: [
         {
-          startTime: "7:00",
-          endTime: "8:30",
-          activity: "Breakfast Aboard Ship",
-          description: "Full breakfast with fresh Egyptian breads",
-          type: "meals",
-          color: "meals",
-          icon: "☕"
-        },
-        {
-          startTime: "9:00",
-          endTime: "13:00",
-          activity: "Karnak Temple Complex",
-          description: "World's largest ancient religious site with towering columns",
-          location: "Luxor East Bank",
+          startTime: "8:00",
+          endTime: "13:30",
+          activity: "Valley of the Kings, Hatshepsut & Queen Nefertari Tomb",
+          description: "Ancient royal tombs, mortuary temple, and Queen Nefertari's tomb",
+          location: "West Bank, Luxor",
           type: "excursion",
           color: "excursion",
-          icon: "🏛️",
+          icon: "👑",
           cost: "Included",
-          notes: "Wear comfortable shoes, lots of walking"
+          notes: "Demanding day - bring water and comfortable shoes"
         },
         {
-          startTime: "13:00",
-          endTime: "14:30",
-          activity: "Lunch Aboard Ship",
-          description: "International buffet with local dishes",
-          type: "meals",
-          color: "meals",
-          icon: "🍽️"
-        },
-        {
-          startTime: "14:30",
-          endTime: "17:00",
-          activity: "Sailing to Aswan",
-          description: "Scenic Nile cruise, pool time and ship activities",
+          startTime: "13:30",
+          endTime: "19:00",
+          activity: "Return to Ship & Rest",
+          description: "Long excursion day - time to relax",
           type: "free",
-          color: "nature",
-          icon: "🌊"
-        },
-        {
-          startTime: "17:00",
-          endTime: "18:30",
-          activity: "Egyptian Cooking Class",
-          description: "Learn to make traditional bread and falafel",
-          type: "cultural",
-          color: "cultural",
-          icon: "👨‍🍳",
-          cost: "$65.00"
+          color: "free",
+          icon: "😴"
         },
         {
           startTime: "19:00",
           endTime: "21:00",
-          activity: "Dinner & Folk Show",
-          description: "Traditional Egyptian dance and music performance",
-          type: "meals",
-          color: "dining",
-          icon: "💃"
-        }
-      ]
-    },
-    {
-      dayNumber: 6,
-      date: "2025-01-22",
-      dayName: "Monday",
-      location: "Aswan",
-      timeSlots: [
-        {
-          startTime: "7:00",
-          endTime: "8:30",
-          activity: "Breakfast Aboard Ship",
-          description: "Continental breakfast as we arrive in Aswan",
-          type: "meals",
-          color: "meals",
-          icon: "☕"
-        },
-        {
-          startTime: "9:00",
-          endTime: "12:30",
-          activity: "Philae Temple",
-          description: "Beautiful island temple dedicated to goddess Isis",
-          location: "Agilkia Island",
-          type: "excursion",
-          color: "excursion",
-          icon: "🏛️",
-          cost: "Included",
-          notes: "Boat transfer to island included"
-        },
-        {
-          startTime: "12:30",
-          endTime: "14:00",
-          activity: "Lunch Aboard Ship",
-          description: "Light lunch with Aswan specialties",
+          activity: "Dinner Aboard Ship",
+          description: "Rest after demanding day of exploration",
           type: "meals",
           color: "meals",
           icon: "🍽️"
-        },
+        }
+      ]
+    },
+    // Day 7: Nov 25 - Esna Egypt - 8:15am Village of Esna by Foot
+    {
+      dayNumber: 7,
+      date: "2025-01-22",
+      dayName: "Monday",
+      location: "Esna",
+      timeSlots: [
         {
-          startTime: "14:00",
-          endTime: "17:30",
-          activity: "Aswan High Dam & Unfinished Obelisk",
-          description: "Modern engineering marvel and ancient quarry site",
-          location: "Aswan",
+          startTime: "8:15",
+          endTime: "9:45",
+          activity: "Village of Esna by Foot",
+          description: "Traditional Egyptian village walking tour with market and temple",
+          location: "Esna Village",
           type: "excursion",
           color: "cultural",
-          icon: "🏗️",
+          icon: "🚶",
           cost: "Included"
         },
         {
-          startTime: "17:30",
-          endTime: "19:00",
-          activity: "Nubian Village Visit",
-          description: "Experience colorful Nubian culture and hospitality",
-          location: "West Bank Aswan",
-          type: "cultural",
-          color: "cultural",
-          icon: "🏘️",
-          cost: "$89.00",
-          notes: "Optional excursion, includes tea ceremony"
+          startTime: "9:45",
+          endTime: "18:00",
+          activity: "Free Time & Sailing",
+          description: "Ship continues south toward Aswan",
+          type: "free",
+          color: "nature",
+          icon: "⛵"
         },
         {
-          startTime: "19:30",
-          endTime: "21:30",
-          activity: "Farewell Dinner",
-          description: "Special dinner celebrating Egyptian journey",
-          type: "meals",
-          color: "dining",
-          icon: "🍽️"
+          startTime: "18:00",
+          endTime: "21:00",
+          activity: "Sail to Aswan at Night",
+          description: "Enjoy ship amenities as we sail south",
+          type: "free",
+          color: "free",
+          icon: "🌙"
         }
       ]
     },
+    // Day 8: Nov 26 - Aswan Egypt - 7:30am The Temples of Abu Simbel
     {
-      dayNumber: 7,
+      dayNumber: 8,
       date: "2025-01-23",
       dayName: "Tuesday",
-      location: "Aswan",
+      location: "Abu Simbel",
       timeSlots: [
         {
-          startTime: "6:30",
-          endTime: "8:00",
-          activity: "Early Breakfast",
-          description: "Quick breakfast for early departure",
-          type: "meals",
-          color: "meals",
-          icon: "☕"
-        },
-        {
-          startTime: "8:00",
-          endTime: "13:00",
-          activity: "Abu Simbel Temples",
-          description: "UNESCO World Heritage site with colossal statues of Ramesses II",
-          location: "Abu Simbel (3-hour drive)",
+          startTime: "7:30",
+          endTime: "14:30",
+          activity: "The Temples at Abu Simbel",
+          description: "Ramesses II's magnificent relocated temples with round-trip flights",
+          location: "Abu Simbel (by flight from Aswan)",
           type: "excursion",
           color: "excursion",
-          icon: "🗿",
-          cost: "$199.00",
-          notes: "Long day trip, pack snacks and water"
+          icon: "🏛️",
+          cost: "$509.00",
+          notes: "Round-trip flights included, long day"
         },
         {
-          startTime: "13:00",
-          endTime: "14:00",
-          activity: "Lunch at Abu Simbel",
-          description: "Lunch at visitor center restaurant",
-          type: "meals",
-          color: "meals",
-          icon: "🍽️"
-        },
-        {
-          startTime: "14:00",
-          endTime: "17:00",
-          activity: "Return Journey to Aswan",
-          description: "Scenic drive through Nubian desert",
-          type: "travel",
-          color: "travel",
-          icon: "🚌"
-        },
-        {
-          startTime: "17:00",
-          endTime: "18:30",
-          activity: "Rest & Relaxation",
-          description: "Free time aboard ship, spa treatments available",
+          startTime: "14:30",
+          endTime: "19:00",
+          activity: "Return to Aswan & Rest",
+          description: "Long day - time to recover on ship",
           type: "free",
           color: "free",
-          icon: "🧘‍♀️"
+          icon: "😴"
         },
         {
           startTime: "19:00",
@@ -482,239 +379,154 @@ const itineraryData = {
         }
       ]
     },
-    {
-      dayNumber: 8,
-      date: "2025-01-24",
-      dayName: "Wednesday",
-      location: "Sailing North",
-      timeSlots: [
-        {
-          startTime: "7:30",
-          endTime: "9:00",
-          activity: "Breakfast Aboard Ship",
-          description: "Leisurely breakfast while sailing north",
-          type: "meals",
-          color: "meals",
-          icon: "☕"
-        },
-        {
-          startTime: "9:00",
-          endTime: "12:00",
-          activity: "Sailing & Ship Activities",
-          description: "Enjoy deck views, pool, library, and spa",
-          type: "free",
-          color: "nature",
-          icon: "🌊"
-        },
-        {
-          startTime: "10:30",
-          endTime: "11:30",
-          activity: "Egyptology Lecture",
-          description: "'Mysteries of Ancient Egypt' by ship historian",
-          type: "cultural",
-          color: "cultural",
-          icon: "📚"
-        },
-        {
-          startTime: "12:00",
-          endTime: "13:30",
-          activity: "Lunch Aboard Ship",
-          description: "International buffet with panoramic Nile views",
-          type: "meals",
-          color: "meals",
-          icon: "🍽️"
-        },
-        {
-          startTime: "13:30",
-          endTime: "17:30",
-          activity: "Afternoon at Leisure",
-          description: "Sunbathing, reading, or afternoon nap",
-          type: "free",
-          color: "free",
-          icon: "☀️"
-        },
-        {
-          startTime: "15:00",
-          endTime: "16:00",
-          activity: "Afternoon Tea",
-          description: "Traditional afternoon tea service on deck",
-          type: "meals",
-          color: "meals",
-          icon: "🫖"
-        },
-        {
-          startTime: "18:00",
-          endTime: "19:00",
-          activity: "Captain's Cocktail Hour",
-          description: "Farewell drinks with captain and crew",
-          type: "cultural",
-          color: "dining",
-          icon: "🍸"
-        },
-        {
-          startTime: "19:30",
-          endTime: "21:30",
-          activity: "Gala Dinner",
-          description: "Formal farewell dinner with Egyptian delicacies",
-          type: "meals",
-          color: "dining",
-          icon: "🥂",
-          notes: "Formal attire requested"
-        }
-      ]
-    },
+    // Day 9: Nov 27 - Aswan Egypt - 8am Nubian Village, Philae Temple, and the Papyrus Institute
     {
       dayNumber: 9,
-      date: "2025-01-25",
-      dayName: "Thursday",
-      location: "Cairo",
+      date: "2025-01-24",
+      dayName: "Wednesday",
+      location: "Aswan",
       timeSlots: [
         {
-          startTime: "7:00",
-          endTime: "8:30",
-          activity: "Final Breakfast Aboard Ship",
-          description: "Last breakfast on Viking ship",
-          type: "meals",
-          color: "meals",
-          icon: "☕"
-        },
-        {
-          startTime: "8:30",
-          endTime: "10:00",
-          activity: "Disembark & Transfer",
-          description: "Check out and transfer to Cairo hotel",
-          type: "travel",
-          color: "travel",
-          icon: "🧳"
-        },
-        {
-          startTime: "10:00",
+          startTime: "8:00",
           endTime: "12:30",
-          activity: "Egyptian Museum",
-          description: "World's finest collection of ancient Egyptian artifacts",
-          location: "Tahrir Square, Cairo",
+          activity: "Philae Temple, Nubian Village & Papyrus Institute",
+          description: "Island temple, traditional village visit, and papyrus making demonstration",
+          location: "Aswan",
           type: "excursion",
           color: "cultural",
-          icon: "🏺",
+          icon: "🏛️",
           cost: "Included",
-          notes: "King Tut's treasures on display"
+          notes: "Boat transfer to temple included"
         },
         {
           startTime: "12:30",
-          endTime: "14:00",
-          activity: "Lunch in Cairo",
-          description: "Traditional Egyptian lunch at local restaurant",
+          endTime: "19:00",
+          activity: "Free Time in Aswan",
+          description: "Explore Aswan or relax on ship",
+          type: "free",
+          color: "free",
+          icon: "🌴"
+        },
+        {
+          startTime: "19:00",
+          endTime: "21:00",
+          activity: "Evening Aboard Ship",
+          description: "Enjoy Aswan views from ship",
           type: "meals",
           color: "meals",
           icon: "🍽️"
+        }
+      ]
+    },
+    // Day 10: Nov 28 - Edfu Egypt - 8:30am Edfu Temple
+    {
+      dayNumber: 10,
+      date: "2025-01-25",
+      dayName: "Thursday",
+      location: "Edfu",
+      timeSlots: [
+        {
+          startTime: "8:30",
+          endTime: "10:30",
+          activity: "Edfu Temple",
+          description: "Best-preserved temple in Egypt dedicated to Horus",
+          location: "Edfu",
+          type: "excursion",
+          color: "excursion",
+          icon: "🦅",
+          cost: "Included"
+        },
+        {
+          startTime: "10:30",
+          endTime: "18:00",
+          activity: "Sailing North",
+          description: "Continue sailing northward",
+          type: "free",
+          color: "nature",
+          icon: "⛵"
+        },
+        {
+          startTime: "19:00",
+          endTime: "21:00",
+          activity: "Evening Aboard Ship",
+          description: "Relaxing evening on the Nile",
+          type: "meals",
+          color: "meals",
+          icon: "🥂"
+        }
+      ]
+    },
+    // Day 11: Nov 29 - Cairo Egypt - 2pm Old Cairo and its Coptic Quarters
+    {
+      dayNumber: 11,
+      date: "2025-01-26",
+      dayName: "Friday",
+      location: "Cairo",
+      timeSlots: [
+        {
+          startTime: "9:00",
+          endTime: "12:00",
+          activity: "Return to Cairo",
+          description: "Travel back to Cairo",
+          type: "travel",
+          color: "travel",
+          icon: "✈️"
         },
         {
           startTime: "14:00",
-          endTime: "17:00",
+          endTime: "17:30",
           activity: "Old Cairo & Coptic Quarter",
-          description: "Explore Christian Cairo and historic churches",
+          description: "Historic Christian Cairo, Coptic Museum, and ancient sites",
           location: "Old Cairo",
           type: "excursion",
           color: "cultural",
           icon: "⛪",
-          cost: "Included"
+          cost: "$109.00"
         },
         {
-          startTime: "17:00",
-          endTime: "18:30",
-          activity: "Hotel Check-in & Rest",
-          description: "Check into Cairo hotel, freshen up",
-          location: "Cairo Hotel",
+          startTime: "17:30",
+          endTime: "21:00",
+          activity: "Free Time in Cairo",
+          description: "Final evening in Egypt",
           type: "free",
           color: "free",
-          icon: "🏨"
-        },
-        {
-          startTime: "19:00",
-          endTime: "22:00",
-          activity: "Farewell Dinner with Entertainment",
-          description: "Traditional Egyptian dinner with belly dancing show",
-          location: "Cairo Restaurant",
-          type: "meals",
-          color: "dining",
-          icon: "💃",
-          cost: "Included"
+          icon: "🌃"
         }
       ]
     },
+    // Day 12: Nov 30 - Cairo Egypt - Departure
     {
-      dayNumber: 10,
-      date: "2025-01-26",
-      dayName: "Friday",
-      location: "Cairo - Departure",
+      dayNumber: 12,
+      date: "2025-01-27",
+      dayName: "Saturday",
+      location: "Cairo",
       timeSlots: [
         {
           startTime: "7:00",
-          endTime: "9:00",
-          activity: "Hotel Breakfast",
-          description: "Final breakfast in Egypt at hotel",
-          type: "meals",
-          color: "meals",
-          icon: "☕"
-        },
-        {
-          startTime: "9:00",
           endTime: "11:00",
-          activity: "Last-Minute Shopping",
-          description: "Free time for souvenir shopping or hotel relaxation",
-          type: "free",
-          color: "free",
-          icon: "🛍️",
-          notes: "Hotel lobby shops and nearby stores"
-        },
-        {
-          startTime: "11:00",
-          endTime: "12:00",
-          activity: "Hotel Check-out",
-          description: "Check out of hotel, luggage storage available",
-          type: "preparation",
+          activity: "Departure Preparation",
+          description: "Pack and prepare for departure",
+          type: "departure",
           color: "travel",
           icon: "🧳"
         },
         {
           startTime: "12:00",
-          endTime: "13:30",
-          activity: "Farewell Lunch",
-          description: "Final Egyptian meal at hotel restaurant",
-          type: "meals",
-          color: "meals",
-          icon: "🍽️"
-        },
-        {
-          startTime: "14:00",
-          endTime: "15:30",
-          activity: "Transfer to Airport",
-          description: "Private transfer to Cairo International Airport",
-          type: "travel",
-          color: "travel",
-          icon: "✈️",
-          notes: "Allow extra time for international departure"
-        },
-        {
-          startTime: "15:30",
           endTime: "18:00",
-          activity: "Airport Procedures",
-          description: "Check-in, security, and departure preparations",
-          location: "Cairo International Airport",
+          activity: "Departure",
+          description: "Depart Cairo for home",
           type: "departure",
           color: "travel",
-          icon: "🛂"
+          icon: "✈️"
         },
         {
           startTime: "18:00",
-          endTime: "19:00",
-          activity: "Departure",
-          description: "Flight departure - Safe travels home!",
-          location: "Cairo International Airport",
+          endTime: "21:00",
+          activity: "Travel Home",
+          description: "End of wonderful Egyptian adventure",
           type: "departure",
           color: "travel",
-          icon: "🛫",
-          notes: "End of Viking Egypt Cruise adventure"
+          icon: "🏠"
         }
       ]
     }
@@ -773,9 +585,9 @@ function Navigation($$renderer, $$props) {
       totalDays,
       viewMode
     } = $$props;
-    $$renderer2.push(`<nav class="bg-white/95 backdrop-blur-md border-b border-blue-400/50 py-3 no-print sticky top-0 z-50 shadow-lg"><div class="container mx-auto px-6"><div class="hidden md:flex items-center justify-between gap-4"><button${attr("disabled", currentDayIndex === 0, true)} class="group px-3 py-2 rounded-full bg-gradient-to-r from-blue-700 to-blue-800 text-white font-medium disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed transition-all duration-300 hover:shadow-lg hover:scale-105 flex items-center gap-2"><span class="group-hover:-translate-x-1 transition-transform">←</span> <span>Previous</span></button> <div class="text-center flex-1 bg-blue-100/80 backdrop-blur-sm rounded-xl py-2 px-4 border border-blue-400/50"><div class="text-base font-bold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent">Day ${escape_html(currentDayIndex + 1)} of ${escape_html(totalDays)}</div> <div class="text-sm text-gray-700 font-medium">${escape_html(currentDay.dayName)} • ${escape_html(currentDay.location)}</div> <div class="text-xs text-gray-600">${escape_html(formatDate(currentDay.date))}</div></div> <div class="flex items-center gap-2"><button${attr_class(`px-3 py-1.5 text-xs rounded-full font-medium transition-all duration-300 ${stringify(viewMode === "single" ? "bg-gradient-to-r from-blue-700 to-blue-800 text-white shadow-md" : "bg-blue-200 text-blue-800 hover:bg-blue-300")}`)}>📅 Day</button> <button${attr_class(`px-3 py-1.5 text-xs rounded-full font-medium transition-all duration-300 ${stringify(viewMode === "timeline" ? "bg-gradient-to-r from-blue-700 to-blue-800 text-white shadow-md" : "bg-blue-200 text-blue-800 hover:bg-blue-300")}`)}>🕐 Timeline</button> <button${attr_class(`px-3 py-1.5 text-xs rounded-full font-medium transition-all duration-300 ${stringify(viewMode === "overview" ? "bg-gradient-to-r from-blue-700 to-blue-800 text-white shadow-md" : "bg-blue-200 text-blue-800 hover:bg-blue-300")}`)}>📊 Overview</button> `);
+    $$renderer2.push(`<nav class="bg-white/95 backdrop-blur-md border-b border-blue-400/50 py-3 no-print sticky top-0 z-50 shadow-lg"><div class="container mx-auto px-6"><div class="hidden md:flex items-center justify-between gap-4"><button${attr("disabled", currentDayIndex === 0, true)} class="group px-3 py-2 rounded-full bg-gradient-to-r from-blue-700 to-blue-800 text-white font-medium disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed transition-all duration-300 hover:shadow-lg hover:scale-105 flex items-center gap-2"><span class="group-hover:-translate-x-1 transition-transform">←</span> <span>Previous</span></button> <div class="text-center flex-1 bg-blue-100/80 backdrop-blur-sm rounded-xl py-2 px-4 border border-blue-400/50"><div class="text-base font-bold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent">Day ${escape_html(currentDay.dayNumber)} of ${escape_html(totalDays)}</div> <div class="text-sm text-gray-700 font-medium">${escape_html(currentDay.dayName)} • ${escape_html(currentDay.location)}</div> <div class="text-xs text-gray-600">${escape_html(formatDate(currentDay.date))}</div></div> <div class="flex items-center gap-2"><button${attr_class(`px-3 py-1.5 text-xs rounded-full font-medium transition-all duration-300 ${stringify(viewMode === "single" ? "bg-gradient-to-r from-blue-700 to-blue-800 text-white shadow-md" : "bg-blue-200 text-blue-800 hover:bg-blue-300")}`)}>📅 Day</button> <button${attr_class(`px-3 py-1.5 text-xs rounded-full font-medium transition-all duration-300 ${stringify(viewMode === "timeline" ? "bg-gradient-to-r from-blue-700 to-blue-800 text-white shadow-md" : "bg-blue-200 text-blue-800 hover:bg-blue-300")}`)}>🕐 Timeline</button> <button${attr_class(`px-3 py-1.5 text-xs rounded-full font-medium transition-all duration-300 ${stringify(viewMode === "overview" ? "bg-gradient-to-r from-blue-700 to-blue-800 text-white shadow-md" : "bg-blue-200 text-blue-800 hover:bg-blue-300")}`)}>📊 Overview</button> `);
     PrintButton($$renderer2, { viewMode, dayIndex: currentDayIndex });
-    $$renderer2.push(`<!----></div> <button${attr("disabled", currentDayIndex === totalDays - 1, true)} class="group px-3 py-2 rounded-full bg-gradient-to-r from-blue-700 to-blue-800 text-white font-medium disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed transition-all duration-300 hover:shadow-lg hover:scale-105 flex items-center gap-2"><span>Next</span> <span class="group-hover:translate-x-1 transition-transform">→</span></button></div> <div class="md:hidden space-y-2"><div class="items-center justify-between gap-2 flex-nowrap"><div class="justify-between flex"><button${attr("disabled", currentDayIndex === 0, true)} class="group px-3 py-2 rounded-full bg-gradient-to-r from-blue-700 to-blue-800 text-white font-medium disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed transition-all duration-300 hover:shadow-lg hover:scale-105 flex items-center gap-2 flex-shrink-0"><span class="group-hover:-translate-x-1 transition-transform">←</span> <span class="hidden sm:inline">Previous</span> <span class="sm:hidden">Prev</span></button> <div class="text-center flex-1 bg-blue-100/80 backdrop-blur-sm rounded-xl py-2 px-3 mx-3 border border-blue-400/50"><div class="text-sm font-bold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent">Day ${escape_html(currentDayIndex + 1)} of ${escape_html(totalDays)}</div> <div class="text-xs text-gray-700 font-medium">${escape_html(currentDay.dayName)} • ${escape_html(currentDay.location)}</div></div> <button${attr("disabled", currentDayIndex === totalDays - 1, true)} class="group px-3 py-2 rounded-full bg-gradient-to-r from-blue-700 to-blue-800 text-white font-medium disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed transition-all duration-300 hover:shadow-lg hover:scale-105 flex items-center gap-2 flex-shrink-0"><span class="hidden sm:inline">Next</span> <span class="sm:hidden">Next</span> <span class="group-hover:translate-x-1 transition-transform">→</span></button></div></div> <div class="flex items-center justify-between gap-2"><div class="flex items-center gap-1"><button${attr_class(`px-2 py-1 text-xs rounded-full font-medium transition-all duration-300 ${stringify(viewMode === "single" ? "bg-gradient-to-r from-blue-700 to-blue-800 text-white shadow-md" : "bg-blue-200 text-blue-800 hover:bg-blue-300")}`)}>📅</button> <button${attr_class(`px-2 py-1 text-xs rounded-full font-medium transition-all duration-300 ${stringify(viewMode === "timeline" ? "bg-gradient-to-r from-blue-700 to-blue-800 text-white shadow-md" : "bg-blue-200 text-blue-800 hover:bg-blue-300")}`)}>🕐</button> <button${attr_class(`px-2 py-1 text-xs rounded-full font-medium transition-all duration-300 ${stringify(viewMode === "overview" ? "bg-gradient-to-r from-blue-700 to-blue-800 text-white shadow-md" : "bg-blue-200 text-blue-800 hover:bg-blue-300")}`)}>📊</button> `);
+    $$renderer2.push(`<!----></div> <button${attr("disabled", currentDayIndex === totalDays, true)} class="group px-3 py-2 rounded-full bg-gradient-to-r from-blue-700 to-blue-800 text-white font-medium disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed transition-all duration-300 hover:shadow-lg hover:scale-105 flex items-center gap-2"><span>Next</span> <span class="group-hover:translate-x-1 transition-transform">→</span></button></div> <div class="md:hidden space-y-2"><div class="items-center justify-between gap-2 flex-nowrap"><div class="justify-between flex"><button${attr("disabled", currentDayIndex === 0, true)} class="group px-3 py-2 rounded-full bg-gradient-to-r from-blue-700 to-blue-800 text-white font-medium disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed transition-all duration-300 hover:shadow-lg hover:scale-105 flex items-center gap-2 flex-shrink-0"><span class="group-hover:-translate-x-1 transition-transform">←</span> <span class="hidden sm:inline">Previous</span> <span class="sm:hidden">Prev</span></button> <div class="text-center flex-1 bg-blue-100/80 backdrop-blur-sm rounded-xl py-2 px-3 mx-3 border border-blue-400/50"><div class="text-sm font-bold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent">Day ${escape_html(currentDay.dayNumber)} of ${escape_html(totalDays)}</div> <div class="text-xs text-gray-700 font-medium">${escape_html(currentDay.dayName)} • ${escape_html(currentDay.location)}</div></div> <button${attr("disabled", currentDayIndex === totalDays, true)} class="group px-3 py-2 rounded-full bg-gradient-to-r from-blue-700 to-blue-800 text-white font-medium disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed transition-all duration-300 hover:shadow-lg hover:scale-105 flex items-center gap-2 flex-shrink-0"><span class="hidden sm:inline">Next</span> <span class="sm:hidden">Next</span> <span class="group-hover:translate-x-1 transition-transform">→</span></button></div></div> <div class="flex items-center justify-between gap-2"><div class="flex items-center gap-1"><button${attr_class(`px-2 py-1 text-xs rounded-full font-medium transition-all duration-300 ${stringify(viewMode === "single" ? "bg-gradient-to-r from-blue-700 to-blue-800 text-white shadow-md" : "bg-blue-200 text-blue-800 hover:bg-blue-300")}`)}>📅</button> <button${attr_class(`px-2 py-1 text-xs rounded-full font-medium transition-all duration-300 ${stringify(viewMode === "timeline" ? "bg-gradient-to-r from-blue-700 to-blue-800 text-white shadow-md" : "bg-blue-200 text-blue-800 hover:bg-blue-300")}`)}>🕐</button> <button${attr_class(`px-2 py-1 text-xs rounded-full font-medium transition-all duration-300 ${stringify(viewMode === "overview" ? "bg-gradient-to-r from-blue-700 to-blue-800 text-white shadow-md" : "bg-blue-200 text-blue-800 hover:bg-blue-300")}`)}>📊</button> `);
     PrintButton($$renderer2, { viewMode, dayIndex: currentDayIndex });
     $$renderer2.push(`<!----></div></div></div></div></nav>`);
   });
@@ -873,7 +685,7 @@ function _page($$renderer, $$props) {
       Navigation($$renderer2, {
         currentDay,
         currentDayIndex,
-        totalDays: itineraryData.dailySchedule.length,
+        totalDays: Math.max(...itineraryData.dailySchedule.map((day) => day.dayNumber)),
         viewMode
       });
       $$renderer2.push(`<!---->`);

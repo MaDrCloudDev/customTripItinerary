@@ -11,7 +11,9 @@ export interface TimeSlot {
 		| 'cultural'
 		| 'departure'
 		| 'meals'
-		| 'travel';
+		| 'travel'
+		| 'arrival'
+		| 'embarkation';
 	color:
 		| 'excursion'
 		| 'dining'

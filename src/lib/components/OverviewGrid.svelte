@@ -21,7 +21,7 @@
 		>
 			📅 Complete Cruise Overview
 		</h2>
-		<p class="text-gray-700">Your 10-day Egyptian adventure</p>
+		<p class="text-gray-700">Your 12-day Egyptian adventure</p>
 
 		<div class="mt-4 flex flex-wrap justify-center gap-3 text-xs">
 			<div class="flex items-center gap-1">

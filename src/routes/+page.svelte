@@ -142,7 +142,7 @@
 		<Navigation 
 			{currentDay}
 			{currentDayIndex}
-			totalDays={itineraryData.dailySchedule.length}
+			totalDays={Math.max(...itineraryData.dailySchedule.map(day => day.dayNumber))}
 			{viewMode}
 			onPrevDay={prevDay}
 			onNextDay={nextDay}

@@ -36,8 +36,8 @@ declare module '$env/static/private' {
 	export const XDG_MENU_PREFIX: string;
 	export const TERM_PROGRAM_VERSION: string;
 	export const FNM_ARCH: string;
-	export const HISTSIZE: string;
 	export const HOSTNAME: string;
+	export const HISTSIZE: string;
 	export const NODE: string;
 	export const DOTNET_ROOT: string;
 	export const SSH_AUTH_SOCK: string;
@@ -53,8 +53,8 @@ declare module '$env/static/private' {
 	export const GPG_TTY: string;
 	export const EDITOR: string;
 	export const PWD: string;
-	export const LOGNAME: string;
 	export const XDG_SESSION_DESKTOP: string;
+	export const LOGNAME: string;
 	export const XDG_SESSION_TYPE: string;
 	export const MAMBA_ROOT_PREFIX: string;
 	export const npm_config_init_module: string;
@@ -74,6 +74,7 @@ declare module '$env/static/private' {
 	export const npm_package_version: string;
 	export const MEMORY_PRESSURE_WATCH: string;
 	export const WAYLAND_DISPLAY: string;
+	export const LOCAL_GIT_DIRECTORY: string;
 	export const GIT_ASKPASS: string;
 	export const INVOCATION_ID: string;
 	export const MANAGERPID: string;
@@ -129,7 +130,6 @@ declare module '$env/static/private' {
 	export const npm_node_execpath: string;
 	export const GIO_LAUNCHED_DESKTOP_FILE: string;
 	export const FNM_LOGLEVEL: string;
-	export const OLDPWD: string;
 	export const TERM_PROGRAM: string;
 	export const NODE_ENV: string;
 }
@@ -171,8 +171,8 @@ declare module '$env/dynamic/private' {
 		XDG_MENU_PREFIX: string;
 		TERM_PROGRAM_VERSION: string;
 		FNM_ARCH: string;
-		HISTSIZE: string;
 		HOSTNAME: string;
+		HISTSIZE: string;
 		NODE: string;
 		DOTNET_ROOT: string;
 		SSH_AUTH_SOCK: string;
@@ -188,8 +188,8 @@ declare module '$env/dynamic/private' {
 		GPG_TTY: string;
 		EDITOR: string;
 		PWD: string;
-		LOGNAME: string;
 		XDG_SESSION_DESKTOP: string;
+		LOGNAME: string;
 		XDG_SESSION_TYPE: string;
 		MAMBA_ROOT_PREFIX: string;
 		npm_config_init_module: string;
@@ -209,6 +209,7 @@ declare module '$env/dynamic/private' {
 		npm_package_version: string;
 		MEMORY_PRESSURE_WATCH: string;
 		WAYLAND_DISPLAY: string;
+		LOCAL_GIT_DIRECTORY: string;
 		GIT_ASKPASS: string;
 		INVOCATION_ID: string;
 		MANAGERPID: string;
@@ -264,7 +265,6 @@ declare module '$env/dynamic/private' {
 		npm_node_execpath: string;
 		GIO_LAUNCHED_DESKTOP_FILE: string;
 		FNM_LOGLEVEL: string;
-		OLDPWD: string;
 		TERM_PROGRAM: string;
 		NODE_ENV: string;
 		[key: `PUBLIC_${string}`]: undefined;

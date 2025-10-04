@@ -6,31 +6,60 @@
     "passengers": "Travelers",
     "stateroom": "XXX",
     "dates": {
-      "start": "2025-01-17",
-      "end": "2025-01-26",
-      "totalDays": 10
+      "start": "2025-01-15",
+      "end": "2025-01-27",
+      "totalDays": 12
     }
   },
   "dailySchedule": [
     {
-      "dayNumber": 1,
-      "date": "2025-01-17",
-      "dayName": "Wednesday",
+      "dayNumber": 0,
+      "date": "2025-01-15",
+      "dayName": "Monday",
       "location": "Cairo",
       "timeSlots": {
         "morning": {
-          "time": "6:00 AM - 12:00 PM",
-          "activity": "Free Time Aboard Ship",
-          "description": "Relax and prepare for evening excursion",
-          "type": "free",
-          "icon": "⚓"
+          "time": "Morning",
+          "activity": "Arrival in Cairo",
+          "description": "Arrive at Cairo International Airport",
+          "type": "arrival",
+          "icon": "✈️"
         },
         "afternoon": {
-          "time": "12:00 PM - 6:00 PM",
-          "activity": "Prepare for Evening Adventure",
-          "description": "Rest, early dinner, dress for Cairo outing",
-          "type": "preparation",
-          "icon": "🎒"
+          "time": "Afternoon",
+          "activity": "Check-in at Hotel",
+          "description": "Rest and recover from travel",
+          "type": "free",
+          "icon": "🏨"
+        },
+        "evening": {
+          "time": "Evening",
+          "activity": "Free Time at Hotel",
+          "description": "Dinner at hotel and rest",
+          "type": "free",
+          "icon": "🍽️"
+        }
+      }
+    },
+    {
+      "dayNumber": 1,
+      "date": "2025-01-16",
+      "dayName": "Tuesday",
+      "location": "Cairo",
+      "timeSlots": {
+        "morning": {
+          "time": "Morning",
+          "activity": "Breakfast at Hotel",
+          "description": "Breakfast at Hotel",
+          "type": "free",
+          "icon": "🥐"
+        },
+        "afternoon": {
+          "time": "Afternoon",
+          "activity": "Free Time off Ship",
+          "description": "Explore Cairo or rest at hotel",
+          "type": "free",
+          "icon": "🚶"
         },
         "evening": {
           "time": "6:00 PM - 10:00 PM",
@@ -47,13 +76,13 @@
     },
     {
       "dayNumber": 2,
-      "date": "2025-01-18",
-      "dayName": "Thursday",
-      "location": "Giza",
+      "date": "2025-01-17",
+      "dayName": "Wednesday",
+      "location": "Cairo/Giza",
       "timeSlots": {
         "morning": {
           "time": "9:00 AM - 1:00 PM",
-          "activity": "Giza Pyramids & Sphinx Tour",
+          "activity": "Giza Pyramids & Grand Egyptian Museum (Part 1)",
           "description": "Marvel at the Great Pyramid and iconic Sphinx",
           "type": "excursion",
           "color": "excursion",
@@ -62,41 +91,41 @@
         },
         "afternoon": {
           "time": "1:00 PM - 5:00 PM",
-          "activity": "Grand Egyptian Museum",
-          "description": "World's largest archaeological museum",
+          "activity": "Grand Egyptian Museum (Part 2)",
+          "description": "World's largest archaeological museum with King Tut collection",
           "type": "excursion",
           "color": "excursion",
           "icon": "🏺",
           "cost": "Included"
         },
         "evening": {
-          "time": "5:00 PM onwards",
-          "activity": "Dinner & Rest Aboard Ship",
-          "description": "Relax after full day of sightseeing",
+          "time": "Evening",
+          "activity": "Return to Hotel",
+          "description": "Return to Hotel",
           "type": "free",
-          "icon": "🍽️"
+          "icon": "�"
         }
       }
     },
     {
       "dayNumber": 3,
-      "date": "2025-01-19",
-      "dayName": "Friday",
-      "location": "Luxor",
+      "date": "2025-01-18",
+      "dayName": "Thursday",
+      "location": "Cairo to Luxor",
       "timeSlots": {
         "morning": {
-          "time": "6:00 AM - 5:30 PM",
-          "activity": "Free Time & Ship Activities",
-          "description": "Sailing to Luxor, ship amenities available",
-          "type": "free",
-          "icon": "⚓"
+          "time": "Morning",
+          "activity": "Breakfast at Hotel & Flight to Luxor",
+          "description": "Check out of Hotel, fly to Luxor",
+          "type": "travel",
+          "icon": "✈️"
         },
         "afternoon": {
-          "time": "Continue sailing",
-          "activity": "Continue Free Time",
-          "description": "Enjoy ship facilities and Nile views",
-          "type": "free",
-          "icon": "🌊"
+          "time": "Afternoon",
+          "activity": "Board Ship in Luxor",
+          "description": "Finally board Viking ship after arriving in Luxor",
+          "type": "embarkation",
+          "icon": "🚢"
         },
         "evening": {
           "time": "5:30 PM - 7:00 PM",
@@ -113,12 +142,12 @@
     },
     {
       "dayNumber": 4,
-      "date": "2025-01-20",
-      "dayName": "Saturday",
-      "location": "Dendera",
+      "date": "2025-01-19",
+      "dayName": "Friday",
+      "location": "Luxor/Qena",
       "timeSlots": {
         "morning": {
-          "time": "6:00 AM - 1:00 PM",
+          "time": "Morning",
           "activity": "Free Time Aboard Ship",
           "description": "Relax and enjoy ship amenities",
           "type": "free",
@@ -127,7 +156,7 @@
         "afternoon": {
           "time": "1:00 PM - 3:30 PM",
           "activity": "Dendera Temple Exploration",
-          "description": "Temple of Hathor with stunning ceiling paintings",
+          "description": "Temple of Hathor with stunning ceiling paintings and Dendera zodiac",
           "location": "Dendera Temple Complex",
           "duration": "2.5 hours",
           "type": "excursion",
@@ -146,51 +175,47 @@
     },
     {
       "dayNumber": 5,
-      "date": "2025-01-21",
-      "dayName": "Sunday",
+      "date": "2025-01-20",
+      "dayName": "Saturday",
       "location": "Valley of the Kings",
       "timeSlots": {
         "morning": {
           "time": "8:00 AM - 1:30 PM",
-          "activity": "Valley of the Kings & Hatshepsut Temple",
-          "description": "Ancient royal tombs and mortuary temple",
+          "activity": "Valley of the Kings, Hatshepsut & Queen Nefertari Tomb",
+          "description": "Ancient royal tombs, mortuary temple, and Queen Nefertari's tomb",
           "location": "West Bank, Luxor",
-          "duration": "5.5 hours (Part 1)",
+          "duration": "5.5 hours",
           "type": "excursion",
           "color": "excursion",
           "icon": "👑",
           "cost": "Included"
         },
         "afternoon": {
-          "time": "1:30 PM - 2:00 PM",
-          "activity": "Queen Nefertari Tomb Visit",
-          "description": "Most beautiful tomb in the Valley of Queens",
-          "location": "Valley of Queens",
-          "duration": "30 minutes",
-          "type": "excursion",
-          "color": "excursion",
-          "icon": "👸",
-          "cost": "Included"
-        },
-        "evening": {
-          "time": "2:00 PM onwards",
+          "time": "1:30 PM onwards",
           "activity": "Return to Ship & Rest",
           "description": "Long excursion day - time to relax",
           "type": "free",
-          "icon": "😌"
+          "icon": "�"
+        },
+        "evening": {
+          "time": "Evening",
+          "activity": "Dinner Aboard Ship",
+          "description": "Rest after demanding day of exploration",
+          "type": "free",
+          "icon": "🍽️"
         }
       }
     },
     {
       "dayNumber": 6,
-      "date": "2025-01-22",
-      "dayName": "Monday",
+      "date": "2025-01-21",
+      "dayName": "Sunday",
       "location": "Esna",
       "timeSlots": {
         "morning": {
           "time": "8:15 AM - 9:45 AM",
           "activity": "Village of Esna by Foot",
-          "description": "Traditional Egyptian village walking tour",
+          "description": "Traditional Egyptian village walking tour with market and temple",
           "location": "Esna Village",
           "duration": "1.5 hours",
           "type": "excursion",
@@ -207,29 +232,29 @@
         },
         "evening": {
           "time": "Evening",
-          "activity": "Dinner & Relaxation",
-          "description": "Enjoy ship amenities as we sail",
+          "activity": "Sail to Aswan at Night",
+          "description": "Enjoy ship amenities as we sail south",
           "type": "free",
-          "icon": "🍽️"
+          "icon": "�"
         }
       }
     },
     {
       "dayNumber": 7,
-      "date": "2025-01-23",
-      "dayName": "Tuesday",
+      "date": "2025-01-22",
+      "dayName": "Monday",
       "location": "Abu Simbel",
       "timeSlots": {
         "morning": {
           "time": "7:30 AM - 2:30 PM",
           "activity": "The Temples at Abu Simbel",
-          "description": "Ramesses II's magnificent relocated temples",
-          "location": "Abu Simbel (by coach)",
+          "description": "Ramesses II's magnificent relocated temples with round-trip flights",
+          "location": "Abu Simbel (by flight from Aswan)",
           "duration": "7 hours",
           "type": "excursion",
           "color": "excursion",
           "icon": "🏛️",
-          "cost": "$134.00"
+          "cost": "$509.00"
         },
         "afternoon": {
           "time": "Continue Abu Simbel",
@@ -237,11 +262,11 @@
           "description": "Complete temple exploration and return journey",
           "type": "excursion",
           "color": "excursion",
-          "icon": "🚌"
+          "icon": "✈️"
         },
         "evening": {
           "time": "2:30 PM onwards",
-          "activity": "Return & Rest",
+          "activity": "Return to Aswan & Rest",
           "description": "Long day - time to recover on ship",
           "type": "free",
           "icon": "😴"
@@ -250,51 +275,47 @@
     },
     {
       "dayNumber": 8,
-      "date": "2025-01-24",
-      "dayName": "Wednesday",
+      "date": "2025-01-23",
+      "dayName": "Tuesday",
       "location": "Aswan",
       "timeSlots": {
         "morning": {
           "time": "8:00 AM - 12:30 PM",
-          "activity": "Nubian Village & Philae Temple",
-          "description": "Traditional village visit and island temple",
+          "activity": "Philae Temple, Nubian Village & Papyrus Institute",
+          "description": "Island temple, traditional village visit, and papyrus making demonstration",
           "location": "Aswan",
-          "duration": "4.5 hours (Part 1)",
+          "duration": "4.5 hours",
           "type": "excursion",
           "color": "cultural",
-          "icon": "🏡",
+          "icon": "�️",
           "cost": "Included"
         },
         "afternoon": {
-          "time": "12:30 PM - 1:00 PM",
-          "activity": "Papyrus Institute Visit",
-          "description": "Learn about ancient papyrus making",
-          "location": "Aswan",
-          "duration": "30 minutes",
-          "type": "excursion",
-          "color": "cultural",
-          "icon": "📜",
-          "cost": "Included"
-        },
-        "evening": {
-          "time": "1:00 PM onwards",
+          "time": "12:30 PM onwards",
           "activity": "Free Time in Aswan",
           "description": "Explore Aswan or relax on ship",
           "type": "free",
           "icon": "🌴"
+        },
+        "evening": {
+          "time": "Evening",
+          "activity": "Evening Aboard Ship",
+          "description": "Enjoy Aswan views from ship",
+          "type": "free",
+          "icon": "�️"
         }
       }
     },
     {
       "dayNumber": 9,
-      "date": "2025-01-25",
-      "dayName": "Thursday",
+      "date": "2025-01-24",
+      "dayName": "Wednesday",
       "location": "Edfu",
       "timeSlots": {
         "morning": {
           "time": "8:30 AM - 10:30 AM",
           "activity": "Edfu Temple",
-          "description": "Best-preserved temple in Egypt",
+          "description": "Best-preserved temple in Egypt dedicated to Horus",
           "location": "Edfu",
           "duration": "2 hours",
           "type": "excursion",
@@ -304,15 +325,15 @@
         },
         "afternoon": {
           "time": "10:30 AM onwards",
-          "activity": "Sailing Back North",
-          "description": "Enjoy final Nile sailing toward Cairo",
+          "activity": "Sailing North",
+          "description": "Continue sailing northward",
           "type": "free",
           "icon": "⛵"
         },
         "evening": {
           "time": "Evening",
-          "activity": "Farewell Dinner Preparations",
-          "description": "Last evening aboard ship",
+          "activity": "Evening Aboard Ship",
+          "description": "Relaxing evening on the Nile",
           "type": "free",
           "icon": "🥂"
         }
@@ -320,21 +341,21 @@
     },
     {
       "dayNumber": 10,
-      "date": "2025-01-26",
-      "dayName": "Friday",
+      "date": "2025-01-25",
+      "dayName": "Thursday",
       "location": "Cairo",
       "timeSlots": {
         "morning": {
           "time": "Morning",
-          "activity": "Disembarkation Preparation",
-          "description": "Pack and prepare to leave ship",
-          "type": "free",
-          "icon": "🧳"
+          "activity": "Return to Cairo",
+          "description": "Travel back to Cairo",
+          "type": "travel",
+          "icon": "✈️"
         },
         "afternoon": {
           "time": "2:00 PM - 5:30 PM",
           "activity": "Old Cairo & Coptic Quarter",
-          "description": "Historic Christian Cairo and ancient sites",
+          "description": "Historic Christian Cairo, Coptic Museum, and ancient sites",
           "location": "Old Cairo",
           "duration": "3.5 hours",
           "type": "excursion",
@@ -344,10 +365,39 @@
         },
         "evening": {
           "time": "5:30 PM onwards",
-          "activity": "Farewell & Departure",
-          "description": "End of wonderful Egyptian adventure",
+          "activity": "Free Time in Cairo",
+          "description": "Final evening in Egypt",
+          "type": "free",
+          "icon": "🌃"
+        }
+      }
+    },
+    {
+      "dayNumber": 11,
+      "date": "2025-01-26",
+      "dayName": "Friday",
+      "location": "Cairo",
+      "timeSlots": {
+        "morning": {
+          "time": "Morning",
+          "activity": "Departure Preparation",
+          "description": "Pack and prepare for departure",
+          "type": "departure",
+          "icon": "🧳"
+        },
+        "afternoon": {
+          "time": "Afternoon",
+          "activity": "Departure",
+          "description": "Depart Cairo for home",
           "type": "departure",
           "icon": "✈️"
+        },
+        "evening": {
+          "time": "Evening",
+          "activity": "Travel Home",
+          "description": "End of wonderful Egyptian adventure",
+          "type": "departure",
+          "icon": "🏠"
         }
       }
     }
