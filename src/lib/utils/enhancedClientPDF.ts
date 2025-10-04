@@ -1,8 +1,3 @@
-/**
- * Enhanced client-side PDF generation that matches Puppeteer output exactly
- * Uses the same logic, scaling, and content preparation as the server-side version
- */
-
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
@@ -13,18 +8,11 @@ export interface ClientPDFOptions {
 	scale?: number;
 }
 
-/**
- * Force all colors to hex/rgb for html2canvas compatibility
- */
 function convertModernColorsForCanvas(): void {
-	// Add comprehensive hex color overrides for all Tailwind 4 oklch colors
 	const styleElement = document.createElement('style');
 	styleElement.id = 'pdf-color-conversion';
 	styleElement.textContent = `
-		/* Override ALL Tailwind CSS variables with hex values for html2canvas */
 		:root, :host {
-			/* Override ALL potentially problematic colors and gradients with solid colors */
-			/* Override Tailwind 4 oklch colors with hex equivalents */
 			--color-red-100: #fee2e2 !important;
 			--color-red-200: #fecaca !important;
 			--color-red-400: #f87171 !important;
@@ -92,7 +80,6 @@ function convertModernColorsForCanvas(): void {
 			--color-slate-900: #0f172a !important;
 		}
 		
-		/* Text colors - preserve actual card text colors */
 		.text-blue-900 { color: #1e3a8a !important; }
 		.text-orange-900 { color: #7c2d12 !important; }
 		.text-purple-900 { color: #581c87 !important; }
@@ -101,8 +88,6 @@ function convertModernColorsForCanvas(): void {
 		.text-yellow-900 { color: #713f12 !important; }
 		.text-red-900 { color: #7f1d1d !important; }
 		.text-white { color: #ffffff !important; }
-		
-		/* Other common text colors */
 		.text-blue-600 { color: #2563eb !important; }
 		.text-blue-700 { color: #1d4ed8 !important; }
 		.text-blue-800 { color: #1e40af !important; }
@@ -111,13 +96,11 @@ function convertModernColorsForCanvas(): void {
 		.text-gray-600 { color: #4b5563 !important; }
 		.text-gray-900 { color: #111827 !important; }
 		
-		/* Background colors */
 		.bg-white { background-color: #ffffff !important; }
 		.bg-white\/60 { background-color: rgba(255, 255, 255, 0.6) !important; }
 		.bg-white\/50 { background-color: rgba(255, 255, 255, 0.5) !important; }
 		.bg-white\/80 { background-color: rgba(255, 255, 255, 0.8) !important; }
 		
-		/* Activity card individual colors */
 		.bg-blue-100 { background-color: #dbeafe !important; }
 		.bg-blue-200 { background-color: #bfdbfe !important; }
 		.bg-orange-100 { background-color: #ffedd5 !important; }
@@ -133,14 +116,12 @@ function convertModernColorsForCanvas(): void {
 		.bg-red-100 { background-color: #fee2e2 !important; }
 		.bg-red-200 { background-color: #fecaca !important; }
 		
-		/* Solid colors for buttons/accents */
 		.bg-blue-600 { background-color: #2563eb !important; }
 		.bg-blue-700 { background-color: #1d4ed8 !important; }
 		.bg-blue-800 { background-color: #1e40af !important; }
 		.bg-emerald-500 { background-color: #10b981 !important; }
 		.bg-teal-500 { background-color: #14b8a6 !important; }
 		
-		/* Print info styles */
 		.bg-blue-50 { background-color: #eff6ff !important; }
 		
 		/* Gradients with hex colors */
@@ -181,31 +162,31 @@ function convertModernColorsForCanvas(): void {
 		/* Convert activity card gradients to solid colors that match the theme */
 		.bg-gradient-to-br.from-blue-100.to-blue-200,
 		*[class*="from-blue-100"] {
-			background: #bfdbfe !important; /* Slightly darker blue for better visibility */
+			background: #bfdbfe !important;
 		}
 		.bg-gradient-to-br.from-orange-100.to-orange-200,
 		*[class*="from-orange-100"] {
-			background: #fed7aa !important; /* Slightly darker orange */
+			background: #fed7aa !important;
 		}
 		.bg-gradient-to-br.from-purple-100.to-purple-200,
 		*[class*="from-purple-100"] {
-			background: #e9d5ff !important; /* Slightly darker purple */
+			background: #e9d5ff !important;
 		}
 		.bg-gradient-to-br.from-green-100.to-green-200,
 		*[class*="from-green-100"] {
-			background: #bbf7d0 !important; /* Slightly darker green */
+			background: #bbf7d0 !important;
 		}
 		.bg-gradient-to-br.from-gray-100.to-gray-200,
 		*[class*="from-gray-100"] {
-			background: #e5e7eb !important; /* Slightly darker gray */
+			background: #e5e7eb !important;
 		}
 		.bg-gradient-to-br.from-yellow-100.to-yellow-200,
 		*[class*="from-yellow-100"] {
-			background: #fde68a !important; /* Slightly darker yellow */
+			background: #fde68a !important;
 		}
 		.bg-gradient-to-br.from-red-100.to-red-200,
 		*[class*="from-red-100"] {
-			background: #fecaca !important; /* Slightly darker red */
+			background: #fecaca !important;
 		}
 		
 		/* Print button - use solid emerald */

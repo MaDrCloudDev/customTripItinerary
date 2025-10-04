@@ -36,5 +36,13 @@
 				cruiseInfo.dates.end
 			)} 🚢
 		</p>
+		<p class="text-blue-200/70 text-xs mt-1">
+			Made by <a 
+				href="https://github.com/madrclouddev" 
+				target="_blank" 
+				rel="noopener noreferrer"
+				class="hover:text-white transition-colors underline decoration-dotted"
+			>MaDrCloudDev</a>
+		</p>
 	</div>
 </footer>

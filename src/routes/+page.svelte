@@ -8,15 +8,11 @@
 	import OverviewGrid from '../lib/components/OverviewGrid.svelte';
 	import CruiseFooter from '../lib/components/CruiseFooter.svelte';
 
-	// State persistence
 	let currentDayIndex = $state(0);
 	let viewMode = $state<ViewMode>('single');
 	let isPrintMode = $state(false);
-
-	// Load saved state on mount
 	$effect(() => {
 		if (typeof window !== 'undefined') {
-			// Check for URL parameters (used by PDF generator)
 			const urlParams = new URLSearchParams(window.location.search);
 			const printMode = urlParams.get('printMode') === 'true';
 			const urlViewMode = urlParams.get('viewMode') as ViewMode;
@@ -33,7 +29,7 @@
 						currentDayIndex = dayIndex;
 					}
 				}
-				return; // Skip localStorage loading in print mode
+				return;
 			}
 			
 			const savedDayIndex = localStorage.getItem('cruise-day-index');
@@ -52,7 +48,6 @@
 		}
 	});
 
-	// Save state when it changes
 	$effect(() => {
 		if (typeof window !== 'undefined') {
 			localStorage.setItem('cruise-day-index', currentDayIndex.toString());
@@ -60,7 +55,6 @@
 		}
 	});
 
-	// Navigation functions
 	const nextDay = () => {
 		if (currentDayIndex < itineraryData.dailySchedule.length - 1) {
 			currentDayIndex += 1;
@@ -91,7 +85,6 @@
 	<title>Viking Egypt Cruise Itinerary - {itineraryData.cruise.passengers}</title>
 	{#if isPrintMode}
 		<style>
-			/* Print mode styles to ensure all content is visible */
 			.print-mode-content {
 				height: auto !important;
 				max-height: none !important;

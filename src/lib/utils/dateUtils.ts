@@ -1,4 +1,3 @@
-// Format date for display
 export const formatDate = (dateStr: string) => {
 	const date = new Date(dateStr);
 	return date.toLocaleDateString('en-US', {
@@ -8,7 +7,6 @@ export const formatDate = (dateStr: string) => {
 	});
 };
 
-// Time formatting
 export const formatTime = (time: string) => {
 	const [hours, minutes] = time.split(':');
 	const hour = parseInt(hours);
@@ -17,7 +15,6 @@ export const formatTime = (time: string) => {
 	return `${displayHour}:${minutes} ${ampm}`;
 };
 
-// Duration calculation
 export const calculateDuration = (
 	startTime: string,
 	endTime: string

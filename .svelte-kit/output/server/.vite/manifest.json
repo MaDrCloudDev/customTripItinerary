@@ -43,6 +43,9 @@
       "_environment.js",
       "_equality.js",
       "_context.js"
+    ],
+    "dynamicImports": [
+      "src/hooks.server.ts"
     ]
   },
   "_shared.js": {
@@ -92,6 +95,12 @@
       "_shared.js"
     ]
   },
+  "src/hooks.server.ts": {
+    "file": "chunks/hooks.server.js",
+    "name": "hooks.server",
+    "src": "src/hooks.server.ts",
+    "isDynamicEntry": true
+  },
   "src/routes/+layout.svelte": {
     "file": "entries/pages/_layout.svelte.js",
     "name": "entries/pages/_layout.svelte",
@@ -101,7 +110,7 @@
       "_index.js"
     ],
     "css": [
-      "_app/immutable/assets/_layout.DN73Lt4d.css"
+      "_app/immutable/assets/_layout.DLEdkM95.css"
     ]
   },
   "src/routes/+page.svelte": {
@@ -113,11 +122,5 @@
       "_index.js",
       "_context.js"
     ]
-  },
-  "src/routes/api/generate-pdf/+server.ts": {
-    "file": "entries/endpoints/api/generate-pdf/_server.ts.js",
-    "name": "entries/endpoints/api/generate-pdf/_server.ts",
-    "src": "src/routes/api/generate-pdf/+server.ts",
-    "isEntry": true
   }
 }

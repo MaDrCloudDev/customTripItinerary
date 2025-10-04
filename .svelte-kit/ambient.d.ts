@@ -95,6 +95,7 @@ declare module '$env/static/private' {
 	export const npm_config_prefix: string;
 	export const LESSOPEN: string;
 	export const USER: string;
+	export const GIT_PAGER: string;
 	export const VSCODE_GIT_IPC_HANDLE: string;
 	export const CONDA_SHLVL: string;
 	export const DISPLAY: string;
@@ -128,6 +129,7 @@ declare module '$env/static/private' {
 	export const npm_node_execpath: string;
 	export const GIO_LAUNCHED_DESKTOP_FILE: string;
 	export const FNM_LOGLEVEL: string;
+	export const OLDPWD: string;
 	export const TERM_PROGRAM: string;
 	export const NODE_ENV: string;
 }
@@ -228,6 +230,7 @@ declare module '$env/dynamic/private' {
 		npm_config_prefix: string;
 		LESSOPEN: string;
 		USER: string;
+		GIT_PAGER: string;
 		VSCODE_GIT_IPC_HANDLE: string;
 		CONDA_SHLVL: string;
 		DISPLAY: string;
@@ -261,6 +264,7 @@ declare module '$env/dynamic/private' {
 		npm_node_execpath: string;
 		GIO_LAUNCHED_DESKTOP_FILE: string;
 		FNM_LOGLEVEL: string;
+		OLDPWD: string;
 		TERM_PROGRAM: string;
 		NODE_ENV: string;
 		[key: `PUBLIC_${string}`]: undefined;
