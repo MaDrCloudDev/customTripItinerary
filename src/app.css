@@ -1,0 +1,141 @@
+@import 'tailwindcss';
+
+@theme {
+	/* Darker Egyptian-inspired palette */
+	--color-dark-sand: #2c2a26;
+	--color-dark-gold: #b8860b;
+	--color-dark-papyrus: #1f1e1b;
+	--color-dark-nile: #1e40af;
+	--color-dark-sunset: #ea580c;
+	--color-dark-oasis: #047857;
+	--color-dark-stone: #4b5563;
+	--color-dark-ruby: #b91c1c;
+	--color-dark-amethyst: #6d28d9;
+
+	/* Background colors */
+	--bg-primary: #1a1917;
+	--bg-secondary: #252320;
+	--bg-tertiary: #2f2d29;
+	--bg-card: #34312c;
+
+	/* Text colors */
+	--text-primary: #f5f1e8;
+	--text-secondary: #d4af37;
+	--text-muted: #a8a29e;
+}
+
+/* Modern, elegant global styles */
+@layer base {
+	html {
+		font-size: 18px;
+		scroll-behavior: smooth;
+	}
+
+	body {
+		line-height: 1.6;
+		font-family: 'Inter', -apple-system, BlinkMacSystemFont,
+			'Segoe UI', system-ui, sans-serif;
+		background: linear-gradient(
+			135deg,
+			#fdf2f8 0%,
+			#fce7f3 50%,
+			#f3e8ff 100%
+		);
+		min-height: 100vh;
+		color: #374151;
+	}
+
+	/* Custom scrollbar */
+	::-webkit-scrollbar {
+		width: 8px;
+	}
+
+	::-webkit-scrollbar-track {
+		background: #fce7f3;
+	}
+
+	::-webkit-scrollbar-thumb {
+		background: linear-gradient(to bottom, #ec4899, #db2777);
+		border-radius: 4px;
+	}
+
+	::-webkit-scrollbar-thumb:hover {
+		background: linear-gradient(to bottom, #db2777, #be185d);
+	}
+
+	/* Beautiful animations */
+	@keyframes fadeInUp {
+		from {
+			opacity: 0;
+			transform: translateY(20px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@keyframes shimmer {
+		0% {
+			background-position: -200px 0;
+		}
+		100% {
+			background-position: calc(200px + 100%) 0;
+		}
+	}
+
+	.animate-fade-in-up {
+		animation: fadeInUp 0.6s ease-out;
+	}
+
+	.shimmer {
+		background: linear-gradient(
+			90deg,
+			transparent,
+			rgba(255, 255, 255, 0.4),
+			transparent
+		);
+		background-size: 200px 100%;
+		animation: shimmer 2s infinite;
+	}
+}
+
+/* Print-specific styles */
+@media print {
+	.no-print {
+		display: none !important;
+	}
+
+	.print-page-break {
+		page-break-before: always;
+	}
+
+	body {
+		background: white !important;
+		color: black !important;
+		font-size: 16px !important;
+	}
+
+	/* Ensure all activity cards print with borders */
+	[class*='bg-blue-100'],
+	[class*='bg-orange-100'],
+	[class*='bg-purple-100'],
+	[class*='bg-green-100'],
+	[class*='bg-gray-50'],
+	[class*='bg-yellow-100'],
+	[class*='bg-red-100'] {
+		background: white !important;
+		border: 2px solid #333 !important;
+		color: black !important;
+	}
+
+	.day-card {
+		margin-bottom: 2rem;
+		page-break-inside: avoid;
+	}
+
+	/* Print margins for binding */
+	@page {
+		margin: 1in 0.75in 1in 1.25in;
+	}
+}
