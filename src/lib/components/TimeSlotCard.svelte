@@ -5,7 +5,12 @@
 		description: string;
 		location?: string;
 		duration?: string;
-		type: 'free' | 'excursion' | 'preparation' | 'cultural' | 'departure';
+		type:
+			| 'free'
+			| 'excursion'
+			| 'preparation'
+			| 'cultural'
+			| 'departure';
 		color?: 'excursion' | 'dining' | 'cultural' | 'nature' | 'free';
 		icon: string;
 		cost?: string;
@@ -24,7 +29,7 @@
 		dining: 'bg-orange-600 border-orange-700 text-white',
 		cultural: 'bg-yellow-500 border-yellow-600 text-black',
 		nature: 'bg-green-600 border-green-700 text-white',
-		free: 'bg-gray-100 border-gray-400 text-gray-800'
+		free: 'bg-gray-100 border-gray-400 text-gray-800',
 	};
 
 	const getColorClass = (slot: TimeSlot) => {
@@ -37,16 +42,24 @@
 	};
 </script>
 
-<div class="time-slot border-4 rounded-lg p-6 mb-4 {getColorClass(timeSlot)} activity-{timeSlot.color || timeSlot.type}">
-	<!-- Time Period Header -->
+<div
+	class="time-slot border-4 rounded-lg p-6 mb-4 {getColorClass(
+		timeSlot
+	)} activity-{timeSlot.color || timeSlot.type}"
+>
 	<div class="flex items-center justify-between mb-4">
-		<h3 class="text-2xl font-bold uppercase tracking-wide">{slotName}</h3>
+		<h3 class="text-2xl font-bold uppercase tracking-wide">
+			{slotName}
+		</h3>
 		<span class="text-xl font-semibold">{timeSlot.time}</span>
 	</div>
 
-	<!-- Activity Title with Icon -->
 	<div class="flex items-start gap-4 mb-3">
-		<span class="text-4xl" role="img" aria-label="Activity icon">{timeSlot.icon}</span>
+		<span
+			class="text-4xl"
+			role="img"
+			aria-label="Activity icon">{timeSlot.icon}</span
+		>
 		<div class="flex-1">
 			<h4 class="text-xl font-bold leading-tight mb-2">
 				{timeSlot.activity}
@@ -57,7 +70,6 @@
 		</div>
 	</div>
 
-	<!-- Additional Details -->
 	{#if timeSlot.location || timeSlot.duration || timeSlot.cost}
 		<div class="mt-4 pt-4 border-t-2 border-current opacity-70">
 			<div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-base">
