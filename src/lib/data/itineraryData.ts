@@ -1,4 +1,4 @@
-import type { ItineraryData } from '../types/itinerary.js';
+import type { ItineraryData } from '../../app.d.ts';
 export const itineraryData: ItineraryData = {
 	cruise: {
 		title: 'Cruise Itinerary',

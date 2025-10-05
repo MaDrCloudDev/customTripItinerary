@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { DaySchedule } from '../types/itinerary.js';
+	import type { DaySchedule } from '../../app.d.ts';
 	import { formatDate } from '../utils/dateUtils.js';
 	import { openGoogleMaps } from '../utils/mapsUtils.js';
 	import ActivityCard from './ActivityCard.svelte';

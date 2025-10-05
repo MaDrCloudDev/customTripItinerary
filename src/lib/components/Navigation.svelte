@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { DaySchedule, ViewMode } from '../types/itinerary.js';
+	import type { DaySchedule, ViewMode } from '../../app.d.ts';
 	import { formatDate } from '../utils/dateUtils.js';
 
 	interface Props {

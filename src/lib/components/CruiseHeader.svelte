@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { CruiseInfo, ViewMode } from '../types/itinerary.js';
+	import type { CruiseInfo, ViewMode } from '../../app.d.ts';
 
 	interface Props {
 		cruiseInfo: CruiseInfo;

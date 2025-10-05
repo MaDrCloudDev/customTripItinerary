@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { TimeSlot } from '../types/itinerary.js';
+	import type { TimeSlot } from '../../app.d.ts';
 	import {
 		formatTime,
 		calculateDuration,

@@ -1,4 +1,15 @@
-// TimeSlot represents a single activity/event in the cruise schedule
+// See https://kit.svelte.dev/docs/types#app
+// for information about these interfaces
+declare global {
+	namespace App {
+		// interface Error {}
+		// interface Locals {}
+		// interface PageData {}
+		// interface PageState {}
+		// interface Platform {}
+	}
+}
+
 export interface TimeSlot {
 	startTime: string;
 	endTime: string;
@@ -31,7 +42,6 @@ export interface TimeSlot {
 	notes?: string;
 }
 
-// Represents one full day of the cruise
 export interface DaySchedule {
 	dayNumber: number;
 	date: string;
@@ -40,7 +50,6 @@ export interface DaySchedule {
 	timeSlots: TimeSlot[];
 }
 
-// Static cruise information displayed in header/footer
 export interface CruiseInfo {
 	title: string;
 	subtitle: string;
@@ -54,11 +63,11 @@ export interface CruiseInfo {
 	};
 }
 
-// Top-level data structure - the complete itinerary
 export interface ItineraryData {
 	cruise: CruiseInfo;
 	dailySchedule: DaySchedule[];
 }
 
-// The three view modes that determine UI layout
 export type ViewMode = 'single' | 'overview' | 'timeline';
+
+export {};

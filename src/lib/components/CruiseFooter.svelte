@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { CruiseInfo } from '../types/itinerary.js';
+	import type { CruiseInfo } from '../../app.d.ts';
 	import { formatDate } from '../utils/dateUtils.js';
 
 	interface Props {

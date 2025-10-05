@@ -1,8 +1,5 @@
 import { DATE_FORMAT_OPTIONS } from '../constants.js';
 
-/**
- * Converts ISO date string to human-readable format
- */
 export const formatDate = (dateStr: string): string => {
 	try {
 		if (!dateStr || dateStr.trim().length === 0) {
@@ -28,9 +25,6 @@ export const formatDate = (dateStr: string): string => {
 	}
 };
 
-/**
- * Converts 24-hour time to 12-hour format
- */
 export const formatTime = (time: string): string => {
 	try {
 		if (!time || !time.includes(':')) {
@@ -59,9 +53,6 @@ export const formatTime = (time: string): string => {
 	}
 };
 
-/**
- * Helper function to normalize time format to HH:MM
- */
 const normalizeTimeFormat = (time: string): string => {
 	if (!time || !time.includes(':')) {
 		throw new Error(`Invalid time format for normalization: ${time}`);

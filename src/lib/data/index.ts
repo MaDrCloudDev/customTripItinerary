@@ -1,4 +1,5 @@
 export { itineraryData } from './itineraryData.js';
+export { loadItinerary, getTotalDays } from './itineraryService.js';
 
 export type {
 	TimeSlot,
@@ -6,4 +7,4 @@ export type {
 	CruiseInfo,
 	ItineraryData,
 	ViewMode,
-} from '../types/itinerary.js';
+} from '../../app.d.ts';

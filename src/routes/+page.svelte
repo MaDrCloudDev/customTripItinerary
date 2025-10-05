@@ -1,6 +1,5 @@
 <script lang="ts">
-	import type { ViewMode } from '../lib/data/index.js';
-	import { itineraryData } from '../lib/data/index.js';
+	import type { ViewMode, ItineraryData } from '../lib/data/index.js';
 
 	import { STORAGE_KEYS, VIEW_MODES } from '../lib/constants.js';
 	import {
@@ -17,21 +16,18 @@
 	import OverviewGrid from '../lib/components/OverviewGrid.svelte';
 	import CruiseFooter from '../lib/components/CruiseFooter.svelte';
 
+	let { data }: { data: { itinerary: ItineraryData; meta: { totalDays: number } } } = $props();
+
 	let currentDayIndex = $state(0);
 	let viewMode = $state<ViewMode>(VIEW_MODES.SINGLE);
 	let isInitialized = $state(false);
 
-	// Simplified effect without .pre to avoid potential issues
 	$effect(() => {
 		if (typeof window === 'undefined') return;
 
 		if (!isInitialized) {
-			const savedDayIndex = safeLocalStorage.getItem(
-				STORAGE_KEYS.DAY_INDEX
-			);
-			const savedViewMode = safeLocalStorage.getItem(
-				STORAGE_KEYS.VIEW_MODE
-			);
+			const savedDayIndex = safeLocalStorage.getItem(STORAGE_KEYS.DAY_INDEX);
+			const savedViewMode = safeLocalStorage.getItem(STORAGE_KEYS.VIEW_MODE);
 
 			if (savedDayIndex) {
 				const dayIndex = safeParseInt(savedDayIndex, 0);
@@ -43,11 +39,31 @@
 			isInitialized = true;
 		}
 
-		safeLocalStorage.setItem(
-			STORAGE_KEYS.DAY_INDEX,
-			currentDayIndex.toString()
-		);
+		safeLocalStorage.setItem(STORAGE_KEYS.DAY_INDEX, currentDayIndex.toString());
 		safeLocalStorage.setItem(STORAGE_KEYS.VIEW_MODE, viewMode);
+	});
+
+	// Simple keyboard navigation (helpful for parents)
+	$effect(() => {
+		if (typeof window === 'undefined') return;
+
+		const handleKeyDown = (event: KeyboardEvent) => {
+			if (viewMode !== 'single') return;
+			
+			switch (event.key) {
+				case 'ArrowLeft':
+					event.preventDefault();
+					handlePrevDay();
+					break;
+				case 'ArrowRight':
+					event.preventDefault();
+					handleNextDay();
+					break;
+			}
+		};
+
+		window.addEventListener('keydown', handleKeyDown);
+		return () => window.removeEventListener('keydown', handleKeyDown);
 	});
 
 	const goToDay = (dayIndex: number): void => {
@@ -72,21 +88,20 @@
 		viewMode = mode;
 	};
 
-	const totalDays = $derived(itineraryData.dailySchedule.length);
+	const totalDays = $derived(data.itinerary.dailySchedule.length);
 	const currentDay = $derived(
-		itineraryData.dailySchedule[currentDayIndex]
+		data.itinerary.dailySchedule[currentDayIndex]
 	);
 </script>
 
 <svelte:head>
-	<title
-		>Viking Egypt Cruise Itinerary - {itineraryData.cruise
-			.passengers}</title
-	>
+	<title>Viking Egypt Cruise Itinerary - {data.itinerary.cruise.passengers}</title>
+	<meta name="description" content="Complete itinerary for {data.itinerary.cruise.passengers}'s Viking Egypt cruise from {data.itinerary.cruise.dates.start} to {data.itinerary.cruise.dates.end}" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 </svelte:head>
 
 <div class="min-h-screen">
-	<CruiseHeader cruiseInfo={itineraryData.cruise} />
+	<CruiseHeader cruiseInfo={data.itinerary.cruise} />
 
 	<Navigation
 		{currentDay}
@@ -105,11 +120,11 @@
 			<TimelineView {currentDay} />
 		{:else if viewMode === 'overview'}
 			<OverviewGrid
-				dailySchedule={itineraryData.dailySchedule}
+				dailySchedule={data.itinerary.dailySchedule}
 				onDaySelect={goToDay}
 			/>
 		{/if}
 	</main>
 
-	<CruiseFooter cruiseInfo={itineraryData.cruise} />
+	<CruiseFooter cruiseInfo={data.itinerary.cruise} />
 </div>
