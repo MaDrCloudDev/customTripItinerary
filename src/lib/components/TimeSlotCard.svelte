@@ -23,7 +23,6 @@
 
 	let { timeSlot, slotName }: Props = $props();
 
-	// Color mapping for different activity types
 	const colorClasses = {
 		excursion: 'bg-blue-600 border-blue-700 text-white',
 		dining: 'bg-orange-600 border-orange-700 text-white',

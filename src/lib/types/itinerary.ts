@@ -1,9 +1,11 @@
+// TimeSlot represents a single activity/event in the cruise schedule
 export interface TimeSlot {
 	startTime: string;
 	endTime: string;
 	activity: string;
 	description: string;
 	location?: string;
+
 	type:
 		| 'free'
 		| 'excursion'
@@ -14,6 +16,7 @@ export interface TimeSlot {
 		| 'travel'
 		| 'arrival'
 		| 'embarkation';
+
 	color:
 		| 'excursion'
 		| 'dining'
@@ -22,11 +25,13 @@ export interface TimeSlot {
 		| 'free'
 		| 'travel'
 		| 'meals';
+
 	icon: string;
 	cost?: string;
 	notes?: string;
 }
 
+// Represents one full day of the cruise
 export interface DaySchedule {
 	dayNumber: number;
 	date: string;
@@ -35,6 +40,7 @@ export interface DaySchedule {
 	timeSlots: TimeSlot[];
 }
 
+// Static cruise information displayed in header/footer
 export interface CruiseInfo {
 	title: string;
 	subtitle: string;
@@ -48,9 +54,11 @@ export interface CruiseInfo {
 	};
 }
 
+// Top-level data structure - the complete itinerary
 export interface ItineraryData {
 	cruise: CruiseInfo;
 	dailySchedule: DaySchedule[];
 }
 
+// The three view modes that determine UI layout
 export type ViewMode = 'single' | 'overview' | 'timeline';

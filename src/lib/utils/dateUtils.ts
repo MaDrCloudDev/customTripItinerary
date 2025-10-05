@@ -1,37 +1,138 @@
-export const formatDate = (dateStr: string) => {
-	const date = new Date(dateStr);
-	return date.toLocaleDateString('en-US', {
-		weekday: 'long',
-		month: 'long',
-		day: 'numeric',
-	});
+import { DATE_FORMAT_OPTIONS } from '../constants.js';
+import { devLog } from './errorHandling.js';
+
+/**
+ * Converts ISO date string to human-readable format
+ */
+export const formatDate = (dateStr: string): string => {
+	try {
+		if (!dateStr || dateStr.trim().length === 0) {
+			throw new Error('Empty date string provided');
+		}
+
+		const date = new Date(dateStr);
+
+		if (isNaN(date.getTime())) {
+			throw new Error(`Invalid date string: ${dateStr}`);
+		}
+
+		const formatted = date.toLocaleDateString(
+			DATE_FORMAT_OPTIONS.LOCALE,
+			DATE_FORMAT_OPTIONS.LONG_DATE
+		);
+
+		devLog('Formatted date', { input: dateStr, output: formatted });
+		return formatted;
+	} catch (error) {
+		console.error('Failed to format date:', error);
+		devLog('Date formatting error', { dateStr, error });
+		return 'Invalid Date';
+	}
 };
 
-export const formatTime = (time: string) => {
+/**
+ * Converts 24-hour time to 12-hour format
+ */
+export const formatTime = (time: string): string => {
+	try {
+		if (!time || !time.includes(':')) {
+			throw new Error(`Invalid time format: ${time}`);
+		}
+
+		const [hours, minutes] = time.split(':');
+		const hour = parseInt(hours, 10);
+
+		if (isNaN(hour) || hour < 0 || hour > 23) {
+			throw new Error(`Invalid hour: ${hours}`);
+		}
+
+		const ampm = hour >= 12 ? 'PM' : 'AM';
+
+		const displayHour =
+			hour === 0 ? 12 : hour > 12 ? hour - 12 : hour;
+
+		const formatted = `${displayHour}:${minutes} ${ampm}`;
+		devLog('Formatted time', { input: time, output: formatted });
+		return formatted;
+	} catch (error) {
+		console.error('Failed to format time:', error);
+		devLog('Time formatting error', { time, error });
+		return 'Invalid Time';
+	}
+};
+
+/**
+ * Helper function to normalize time format to HH:MM
+ */
+const normalizeTimeFormat = (time: string): string => {
+	if (!time || !time.includes(':')) {
+		throw new Error(`Invalid time format for normalization: ${time}`);
+	}
+
 	const [hours, minutes] = time.split(':');
-	const hour = parseInt(hours);
-	const ampm = hour >= 12 ? 'PM' : 'AM';
-	const displayHour = hour === 0 ? 12 : hour > 12 ? hour - 12 : hour;
-	return `${displayHour}:${minutes} ${ampm}`;
+	if (!hours || !minutes) {
+		throw new Error(`Invalid time components: ${time}`);
+	}
+
+	const paddedHours = hours.padStart(2, '0');
+	const paddedMinutes = minutes.padStart(2, '0');
+	return `${paddedHours}:${paddedMinutes}`;
 };
 
 export const calculateDuration = (
 	startTime: string,
 	endTime: string
-) => {
-	const start = new Date(`2000-01-01T${startTime}:00`);
-	const end = new Date(`2000-01-01T${endTime}:00`);
-	const diffMs = end.getTime() - start.getTime();
-	const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
-	const diffMinutes = Math.floor(
-		(diffMs % (1000 * 60 * 60)) / (1000 * 60)
-	);
+): string => {
+	try {
+		if (!startTime || !endTime) {
+			throw new Error('Start time and end time are required');
+		}
 
-	if (diffHours === 0) {
-		return `${diffMinutes}min`;
-	} else if (diffMinutes === 0) {
-		return `${diffHours}hr`;
-	} else {
-		return `${diffHours}hr ${diffMinutes}min`;
+		const normalizedStart = normalizeTimeFormat(startTime);
+		const normalizedEnd = normalizeTimeFormat(endTime);
+
+		const start = new Date(`2000-01-01T${normalizedStart}:00`);
+		const end = new Date(`2000-01-01T${normalizedEnd}:00`);
+
+		if (isNaN(start.getTime()) || isNaN(end.getTime())) {
+			throw new Error(
+				`Invalid time format: ${startTime} - ${endTime} (normalized: ${normalizedStart} - ${normalizedEnd})`
+			);
+		}
+
+		const diffMs = end.getTime() - start.getTime();
+
+		if (diffMs < 0) {
+			devLog('Warning: Negative duration detected', {
+				startTime,
+				endTime,
+			});
+			return '0min';
+		}
+
+		const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+		const diffMinutes = Math.floor(
+			(diffMs % (1000 * 60 * 60)) / (1000 * 60)
+		);
+
+		let formatted: string;
+		if (diffHours === 0) {
+			formatted = `${diffMinutes}min`;
+		} else if (diffMinutes === 0) {
+			formatted = `${diffHours}hr`;
+		} else {
+			formatted = `${diffHours}hr ${diffMinutes}min`;
+		}
+
+		devLog('Calculated duration', { startTime, endTime, formatted });
+		return formatted;
+	} catch (error) {
+		console.error('Failed to calculate duration:', error);
+		devLog('Duration calculation error', {
+			startTime,
+			endTime,
+			error,
+		});
+		return '0min';
 	}
 };

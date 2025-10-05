@@ -1,5 +1,4 @@
 import type { ItineraryData } from '../types/itinerary.js';
-
 export const itineraryData: ItineraryData = {
 	cruise: {
 		title: 'Cruise Itinerary',

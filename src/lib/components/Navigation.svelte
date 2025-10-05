@@ -1,37 +1,44 @@
 <script lang="ts">
 	import type { DaySchedule, ViewMode } from '../types/itinerary.js';
 	import { formatDate } from '../utils/dateUtils.js';
-	import PrintButton from './PrintButton.svelte';
+	import { createEventDispatcher } from 'svelte';
 
 	interface Props {
 		currentDay: DaySchedule;
 		currentDayIndex: number;
 		totalDays: number;
 		viewMode: ViewMode;
-		onPrevDay: () => void;
-		onNextDay: () => void;
-		onViewModeChange: (mode: ViewMode) => void;
 	}
 
-	let {
-		currentDay,
-		currentDayIndex,
-		totalDays,
-		viewMode,
-		onPrevDay,
-		onNextDay,
-		onViewModeChange,
-	}: Props = $props();
+	let { currentDay, currentDayIndex, totalDays, viewMode }: Props = $props();
+
+	const dispatch = createEventDispatcher<{
+		prevday: void;
+		nextday: void;
+		viewchange: ViewMode;
+	}>();
+
+	const nextDay = (): void => {
+		dispatch('nextday');
+	};
+
+	const prevDay = (): void => {
+		dispatch('prevday');
+	};
+
+	const handleViewModeChange = (mode: ViewMode): void => {
+		dispatch('viewchange', mode);
+	};
 </script>
 
 <nav
-	class="bg-white/95 backdrop-blur-md border-b border-blue-400/50 py-3 no-print sticky top-0 z-50 shadow-lg"
+	class="bg-white/95 backdrop-blur-md border-b border-blue-400/50 py-3 sticky top-0 z-50 shadow-lg"
 >
 	<div class="container mx-auto px-6">
-		<!-- Desktop Layout: Previous | Day Info | View Buttons | Print | Next -->
 		<div class="hidden md:flex items-center justify-between gap-4">
 			<button
-				onclick={onPrevDay}
+				type="button"
+				onclick={prevDay}
 				disabled={currentDayIndex === 0}
 				class="group px-3 py-2 rounded-full bg-gradient-to-r from-blue-700 to-blue-800 text-white font-medium disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed transition-all duration-300 hover:shadow-lg hover:scale-105 flex items-center gap-2"
 			>
@@ -59,7 +66,8 @@
 
 			<div class="flex items-center gap-2">
 				<button
-					onclick={() => onViewModeChange('single')}
+					type="button"
+					onclick={() => handleViewModeChange('single')}
 					class="px-3 py-1.5 text-xs rounded-full font-medium transition-all duration-300 {viewMode ===
 					'single'
 						? 'bg-gradient-to-r from-blue-700 to-blue-800 text-white shadow-md'
@@ -68,7 +76,8 @@
 					📅 Day
 				</button>
 				<button
-					onclick={() => onViewModeChange('timeline')}
+					type="button"
+					onclick={() => handleViewModeChange('timeline')}
 					class="px-3 py-1.5 text-xs rounded-full font-medium transition-all duration-300 {viewMode ===
 					'timeline'
 						? 'bg-gradient-to-r from-blue-700 to-blue-800 text-white shadow-md'
@@ -77,7 +86,8 @@
 					🕐 Timeline
 				</button>
 				<button
-					onclick={() => onViewModeChange('overview')}
+					type="button"
+					onclick={() => handleViewModeChange('overview')}
 					class="px-3 py-1.5 text-xs rounded-full font-medium transition-all duration-300 {viewMode ===
 					'overview'
 						? 'bg-gradient-to-r from-blue-700 to-blue-800 text-white shadow-md'
@@ -85,12 +95,12 @@
 				>
 					📊 Overview
 				</button>
-				<PrintButton {viewMode} dayIndex={currentDayIndex} />
 			</div>
 
 			<button
-				onclick={onNextDay}
-				disabled={currentDayIndex === totalDays}
+				type="button"
+				onclick={nextDay}
+				disabled={currentDayIndex >= totalDays - 1}
 				class="group px-3 py-2 rounded-full bg-gradient-to-r from-blue-700 to-blue-800 text-white font-medium disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed transition-all duration-300 hover:shadow-lg hover:scale-105 flex items-center gap-2"
 			>
 				<span>Next</span>
@@ -100,13 +110,11 @@
 			</button>
 		</div>
 
-		<!-- Mobile Layout: Previous/Next buttons above, Day Info and View Buttons below -->
 		<div class="md:hidden space-y-2">
-			<!-- Top row: Previous and Next buttons -->
 			<div class="items-center justify-between gap-2 flex-nowrap">
 				<div class="justify-between flex">
 					<button
-						onclick={onPrevDay}
+						onclick={prevDay}
 						disabled={currentDayIndex === 0}
 						class="group px-3 py-2 rounded-full bg-gradient-to-r from-blue-700 to-blue-800 text-white font-medium disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed transition-all duration-300 hover:shadow-lg hover:scale-105 flex items-center gap-2 flex-shrink-0"
 					>
@@ -132,8 +140,8 @@
 					</div>
 
 					<button
-						onclick={onNextDay}
-						disabled={currentDayIndex === totalDays}
+						onclick={nextDay}
+						disabled={currentDayIndex >= totalDays - 1}
 						class="group px-3 py-2 rounded-full bg-gradient-to-r from-blue-700 to-blue-800 text-white font-medium disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed transition-all duration-300 hover:shadow-lg hover:scale-105 flex items-center gap-2 flex-shrink-0"
 					>
 						<span class="hidden sm:inline">Next</span>
@@ -146,11 +154,10 @@
 				</div>
 			</div>
 
-			<!-- Bottom row: Day Info and View Buttons -->
 			<div class="flex items-center justify-between gap-2">
 				<div class="flex items-center gap-1">
 					<button
-						onclick={() => onViewModeChange('single')}
+						onclick={() => handleViewModeChange('single')}
 						class="px-2 py-1 text-xs rounded-full font-medium transition-all duration-300 {viewMode ===
 						'single'
 							? 'bg-gradient-to-r from-blue-700 to-blue-800 text-white shadow-md'
@@ -159,7 +166,7 @@
 						📅
 					</button>
 					<button
-						onclick={() => onViewModeChange('timeline')}
+						onclick={() => handleViewModeChange('timeline')}
 						class="px-2 py-1 text-xs rounded-full font-medium transition-all duration-300 {viewMode ===
 						'timeline'
 							? 'bg-gradient-to-r from-blue-700 to-blue-800 text-white shadow-md'
@@ -168,7 +175,7 @@
 						🕐
 					</button>
 					<button
-						onclick={() => onViewModeChange('overview')}
+						onclick={() => handleViewModeChange('overview')}
 						class="px-2 py-1 text-xs rounded-full font-medium transition-all duration-300 {viewMode ===
 						'overview'
 							? 'bg-gradient-to-r from-blue-700 to-blue-800 text-white shadow-md'
@@ -176,7 +183,6 @@
 					>
 						📊
 					</button>
-					<PrintButton {viewMode} dayIndex={currentDayIndex} />
 				</div>
 			</div>
 		</div>

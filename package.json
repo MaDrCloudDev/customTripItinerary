@@ -1,7 +1,7 @@
 {
   "name": "viking-itinerary",
   "version": "1.0.0",
-  "description": "Viking Egypt Cruise Itinerary for Elderly Users",
+  "description": "Clean, modern cruise itinerary app built with SvelteKit 5 and Tailwind CSS 4+",
   "type": "module",
   "scripts": {
     "dev": "vite dev",
@@ -20,16 +20,13 @@
   "devDependencies": {
     "@sveltejs/adapter-vercel": "^5.10.3",
     "@sveltejs/vite-plugin-svelte": "^6.2.1",
-    "autoprefixer": "^10.4.21",
-    "postcss": "^8.5.6",
-    "tailwindcss": "^3.4.18",
+    "@tailwindcss/vite": "^4.0.0-alpha.25",
+    "tailwindcss": "^4.0.0-alpha.25",
     "typescript": "^5.9.3",
     "vite": "^7.1.9"
   },
   "dependencies": {
     "@sveltejs/kit": "^2.43.8",
-    "html2canvas": "^1.4.1",
-    "jspdf": "^3.0.3",
     "svelte": "^5.39.8"
   }
 }

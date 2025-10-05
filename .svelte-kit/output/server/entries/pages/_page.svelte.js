@@ -1,8 +1,6 @@
-import { y as bind_props, z as attr, F as attr_class, G as stringify, J as ensure_array_like, K as head, N as clsx } from "../../chunks/index.js";
+import { y as attr, z as attr_class, F as stringify, G as ensure_array_like, J as head } from "../../chunks/index.js";
 import { e as escape_html } from "../../chunks/context.js";
 import "clsx";
-import "jspdf";
-import "html2canvas";
 const itineraryData = {
   cruise: {
     title: "Cruise Itinerary",
@@ -532,64 +530,123 @@ const itineraryData = {
     }
   ]
 };
-function CruiseHeader($$renderer, $$props) {
-  $$renderer.component(($$renderer2) => {
-    let { cruiseInfo } = $$props;
-    $$renderer2.push(`<header class="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-emerald-600 no-print"><div class="absolute inset-0 opacity-10"><div class="absolute top-10 left-10 text-6xl">🏺</div> <div class="absolute top-20 right-20 text-4xl">🐪</div> <div class="absolute bottom-10 left-1/4 text-5xl">🏛️</div> <div class="absolute bottom-20 right-1/3 text-3xl">🌅</div></div> <div class="relative container mx-auto px-6 py-8 text-center"><div class="mb-6"><div class="inline-flex items-center gap-4 mb-4"><div class="w-16 h-0.5 bg-gradient-to-r from-transparent to-amber-500"></div> <span class="text-4xl">🚢</span> <div class="w-16 h-0.5 bg-gradient-to-l from-transparent to-amber-500"></div></div> <h1 class="text-3xl md:text-4xl font-bold text-white drop-shadow-lg mb-3">${escape_html(cruiseInfo.title)}</h1> <p class="text-lg md:text-xl text-blue-100 font-medium mb-6">${escape_html(cruiseInfo.subtitle)}</p></div> <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto"><div class="bg-white/20 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-white/30"><div class="text-2xl mb-2">📋</div> <div class="text-sm text-blue-100 font-medium">Booking Number</div> <div class="text-lg font-bold text-white">${escape_html(cruiseInfo.bookingNumber)}</div></div> <div class="bg-white/20 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-white/30"><div class="text-2xl mb-2">👥</div> <div class="text-sm text-blue-100 font-medium">Travelers</div> <div class="text-lg font-bold text-white">${escape_html(cruiseInfo.passengers)}</div></div> <div class="bg-white/20 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-white/30"><div class="text-2xl mb-2">🏠</div> <div class="text-sm text-blue-100 font-medium">Stateroom</div> <div class="text-lg font-bold text-white">${escape_html(cruiseInfo.stateroom)}</div></div></div></div></header>`);
-  });
-}
-const formatDate = (dateStr) => {
-  const date = new Date(dateStr);
-  return date.toLocaleDateString("en-US", {
+const DATE_FORMAT_OPTIONS = {
+  LONG_DATE: {
     weekday: "long",
     month: "long",
     day: "numeric"
-  });
+  },
+  LOCALE: "en-US"
 };
-const formatTime = (time) => {
-  const [hours, minutes] = time.split(":");
-  const hour = parseInt(hours);
-  const ampm = hour >= 12 ? "PM" : "AM";
-  const displayHour = hour === 0 ? 12 : hour > 12 ? hour - 12 : hour;
-  return `${displayHour}:${minutes} ${ampm}`;
+const devLog = (message, data) => {
 };
-const calculateDuration = (startTime, endTime) => {
-  const start = /* @__PURE__ */ new Date(`2000-01-01T${startTime}:00`);
-  const end = /* @__PURE__ */ new Date(`2000-01-01T${endTime}:00`);
-  const diffMs = end.getTime() - start.getTime();
-  const diffHours = Math.floor(diffMs / (1e3 * 60 * 60));
-  const diffMinutes = Math.floor(
-    diffMs % (1e3 * 60 * 60) / (1e3 * 60)
-  );
-  if (diffHours === 0) {
-    return `${diffMinutes}min`;
-  } else if (diffMinutes === 0) {
-    return `${diffHours}hr`;
-  } else {
-    return `${diffHours}hr ${diffMinutes}min`;
-  }
-};
-function PrintButton($$renderer, $$props) {
+function CruiseHeader($$renderer, $$props) {
   $$renderer.component(($$renderer2) => {
-    let viewMode = $$props["viewMode"];
-    let dayIndex = $$props["dayIndex"];
-    $$renderer2.push(`<button class="px-3 py-1.5 text-xs rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-medium hover:shadow-md hover:scale-105 transition-all duration-300">🖨️ PDF</button>`);
-    bind_props($$props, { viewMode, dayIndex });
+    let { cruiseInfo } = $$props;
+    $$renderer2.push(`<header class="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-emerald-600"><div class="absolute inset-0 opacity-10"><div class="absolute top-10 left-10 text-6xl">🏺</div> <div class="absolute top-20 right-20 text-4xl">🐪</div> <div class="absolute bottom-10 left-1/4 text-5xl">🏛️</div> <div class="absolute bottom-20 right-1/3 text-3xl">🌅</div></div> <div class="relative container mx-auto px-6 py-8 text-center"><div class="mb-6"><div class="inline-flex items-center gap-4 mb-4"><div class="w-16 h-0.5 bg-gradient-to-r from-transparent to-amber-500"></div> <span class="text-4xl">🚢</span> <div class="w-16 h-0.5 bg-gradient-to-l from-transparent to-amber-500"></div></div> <h1 class="text-3xl md:text-4xl font-bold text-white drop-shadow-lg mb-3">${escape_html(cruiseInfo.title)}</h1> <p class="text-lg md:text-xl text-blue-100 font-medium mb-6">${escape_html(cruiseInfo.subtitle)}</p></div> <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto"><div class="bg-white/20 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-white/30"><div class="text-2xl mb-2">📋</div> <div class="text-sm text-blue-100 font-medium">Booking Number</div> <div class="text-lg font-bold text-white">${escape_html(cruiseInfo.bookingNumber)}</div></div> <div class="bg-white/20 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-white/30"><div class="text-2xl mb-2">👥</div> <div class="text-sm text-blue-100 font-medium">Travelers</div> <div class="text-lg font-bold text-white">${escape_html(cruiseInfo.passengers)}</div></div> <div class="bg-white/20 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-white/30"><div class="text-2xl mb-2">🏠</div> <div class="text-sm text-blue-100 font-medium">Stateroom</div> <div class="text-lg font-bold text-white">${escape_html(cruiseInfo.stateroom)}</div></div></div></div></header>`);
   });
 }
+const formatDate = (dateStr) => {
+  try {
+    if (!dateStr || dateStr.trim().length === 0) {
+      throw new Error("Empty date string provided");
+    }
+    const date = new Date(dateStr);
+    if (isNaN(date.getTime())) {
+      throw new Error(`Invalid date string: ${dateStr}`);
+    }
+    const formatted = date.toLocaleDateString(
+      DATE_FORMAT_OPTIONS.LOCALE,
+      DATE_FORMAT_OPTIONS.LONG_DATE
+    );
+    devLog("Formatted date", { input: dateStr, output: formatted });
+    return formatted;
+  } catch (error) {
+    console.error("Failed to format date:", error);
+    return "Invalid Date";
+  }
+};
+const formatTime = (time) => {
+  try {
+    if (!time || !time.includes(":")) {
+      throw new Error(`Invalid time format: ${time}`);
+    }
+    const [hours, minutes] = time.split(":");
+    const hour = parseInt(hours, 10);
+    if (isNaN(hour) || hour < 0 || hour > 23) {
+      throw new Error(`Invalid hour: ${hours}`);
+    }
+    const ampm = hour >= 12 ? "PM" : "AM";
+    const displayHour = hour === 0 ? 12 : hour > 12 ? hour - 12 : hour;
+    const formatted = `${displayHour}:${minutes} ${ampm}`;
+    devLog("Formatted time", { input: time, output: formatted });
+    return formatted;
+  } catch (error) {
+    console.error("Failed to format time:", error);
+    return "Invalid Time";
+  }
+};
+const normalizeTimeFormat = (time) => {
+  if (!time || !time.includes(":")) {
+    throw new Error(`Invalid time format for normalization: ${time}`);
+  }
+  const [hours, minutes] = time.split(":");
+  if (!hours || !minutes) {
+    throw new Error(`Invalid time components: ${time}`);
+  }
+  const paddedHours = hours.padStart(2, "0");
+  const paddedMinutes = minutes.padStart(2, "0");
+  return `${paddedHours}:${paddedMinutes}`;
+};
+const calculateDuration = (startTime, endTime) => {
+  try {
+    if (!startTime || !endTime) {
+      throw new Error("Start time and end time are required");
+    }
+    const normalizedStart = normalizeTimeFormat(startTime);
+    const normalizedEnd = normalizeTimeFormat(endTime);
+    const start = /* @__PURE__ */ new Date(`2000-01-01T${normalizedStart}:00`);
+    const end = /* @__PURE__ */ new Date(`2000-01-01T${normalizedEnd}:00`);
+    if (isNaN(start.getTime()) || isNaN(end.getTime())) {
+      throw new Error(
+        `Invalid time format: ${startTime} - ${endTime} (normalized: ${normalizedStart} - ${normalizedEnd})`
+      );
+    }
+    const diffMs = end.getTime() - start.getTime();
+    if (diffMs < 0) {
+      devLog("Warning: Negative duration detected", {
+        startTime,
+        endTime
+      });
+      return "0min";
+    }
+    const diffHours = Math.floor(diffMs / (1e3 * 60 * 60));
+    const diffMinutes = Math.floor(
+      diffMs % (1e3 * 60 * 60) / (1e3 * 60)
+    );
+    let formatted;
+    if (diffHours === 0) {
+      formatted = `${diffMinutes}min`;
+    } else if (diffMinutes === 0) {
+      formatted = `${diffHours}hr`;
+    } else {
+      formatted = `${diffHours}hr ${diffMinutes}min`;
+    }
+    devLog("Calculated duration", { startTime, endTime, formatted });
+    return formatted;
+  } catch (error) {
+    console.error("Failed to calculate duration:", error);
+    return "0min";
+  }
+};
 function Navigation($$renderer, $$props) {
   $$renderer.component(($$renderer2) => {
-    let {
-      currentDay,
-      currentDayIndex,
-      totalDays,
-      viewMode
-    } = $$props;
-    $$renderer2.push(`<nav class="bg-white/95 backdrop-blur-md border-b border-blue-400/50 py-3 no-print sticky top-0 z-50 shadow-lg"><div class="container mx-auto px-6"><div class="hidden md:flex items-center justify-between gap-4"><button${attr("disabled", currentDayIndex === 0, true)} class="group px-3 py-2 rounded-full bg-gradient-to-r from-blue-700 to-blue-800 text-white font-medium disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed transition-all duration-300 hover:shadow-lg hover:scale-105 flex items-center gap-2"><span class="group-hover:-translate-x-1 transition-transform">←</span> <span>Previous</span></button> <div class="text-center flex-1 bg-blue-100/80 backdrop-blur-sm rounded-xl py-2 px-4 border border-blue-400/50"><div class="text-base font-bold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent">Day ${escape_html(currentDay.dayNumber)} of ${escape_html(totalDays)}</div> <div class="text-sm text-gray-700 font-medium">${escape_html(currentDay.dayName)} • ${escape_html(currentDay.location)}</div> <div class="text-xs text-gray-600">${escape_html(formatDate(currentDay.date))}</div></div> <div class="flex items-center gap-2"><button${attr_class(`px-3 py-1.5 text-xs rounded-full font-medium transition-all duration-300 ${stringify(viewMode === "single" ? "bg-gradient-to-r from-blue-700 to-blue-800 text-white shadow-md" : "bg-blue-200 text-blue-800 hover:bg-blue-300")}`)}>📅 Day</button> <button${attr_class(`px-3 py-1.5 text-xs rounded-full font-medium transition-all duration-300 ${stringify(viewMode === "timeline" ? "bg-gradient-to-r from-blue-700 to-blue-800 text-white shadow-md" : "bg-blue-200 text-blue-800 hover:bg-blue-300")}`)}>🕐 Timeline</button> <button${attr_class(`px-3 py-1.5 text-xs rounded-full font-medium transition-all duration-300 ${stringify(viewMode === "overview" ? "bg-gradient-to-r from-blue-700 to-blue-800 text-white shadow-md" : "bg-blue-200 text-blue-800 hover:bg-blue-300")}`)}>📊 Overview</button> `);
-    PrintButton($$renderer2, { viewMode, dayIndex: currentDayIndex });
-    $$renderer2.push(`<!----></div> <button${attr("disabled", currentDayIndex === totalDays, true)} class="group px-3 py-2 rounded-full bg-gradient-to-r from-blue-700 to-blue-800 text-white font-medium disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed transition-all duration-300 hover:shadow-lg hover:scale-105 flex items-center gap-2"><span>Next</span> <span class="group-hover:translate-x-1 transition-transform">→</span></button></div> <div class="md:hidden space-y-2"><div class="items-center justify-between gap-2 flex-nowrap"><div class="justify-between flex"><button${attr("disabled", currentDayIndex === 0, true)} class="group px-3 py-2 rounded-full bg-gradient-to-r from-blue-700 to-blue-800 text-white font-medium disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed transition-all duration-300 hover:shadow-lg hover:scale-105 flex items-center gap-2 flex-shrink-0"><span class="group-hover:-translate-x-1 transition-transform">←</span> <span class="hidden sm:inline">Previous</span> <span class="sm:hidden">Prev</span></button> <div class="text-center flex-1 bg-blue-100/80 backdrop-blur-sm rounded-xl py-2 px-3 mx-3 border border-blue-400/50"><div class="text-sm font-bold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent">Day ${escape_html(currentDay.dayNumber)} of ${escape_html(totalDays)}</div> <div class="text-xs text-gray-700 font-medium">${escape_html(currentDay.dayName)} • ${escape_html(currentDay.location)}</div></div> <button${attr("disabled", currentDayIndex === totalDays, true)} class="group px-3 py-2 rounded-full bg-gradient-to-r from-blue-700 to-blue-800 text-white font-medium disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed transition-all duration-300 hover:shadow-lg hover:scale-105 flex items-center gap-2 flex-shrink-0"><span class="hidden sm:inline">Next</span> <span class="sm:hidden">Next</span> <span class="group-hover:translate-x-1 transition-transform">→</span></button></div></div> <div class="flex items-center justify-between gap-2"><div class="flex items-center gap-1"><button${attr_class(`px-2 py-1 text-xs rounded-full font-medium transition-all duration-300 ${stringify(viewMode === "single" ? "bg-gradient-to-r from-blue-700 to-blue-800 text-white shadow-md" : "bg-blue-200 text-blue-800 hover:bg-blue-300")}`)}>📅</button> <button${attr_class(`px-2 py-1 text-xs rounded-full font-medium transition-all duration-300 ${stringify(viewMode === "timeline" ? "bg-gradient-to-r from-blue-700 to-blue-800 text-white shadow-md" : "bg-blue-200 text-blue-800 hover:bg-blue-300")}`)}>🕐</button> <button${attr_class(`px-2 py-1 text-xs rounded-full font-medium transition-all duration-300 ${stringify(viewMode === "overview" ? "bg-gradient-to-r from-blue-700 to-blue-800 text-white shadow-md" : "bg-blue-200 text-blue-800 hover:bg-blue-300")}`)}>📊</button> `);
-    PrintButton($$renderer2, { viewMode, dayIndex: currentDayIndex });
-    $$renderer2.push(`<!----></div></div></div></div></nav>`);
+    let { currentDay, currentDayIndex, totalDays } = $$props;
+    $$renderer2.push(`<nav class="bg-white/95 backdrop-blur-md border-b border-blue-400/50 py-3 sticky top-0 z-50 shadow-lg"><div class="container mx-auto px-6"><div class="hidden md:flex items-center justify-between gap-4"><button type="button"${attr("disabled", currentDayIndex === 0, true)} class="group px-3 py-2 rounded-full bg-gradient-to-r from-blue-700 to-blue-800 text-white font-medium disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed transition-all duration-300 hover:shadow-lg hover:scale-105 flex items-center gap-2"><span class="group-hover:-translate-x-1 transition-transform">←</span> <span>Previous</span></button> <div class="text-center flex-1 bg-blue-100/80 backdrop-blur-sm rounded-xl py-2 px-4 border border-blue-400/50"><div class="text-base font-bold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent">Day ${escape_html(currentDay.dayNumber)} of ${escape_html(totalDays)}</div> <div class="text-sm text-gray-700 font-medium">${escape_html(currentDay.dayName)} • ${escape_html(currentDay.location)}</div> <div class="text-xs text-gray-600">${escape_html(formatDate(currentDay.date))}</div></div> <div class="flex items-center gap-2"><button type="button"${attr_class(`px-3 py-1.5 text-xs rounded-full font-medium transition-all duration-300 ${stringify(
+      "bg-gradient-to-r from-blue-700 to-blue-800 text-white shadow-md"
+    )}`)}>📅 Day</button> <button type="button"${attr_class(`px-3 py-1.5 text-xs rounded-full font-medium transition-all duration-300 ${stringify("bg-blue-200 text-blue-800 hover:bg-blue-300")}`)}>🕐 Timeline</button> <button type="button"${attr_class(`px-3 py-1.5 text-xs rounded-full font-medium transition-all duration-300 ${stringify("bg-blue-200 text-blue-800 hover:bg-blue-300")}`)}>📊 Overview</button></div> <button type="button"${attr("disabled", currentDayIndex >= totalDays - 1, true)} class="group px-3 py-2 rounded-full bg-gradient-to-r from-blue-700 to-blue-800 text-white font-medium disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed transition-all duration-300 hover:shadow-lg hover:scale-105 flex items-center gap-2"><span>Next</span> <span class="group-hover:translate-x-1 transition-transform">→</span></button></div> <div class="md:hidden space-y-2"><div class="items-center justify-between gap-2 flex-nowrap"><div class="justify-between flex"><button${attr("disabled", currentDayIndex === 0, true)} class="group px-3 py-2 rounded-full bg-gradient-to-r from-blue-700 to-blue-800 text-white font-medium disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed transition-all duration-300 hover:shadow-lg hover:scale-105 flex items-center gap-2 flex-shrink-0"><span class="group-hover:-translate-x-1 transition-transform">←</span> <span class="hidden sm:inline">Previous</span> <span class="sm:hidden">Prev</span></button> <div class="text-center flex-1 bg-blue-100/80 backdrop-blur-sm rounded-xl py-2 px-3 mx-3 border border-blue-400/50"><div class="text-sm font-bold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent">Day ${escape_html(currentDay.dayNumber)} of ${escape_html(totalDays)}</div> <div class="text-xs text-gray-700 font-medium">${escape_html(currentDay.dayName)} • ${escape_html(currentDay.location)}</div></div> <button${attr("disabled", currentDayIndex >= totalDays - 1, true)} class="group px-3 py-2 rounded-full bg-gradient-to-r from-blue-700 to-blue-800 text-white font-medium disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed transition-all duration-300 hover:shadow-lg hover:scale-105 flex items-center gap-2 flex-shrink-0"><span class="hidden sm:inline">Next</span> <span class="sm:hidden">Next</span> <span class="group-hover:translate-x-1 transition-transform">→</span></button></div></div> <div class="flex items-center justify-between gap-2"><div class="flex items-center gap-1"><button${attr_class(`px-2 py-1 text-xs rounded-full font-medium transition-all duration-300 ${stringify(
+      "bg-gradient-to-r from-blue-700 to-blue-800 text-white shadow-md"
+    )}`)}>📅</button> <button${attr_class(`px-2 py-1 text-xs rounded-full font-medium transition-all duration-300 ${stringify("bg-blue-200 text-blue-800 hover:bg-blue-300")}`)}>🕐</button> <button${attr_class(`px-2 py-1 text-xs rounded-full font-medium transition-all duration-300 ${stringify("bg-blue-200 text-blue-800 hover:bg-blue-300")}`)}>📊</button></div></div></div></div></nav>`);
   });
 }
 const getColorClass = (slot) => {
@@ -666,31 +723,21 @@ function CruiseFooter($$renderer, $$props) {
 function _page($$renderer, $$props) {
   $$renderer.component(($$renderer2) => {
     let currentDayIndex = 0;
-    let viewMode = "single";
     const currentDay = itineraryData.dailySchedule[currentDayIndex];
     head($$renderer2, ($$renderer3) => {
       $$renderer3.title(($$renderer4) => {
         $$renderer4.push(`<title>Viking Egypt Cruise Itinerary - ${escape_html(itineraryData.cruise.passengers)}</title>`);
       });
-      {
-        $$renderer3.push("<!--[!-->");
-      }
-      $$renderer3.push(`<!--]-->`);
     });
     $$renderer2.push(`<div class="min-h-screen">`);
-    {
-      $$renderer2.push("<!--[-->");
-      CruiseHeader($$renderer2, { cruiseInfo: itineraryData.cruise });
-      $$renderer2.push(`<!----> `);
-      Navigation($$renderer2, {
-        currentDay,
-        currentDayIndex,
-        totalDays: Math.max(...itineraryData.dailySchedule.map((day) => day.dayNumber)),
-        viewMode
-      });
-      $$renderer2.push(`<!---->`);
-    }
-    $$renderer2.push(`<!--]--> <main${attr_class(`container mx-auto px-6 py-8 ${stringify("")}`)} data-print-content=""><div${attr_class(clsx(""))}>`);
+    CruiseHeader($$renderer2, { cruiseInfo: itineraryData.cruise });
+    $$renderer2.push(`<!----> `);
+    Navigation($$renderer2, {
+      currentDay,
+      currentDayIndex,
+      totalDays: itineraryData.dailySchedule.length
+    });
+    $$renderer2.push(`<!----> <main class="container mx-auto px-6 py-8">`);
     if (currentDay) {
       $$renderer2.push("<!--[-->");
       SingleDayView($$renderer2, { currentDay });
@@ -705,12 +752,9 @@ function _page($$renderer, $$props) {
       }
       $$renderer2.push(`<!--]-->`);
     }
-    $$renderer2.push(`<!--]--></div></main> `);
-    {
-      $$renderer2.push("<!--[-->");
-      CruiseFooter($$renderer2, { cruiseInfo: itineraryData.cruise });
-    }
-    $$renderer2.push(`<!--]--></div>`);
+    $$renderer2.push(`<!--]--></main> `);
+    CruiseFooter($$renderer2, { cruiseInfo: itineraryData.cruise });
+    $$renderer2.push(`<!----></div>`);
   });
 }
 export {

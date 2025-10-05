@@ -36,8 +36,8 @@ declare module '$env/static/private' {
 	export const XDG_MENU_PREFIX: string;
 	export const TERM_PROGRAM_VERSION: string;
 	export const FNM_ARCH: string;
-	export const HOSTNAME: string;
 	export const HISTSIZE: string;
+	export const HOSTNAME: string;
 	export const NODE: string;
 	export const DOTNET_ROOT: string;
 	export const SSH_AUTH_SOCK: string;
@@ -53,8 +53,8 @@ declare module '$env/static/private' {
 	export const GPG_TTY: string;
 	export const EDITOR: string;
 	export const PWD: string;
-	export const XDG_SESSION_DESKTOP: string;
 	export const LOGNAME: string;
+	export const XDG_SESSION_DESKTOP: string;
 	export const XDG_SESSION_TYPE: string;
 	export const MAMBA_ROOT_PREFIX: string;
 	export const npm_config_init_module: string;
@@ -74,7 +74,6 @@ declare module '$env/static/private' {
 	export const npm_package_version: string;
 	export const MEMORY_PRESSURE_WATCH: string;
 	export const WAYLAND_DISPLAY: string;
-	export const LOCAL_GIT_DIRECTORY: string;
 	export const GIT_ASKPASS: string;
 	export const INVOCATION_ID: string;
 	export const MANAGERPID: string;
@@ -87,7 +86,6 @@ declare module '$env/static/private' {
 	export const MOZ_GMP_PATH: string;
 	export const VSCODE_GIT_ASKPASS_EXTRA_ARGS: string;
 	export const GNOME_SETUP_DISPLAY: string;
-	export const VSCODE_PYTHON_AUTOACTIVATE_GUARD: string;
 	export const npm_config_npm_version: string;
 	export const XDG_SESSION_CLASS: string;
 	export const MAMBA_EXE: string;
@@ -96,7 +94,6 @@ declare module '$env/static/private' {
 	export const npm_config_prefix: string;
 	export const LESSOPEN: string;
 	export const USER: string;
-	export const GIT_PAGER: string;
 	export const VSCODE_GIT_IPC_HANDLE: string;
 	export const CONDA_SHLVL: string;
 	export const DISPLAY: string;
@@ -171,8 +168,8 @@ declare module '$env/dynamic/private' {
 		XDG_MENU_PREFIX: string;
 		TERM_PROGRAM_VERSION: string;
 		FNM_ARCH: string;
-		HOSTNAME: string;
 		HISTSIZE: string;
+		HOSTNAME: string;
 		NODE: string;
 		DOTNET_ROOT: string;
 		SSH_AUTH_SOCK: string;
@@ -188,8 +185,8 @@ declare module '$env/dynamic/private' {
 		GPG_TTY: string;
 		EDITOR: string;
 		PWD: string;
-		XDG_SESSION_DESKTOP: string;
 		LOGNAME: string;
+		XDG_SESSION_DESKTOP: string;
 		XDG_SESSION_TYPE: string;
 		MAMBA_ROOT_PREFIX: string;
 		npm_config_init_module: string;
@@ -209,7 +206,6 @@ declare module '$env/dynamic/private' {
 		npm_package_version: string;
 		MEMORY_PRESSURE_WATCH: string;
 		WAYLAND_DISPLAY: string;
-		LOCAL_GIT_DIRECTORY: string;
 		GIT_ASKPASS: string;
 		INVOCATION_ID: string;
 		MANAGERPID: string;
@@ -222,7 +218,6 @@ declare module '$env/dynamic/private' {
 		MOZ_GMP_PATH: string;
 		VSCODE_GIT_ASKPASS_EXTRA_ARGS: string;
 		GNOME_SETUP_DISPLAY: string;
-		VSCODE_PYTHON_AUTOACTIVATE_GUARD: string;
 		npm_config_npm_version: string;
 		XDG_SESSION_CLASS: string;
 		MAMBA_EXE: string;
@@ -231,7 +226,6 @@ declare module '$env/dynamic/private' {
 		npm_config_prefix: string;
 		LESSOPEN: string;
 		USER: string;
-		GIT_PAGER: string;
 		VSCODE_GIT_IPC_HANDLE: string;
 		CONDA_SHLVL: string;
 		DISPLAY: string;

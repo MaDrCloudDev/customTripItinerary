@@ -9,7 +9,7 @@
 </script>
 
 <header
-	class="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-emerald-600 no-print"
+	class="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-emerald-600"
 >
 	<div class="absolute inset-0 opacity-10">
 		<div class="absolute top-10 left-10 text-6xl">🏺</div>

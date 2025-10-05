@@ -1,6 +1,16 @@
 <script lang="ts">
-	import type { ViewMode } from '../lib/types/itinerary.js';
-	import { itineraryData } from '../lib/data/itineraryData.js';
+	import type { ViewMode } from '../lib/data/index.js';
+	import { itineraryData } from '../lib/data/index.js';
+
+	import { STORAGE_KEYS, VIEW_MODES } from '../lib/constants.js';
+	import {
+		safeLocalStorage,
+		safeParseInt,
+		validateDayIndex,
+		isValidViewMode,
+		devLog,
+	} from '../lib/utils/errorHandling.js';
+
 	import CruiseHeader from '../lib/components/CruiseHeader.svelte';
 	import Navigation from '../lib/components/Navigation.svelte';
 	import SingleDayView from '../lib/components/SingleDayView.svelte';
@@ -9,167 +19,111 @@
 	import CruiseFooter from '../lib/components/CruiseFooter.svelte';
 
 	let currentDayIndex = $state(0);
-	let viewMode = $state<ViewMode>('single');
-	let isPrintMode = $state(false);
-	$effect(() => {
-		if (typeof window !== 'undefined') {
-			const urlParams = new URLSearchParams(window.location.search);
-			const printMode = urlParams.get('printMode') === 'true';
-			const urlViewMode = urlParams.get('viewMode') as ViewMode;
-			const urlDayIndex = urlParams.get('dayIndex');
-			
-			if (printMode) {
-				isPrintMode = true;
-				if (urlViewMode && ['single', 'timeline', 'overview'].includes(urlViewMode)) {
-					viewMode = urlViewMode;
-				}
-				if (urlDayIndex) {
-					const dayIndex = parseInt(urlDayIndex);
-					if (dayIndex >= 0 && dayIndex < itineraryData.dailySchedule.length) {
-						currentDayIndex = dayIndex;
-					}
-				}
-				return;
-			}
-			
-			const savedDayIndex = localStorage.getItem('cruise-day-index');
-			const savedViewMode = localStorage.getItem('cruise-view-mode');
-			
+	let viewMode = $state<ViewMode>(VIEW_MODES.SINGLE);
+	let isInitialized = $state(false);
+
+	// Runs before DOM updates to prevent visual flicker
+	$effect.pre(() => {
+		if (typeof window === 'undefined') return;
+
+		if (!isInitialized) {
+			const savedDayIndex = safeLocalStorage.getItem(
+				STORAGE_KEYS.DAY_INDEX
+			);
+			const savedViewMode = safeLocalStorage.getItem(
+				STORAGE_KEYS.VIEW_MODE
+			);
+
 			if (savedDayIndex) {
-				const dayIndex = parseInt(savedDayIndex);
-				if (dayIndex >= 0 && dayIndex < itineraryData.dailySchedule.length) {
-					currentDayIndex = dayIndex;
-				}
+				const dayIndex = safeParseInt(savedDayIndex, 0);
+				currentDayIndex = validateDayIndex(
+					dayIndex,
+					itineraryData.dailySchedule.length
+				);
 			}
-			
-			if (savedViewMode && ['single', 'timeline', 'overview'].includes(savedViewMode)) {
-				viewMode = savedViewMode as ViewMode;
+			if (savedViewMode && isValidViewMode(savedViewMode)) {
+				viewMode = savedViewMode;
 			}
+			isInitialized = true;
 		}
+
+		devLog('Persisting state to localStorage', {
+			currentDayIndex,
+			viewMode,
+		});
+		safeLocalStorage.setItem(
+			STORAGE_KEYS.DAY_INDEX,
+			currentDayIndex.toString()
+		);
+		safeLocalStorage.setItem(STORAGE_KEYS.VIEW_MODE, viewMode);
 	});
 
-	$effect(() => {
-		if (typeof window !== 'undefined') {
-			localStorage.setItem('cruise-day-index', currentDayIndex.toString());
-			localStorage.setItem('cruise-view-mode', viewMode);
-		}
-	});
+	const goToDay = (dayIndex: number): void => {
+		currentDayIndex = validateDayIndex(
+			dayIndex,
+			itineraryData.dailySchedule.length
+		);
+		viewMode = VIEW_MODES.SINGLE;
+		devLog('Navigated to specific day', {
+			requestedIndex: dayIndex,
+			actualIndex: currentDayIndex,
+		});
+	};
 
-	const nextDay = () => {
-		if (currentDayIndex < itineraryData.dailySchedule.length - 1) {
+	const handleNextDay = () => {
+		const maxIndex = itineraryData.dailySchedule.length - 1;
+		if (currentDayIndex < maxIndex) {
 			currentDayIndex += 1;
 		}
 	};
 
-	const prevDay = () => {
+	const handlePrevDay = () => {
 		if (currentDayIndex > 0) {
 			currentDayIndex -= 1;
 		}
 	};
 
-	const goToDay = (dayIndex: number) => {
-		currentDayIndex = dayIndex;
-		viewMode = 'single';
+	const handleViewChange = (event: CustomEvent<ViewMode>) => {
+		viewMode = event.detail;
 	};
 
-	const handleViewModeChange = (mode: ViewMode) => {
-		viewMode = mode;
-	};
-
-
-
-	const currentDay = $derived(itineraryData.dailySchedule[currentDayIndex]);
+	const currentDay = $derived(
+		itineraryData.dailySchedule[currentDayIndex]
+	);
 </script>
 
 <svelte:head>
-	<title>Viking Egypt Cruise Itinerary - {itineraryData.cruise.passengers}</title>
-	{#if isPrintMode}
-		<style>
-			.print-mode-content {
-				height: auto !important;
-				max-height: none !important;
-				overflow: visible !important;
-			}
-			
-			.print-content-wrapper {
-				height: auto !important;
-				max-height: none !important;
-				overflow: visible !important;
-			}
-			
-			/* Remove any height constraints from child elements in print mode */
-			.print-mode-content * {
-				height: auto !important;
-				max-height: none !important;
-				overflow: visible !important;
-			}
-			
-			/* Ensure space-y classes don't interfere */
-			.space-y-4 > * + * {
-				margin-top: 1rem !important;
-			}
-			
-			/* Make sure all activity cards are visible */
-			.space-y-4,
-			.space-y-6,
-			.space-y-8 {
-				display: flex;
-				flex-direction: column;
-				gap: 1rem;
-			}
-			
-			/* Ensure overview grid is visible in print mode */
-			.overview-grid {
-				display: grid !important;
-				grid-template-columns: repeat(2, 1fr) !important;
-				gap: 1rem !important;
-				width: 100% !important;
-			}
-			
-			.overview-card {
-				display: flex !important;
-				flex-direction: column !important;
-				break-inside: avoid !important;
-			}
-		</style>
-	{/if}
+	<title
+		>Viking Egypt Cruise Itinerary - {itineraryData.cruise
+			.passengers}</title
+	>
 </svelte:head>
 
 <div class="min-h-screen">
-	{#if !isPrintMode}
-		<CruiseHeader cruiseInfo={itineraryData.cruise} />
-		
-		<Navigation 
-			{currentDay}
-			{currentDayIndex}
-			totalDays={Math.max(...itineraryData.dailySchedule.map(day => day.dayNumber))}
-			{viewMode}
-			onPrevDay={prevDay}
-			onNextDay={nextDay}
-			onViewModeChange={handleViewModeChange}
-		/>
-	{/if}
+	<CruiseHeader cruiseInfo={itineraryData.cruise} />
 
-	<!-- Main Content -->
-	<main 
-		class="container mx-auto px-6 py-8 {isPrintMode ? 'print-mode-content' : ''}" 
-		data-print-content
-	>
-	<div class={isPrintMode ? 'print-content-wrapper' : ''}>
+	<Navigation
+		{currentDay}
+		{currentDayIndex}
+		totalDays={itineraryData.dailySchedule.length}
+		{viewMode}
+		on:prevday={handlePrevDay}
+		on:nextday={handleNextDay}
+		on:viewchange={handleViewChange}
+	/>
+
+	<main class="container mx-auto px-6 py-8">
 		{#if viewMode === 'single' && currentDay}
 			<SingleDayView {currentDay} />
 		{:else if viewMode === 'timeline' && currentDay}
 			<TimelineView {currentDay} />
 		{:else if viewMode === 'overview'}
-			<OverviewGrid 
-				dailySchedule={itineraryData.dailySchedule} 
-				onDaySelect={goToDay} 
+			<OverviewGrid
+				dailySchedule={itineraryData.dailySchedule}
+				onDaySelect={goToDay}
 			/>
 		{/if}
-	</div>
-</main>
+	</main>
 
-	{#if !isPrintMode}
-		<CruiseFooter cruiseInfo={itineraryData.cruise} />
-	{/if}
+	<CruiseFooter cruiseInfo={itineraryData.cruise} />
 </div>

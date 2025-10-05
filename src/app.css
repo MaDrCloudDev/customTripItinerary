@@ -1,46 +1,47 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+/* LLM GLOBAL STYLES: Tailwind CSS 4+ import + custom styles + responsive design */
+/* ARCHITECTURE: Single import (no config files), custom CSS variables, elderly-friendly design */
+@import 'tailwindcss';
 
+/* LLM CSS VARIABLES: App-specific custom properties for consistency */
+/* USAGE: These complement Tailwind classes for app-specific styling */
 :root {
-	--color-dark-sand: #2c2a26;
-	--color-dark-gold: #b8860b;
-	--color-dark-papyrus: #1f1e1b;
-	--color-dark-nile: #1e40af;
-	--color-dark-sunset: #ea580c;
-	--color-dark-oasis: #047857;
-	--color-dark-stone: #4b5563;
-	--color-dark-ruby: #b91c1c;
-	--color-dark-amethyst: #6d28d9;
+	/* LLM: Elderly-friendly font scaling */
+	--font-scale-mobile: 16px;
+	--font-scale-desktop: 18px;
 
-	--bg-primary: #1a1917;
-	--bg-secondary: #252320;
-	--bg-tertiary: #2f2d29;
-	--bg-card: #34312c;
+	/* LLM: Animation timing for consistent UX */
+	--transition-fast: 150ms ease-out;
+	--transition-normal: 300ms ease-out;
+	--transition-slow: 500ms ease-out;
 
-	--text-primary: #f5f1e8;
-	--text-secondary: #d4af37;
-	--text-muted: #a8a29e;
+	/* LLM: Layout constants */
+	--nav-height: 80px;
+	--container-padding: 1.5rem;
+	--card-border-radius: 1rem;
 }
 
+/* LLM BASE LAYER: Global HTML/body styles + animations + scrollbar styling */
 @layer base {
+	/* LLM: Large base font size (18px) for elderly users - better readability */
 	html {
-		font-size: 18px;
-		scroll-behavior: smooth;
+		font-size: 18px; /* Larger than standard 16px for elderly users */
+		scroll-behavior: smooth; /* Smooth scrolling for navigation */
 	}
 
+	/* LLM: Body styling with cruise theme gradient background */
 	body {
-		line-height: 1.6;
+		line-height: 1.6; /* Generous line height for readability */
 		font-family: 'Inter', -apple-system, BlinkMacSystemFont,
 			'Segoe UI', system-ui, sans-serif;
+		/* Blue to green gradient background - cruise/water theme */
 		background: linear-gradient(
 			135deg,
 			#dbeafe 0%,
-			#bfdbfe 50%,
-			#dcfce7 100%
+			/* Light blue */ #bfdbfe 50%,
+			/* Medium blue */ #dcfce7 100% /* Light green */
 		);
 		min-height: 100vh;
-		color: #374151;
+		color: #374151; /* Dark gray text for good contrast */
 	}
 
 	::-webkit-scrollbar {
@@ -93,152 +94,6 @@
 		);
 		background-size: 200px 100%;
 		animation: shimmer 2s infinite;
-	}
-}
-
-@media print {
-	.no-print {
-		display: none !important;
-	}
-
-	html,
-	body {
-		height: 100vh !important;
-		overflow: hidden !important;
-		background: white !important;
-		color: black !important;
-		font-size: 12px !important;
-		margin: 0 !important;
-		padding: 0 !important;
-	}
-
-	@page {
-		size: letter;
-		margin: 0.5in;
-	}
-
-	body > * {
-		height: 100vh !important;
-		overflow: hidden !important;
-		transform: scale(0.85) !important;
-		transform-origin: top left !important;
-		page-break-after: avoid !important;
-	}
-
-	.bg-white\/80,
-	[class*='bg-white'] {
-		background: white !important;
-		border: 1px solid #333 !important;
-		box-shadow: none !important;
-		backdrop-filter: none !important;
-		height: fit-content !important;
-		max-height: 90vh !important;
-		overflow: hidden !important;
-		padding: 0.5rem !important;
-		margin: 0 !important;
-	}
-
-	h1,
-	h2,
-	h3 {
-		font-size: 14px !important;
-		margin: 0.25rem 0 !important;
-		line-height: 1.2 !important;
-	}
-
-	.overview-grid {
-		display: grid !important;
-		grid-template-columns: repeat(3, 1fr) !important;
-		gap: 0.25rem !important;
-		height: fit-content !important;
-		max-height: 80vh !important;
-	}
-
-	.overview-card {
-		font-size: 10px !important;
-		padding: 0.25rem !important;
-		border: 1px solid #333 !important;
-		background: white !important;
-		page-break-inside: avoid !important;
-		height: fit-content !important;
-		max-height: 25vh !important;
-		overflow: hidden !important;
-	}
-
-	.overview-card .activity-list {
-		max-height: 15vh !important;
-		overflow: hidden !important;
-		font-size: 9px !important;
-	}
-
-	.space-y-4 > * {
-		margin-bottom: 0.25rem !important;
-	}
-
-	.rounded-2xl {
-		padding: 0.5rem !important;
-		margin: 0.25rem 0 !important;
-		font-size: 10px !important;
-		border: 1px solid #333 !important;
-		background: white !important;
-	}
-
-	.space-y-0\.5 {
-		max-height: 75vh !important;
-		overflow: hidden !important;
-	}
-
-	.grid-cols-5 {
-		font-size: 9px !important;
-	}
-
-	.h-10 {
-		height: 1.5rem !important;
-	}
-
-	[class*='bg-blue-100'] {
-		background: #e3f2fd !important;
-		border-color: #1976d2 !important;
-	}
-	[class*='bg-orange-100'] {
-		background: #fff3e0 !important;
-		border-color: #f57c00 !important;
-	}
-	[class*='bg-purple-100'] {
-		background: #f3e5f5 !important;
-		border-color: #7b1fa2 !important;
-	}
-	[class*='bg-green-100'] {
-		background: #e8f5e8 !important;
-		border-color: #388e3c !important;
-	}
-	[class*='bg-yellow-100'] {
-		background: #fffde7 !important;
-		border-color: #fbc02d !important;
-	}
-	[class*='bg-red-100'] {
-		background: #ffebee !important;
-		border-color: #d32f2f !important;
-	}
-	[class*='bg-gray-100'] {
-		background: #f5f5f5 !important;
-		border-color: #616161 !important;
-	}
-
-	.flex.flex-wrap.justify-center {
-		font-size: 8px !important;
-		margin: 0.25rem 0 !important;
-	}
-
-	.w-4.h-4 {
-		width: 8px !important;
-		height: 8px !important;
-	}
-
-	* {
-		page-break-inside: avoid !important;
-		page-break-before: avoid !important;
-		page-break-after: avoid !important;
 	}
 }
 
