@@ -1,34 +1,29 @@
 <script lang="ts">
 	import type { DaySchedule, ViewMode } from '../types/itinerary.js';
 	import { formatDate } from '../utils/dateUtils.js';
-	import { createEventDispatcher } from 'svelte';
 
 	interface Props {
 		currentDay: DaySchedule;
 		currentDayIndex: number;
 		totalDays: number;
 		viewMode: ViewMode;
+		onPrevDay: () => void;
+		onNextDay: () => void;
+		onViewChange: (mode: ViewMode) => void;
 	}
 
-	let { currentDay, currentDayIndex, totalDays, viewMode }: Props = $props();
+	let {
+		currentDay,
+		currentDayIndex,
+		totalDays,
+		viewMode,
+		onPrevDay,
+		onNextDay,
+		onViewChange,
+	}: Props = $props();
 
-	const dispatch = createEventDispatcher<{
-		prevday: void;
-		nextday: void;
-		viewchange: ViewMode;
-	}>();
-
-	const nextDay = (): void => {
-		dispatch('nextday');
-	};
-
-	const prevDay = (): void => {
-		dispatch('prevday');
-	};
-
-	const handleViewModeChange = (mode: ViewMode): void => {
-		dispatch('viewchange', mode);
-	};
+	const isPrevDisabled = $derived(currentDayIndex === 0);
+	const isNextDisabled = $derived(currentDayIndex >= totalDays - 1);
 </script>
 
 <nav
@@ -38,8 +33,8 @@
 		<div class="hidden md:flex items-center justify-between gap-4">
 			<button
 				type="button"
-				onclick={prevDay}
-				disabled={currentDayIndex === 0}
+				onclick={onPrevDay}
+				disabled={isPrevDisabled}
 				class="group px-3 py-2 rounded-full bg-gradient-to-r from-blue-700 to-blue-800 text-white font-medium disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed transition-all duration-300 hover:shadow-lg hover:scale-105 flex items-center gap-2"
 			>
 				<span class="group-hover:-translate-x-1 transition-transform"
@@ -67,7 +62,7 @@
 			<div class="flex items-center gap-2">
 				<button
 					type="button"
-					onclick={() => handleViewModeChange('single')}
+					onclick={() => onViewChange('single')}
 					class="px-3 py-1.5 text-xs rounded-full font-medium transition-all duration-300 {viewMode ===
 					'single'
 						? 'bg-gradient-to-r from-blue-700 to-blue-800 text-white shadow-md'
@@ -77,7 +72,7 @@
 				</button>
 				<button
 					type="button"
-					onclick={() => handleViewModeChange('timeline')}
+					onclick={() => onViewChange('timeline')}
 					class="px-3 py-1.5 text-xs rounded-full font-medium transition-all duration-300 {viewMode ===
 					'timeline'
 						? 'bg-gradient-to-r from-blue-700 to-blue-800 text-white shadow-md'
@@ -87,7 +82,7 @@
 				</button>
 				<button
 					type="button"
-					onclick={() => handleViewModeChange('overview')}
+					onclick={() => onViewChange('overview')}
 					class="px-3 py-1.5 text-xs rounded-full font-medium transition-all duration-300 {viewMode ===
 					'overview'
 						? 'bg-gradient-to-r from-blue-700 to-blue-800 text-white shadow-md'
@@ -99,8 +94,8 @@
 
 			<button
 				type="button"
-				onclick={nextDay}
-				disabled={currentDayIndex >= totalDays - 1}
+				onclick={onNextDay}
+				disabled={isNextDisabled}
 				class="group px-3 py-2 rounded-full bg-gradient-to-r from-blue-700 to-blue-800 text-white font-medium disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed transition-all duration-300 hover:shadow-lg hover:scale-105 flex items-center gap-2"
 			>
 				<span>Next</span>
@@ -114,8 +109,8 @@
 			<div class="items-center justify-between gap-2 flex-nowrap">
 				<div class="justify-between flex">
 					<button
-						onclick={prevDay}
-						disabled={currentDayIndex === 0}
+						onclick={onPrevDay}
+						disabled={isPrevDisabled}
 						class="group px-3 py-2 rounded-full bg-gradient-to-r from-blue-700 to-blue-800 text-white font-medium disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed transition-all duration-300 hover:shadow-lg hover:scale-105 flex items-center gap-2 flex-shrink-0"
 					>
 						<span
@@ -140,8 +135,8 @@
 					</div>
 
 					<button
-						onclick={nextDay}
-						disabled={currentDayIndex >= totalDays - 1}
+						onclick={onNextDay}
+						disabled={isNextDisabled}
 						class="group px-3 py-2 rounded-full bg-gradient-to-r from-blue-700 to-blue-800 text-white font-medium disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed transition-all duration-300 hover:shadow-lg hover:scale-105 flex items-center gap-2 flex-shrink-0"
 					>
 						<span class="hidden sm:inline">Next</span>
@@ -157,7 +152,7 @@
 			<div class="flex items-center justify-between gap-2">
 				<div class="flex items-center gap-1">
 					<button
-						onclick={() => handleViewModeChange('single')}
+						onclick={() => onViewChange('single')}
 						class="px-2 py-1 text-xs rounded-full font-medium transition-all duration-300 {viewMode ===
 						'single'
 							? 'bg-gradient-to-r from-blue-700 to-blue-800 text-white shadow-md'
@@ -166,7 +161,7 @@
 						📅
 					</button>
 					<button
-						onclick={() => handleViewModeChange('timeline')}
+						onclick={() => onViewChange('timeline')}
 						class="px-2 py-1 text-xs rounded-full font-medium transition-all duration-300 {viewMode ===
 						'timeline'
 							? 'bg-gradient-to-r from-blue-700 to-blue-800 text-white shadow-md'
@@ -175,7 +170,7 @@
 						🕐
 					</button>
 					<button
-						onclick={() => handleViewModeChange('overview')}
+						onclick={() => onViewChange('overview')}
 						class="px-2 py-1 text-xs rounded-full font-medium transition-all duration-300 {viewMode ===
 						'overview'
 							? 'bg-gradient-to-r from-blue-700 to-blue-800 text-white shadow-md'

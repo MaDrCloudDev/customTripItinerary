@@ -2433,7 +2433,7 @@ const options = {
   service_worker: false,
   service_worker_options: null,
   templates: {
-    app: ({ head, body, assets, nonce, env }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<link\n			rel="icon"\n			type="image/png"\n			href="' + assets + '/favicon.ico" />\n		<meta\n			name="viewport"\n			content="width=device-width, initial-scale=1" />\n		<title>\n			Viking Egypt Cruise Itinerary - Travelers\n		</title>\n		<meta\n			name="description"\n			content="Easy-to-read Viking Egypt cruise itinerary for elderly travelers" />\n\n		<!-- Bot prevention meta tags -->\n		<meta\n			name="robots"\n			content="noindex, nofollow, noarchive, nosnippet, noimageindex, nocache" />\n		<meta\n			name="googlebot"\n			content="noindex, nofollow, noarchive, nosnippet, noimageindex" />\n		<meta\n			name="bingbot"\n			content="noindex, nofollow, noarchive, nosnippet, noimageindex" />\n		<meta\n			name="slurp"\n			content="noindex, nofollow, noarchive, nosnippet, noimageindex" />\n		<meta\n			name="duckduckbot"\n			content="noindex, nofollow" />\n\n		' + head + '\n	</head>\n	<body\n		data-sveltekit-preload-data="hover"\n		class="bg-cruise-cream text-gray-900">\n		<div style="display: contents">' + body + "</div>\n	</body>\n</html>\n",
+    app: ({ head, body, assets, nonce, env }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<link\n			rel="icon"\n			type="image/png"\n			href="' + assets + '/favicon.ico" />\n		<meta\n			name="viewport"\n			content="width=device-width, initial-scale=1" />\n		<title>\n			Viking Egypt Cruise Itinerary - Travelers\n		</title>\n		<meta\n			name="description"\n			content="Easy-to-read Viking Egypt cruise itinerary for elderly travelers" />\n\n		<!-- Bot prevention meta tags -->\n		<meta\n			name="robots"\n			content="noindex, nofollow, noarchive, nosnippet, noimageindex, nocache" />\n		<meta\n			name="googlebot"\n			content="noindex, nofollow, noarchive, nosnippet, noimageindex" />\n		<meta\n			name="bingbot"\n			content="noindex, nofollow, noarchive, nosnippet, noimageindex" />\n		<meta\n			name="slurp"\n			content="noindex, nofollow, noarchive, nosnippet, noimageindex" />\n		<meta\n			name="duckduckbot"\n			content="noindex, nofollow" />\n\n		' + head + '\n	</head>\n	<body\n		data-sveltekit-preload-data="hover"\n		class="text-gray-900">\n		<div style="display: contents">' + body + "</div>\n	</body>\n</html>\n",
     error: ({ status, message }) => '<!doctype html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<title>' + message + `</title>
 
 		<style>
@@ -2505,7 +2505,7 @@ const options = {
 		<div class="error">
 			<span class="status">` + status + '</span>\n			<div class="message">\n				<h1>' + message + "</h1>\n			</div>\n		</div>\n	</body>\n</html>\n"
   },
-  version_hash: "1hopewg"
+  version_hash: "bxyic"
 };
 async function get_hooks() {
   let handle;

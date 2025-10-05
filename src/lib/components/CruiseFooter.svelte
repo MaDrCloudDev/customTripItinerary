@@ -26,23 +26,24 @@
 			Viking Egypt Cruise Itinerary
 		</p>
 		<p class="text-blue-100 font-medium">
-			Generated for {cruiseInfo.passengers}
+			{cruiseInfo.passengers}
 		</p>
 		<p class="text-blue-100 text-sm">
 			Booking #{cruiseInfo.bookingNumber} • Stateroom {cruiseInfo.stateroom}
 		</p>
 		<p class="text-blue-100 text-sm mt-2">
-			🚢 {formatDate(cruiseInfo.dates.start)} to {formatDate(
+			🚢 {formatDate(cruiseInfo.dates.start)} - {formatDate(
 				cruiseInfo.dates.end
 			)} 🚢
 		</p>
 		<p class="text-blue-200/70 text-xs mt-1">
-			Made by <a 
-				href="https://github.com/madrclouddev" 
-				target="_blank" 
+			Made by <a
+				href="https://github.com/madrclouddev"
+				target="_blank"
 				rel="noopener noreferrer"
 				class="hover:text-white transition-colors underline decoration-dotted"
-			>MaDrCloudDev</a>
+				>MaDrCloudDev</a
+			>
 		</p>
 	</div>
 </footer>

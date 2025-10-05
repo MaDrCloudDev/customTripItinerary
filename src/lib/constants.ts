@@ -6,6 +6,9 @@ export const STORAGE_KEYS = {
 	VIEW_MODE: 'cruise-view-mode',
 } as const;
 
+export type StorageKey =
+	(typeof STORAGE_KEYS)[keyof typeof STORAGE_KEYS];
+
 /**
  * View mode configuration
  */
@@ -14,6 +17,9 @@ export const VIEW_MODES = {
 	TIMELINE: 'timeline',
 	OVERVIEW: 'overview',
 } as const;
+
+export type ViewModeKey = keyof typeof VIEW_MODES;
+export type ViewModeValue = (typeof VIEW_MODES)[ViewModeKey];
 
 /**
  * Activity type configuration

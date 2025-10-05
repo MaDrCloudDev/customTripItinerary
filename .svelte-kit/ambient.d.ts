@@ -73,8 +73,10 @@ declare module '$env/static/private' {
 	export const XDG_CURRENT_DESKTOP: string;
 	export const npm_package_version: string;
 	export const MEMORY_PRESSURE_WATCH: string;
+	export const VTE_VERSION: string;
 	export const WAYLAND_DISPLAY: string;
 	export const GIT_ASKPASS: string;
+	export const PROMPT_COMMAND: string;
 	export const INVOCATION_ID: string;
 	export const MANAGERPID: string;
 	export const INIT_CWD: string;
@@ -105,6 +107,7 @@ declare module '$env/static/private' {
 	export const npm_execpath: string;
 	export const XDG_RUNTIME_DIR: string;
 	export const FNM_RESOLVE_ENGINES: string;
+	export const Q_TERM_DISABLED: string;
 	export const DEBUGINFOD_URLS: string;
 	export const npm_package_json: string;
 	export const BUN_INSTALL: string;
@@ -205,8 +208,10 @@ declare module '$env/dynamic/private' {
 		XDG_CURRENT_DESKTOP: string;
 		npm_package_version: string;
 		MEMORY_PRESSURE_WATCH: string;
+		VTE_VERSION: string;
 		WAYLAND_DISPLAY: string;
 		GIT_ASKPASS: string;
+		PROMPT_COMMAND: string;
 		INVOCATION_ID: string;
 		MANAGERPID: string;
 		INIT_CWD: string;
@@ -237,6 +242,7 @@ declare module '$env/dynamic/private' {
 		npm_execpath: string;
 		XDG_RUNTIME_DIR: string;
 		FNM_RESOLVE_ENGINES: string;
+		Q_TERM_DISABLED: string;
 		DEBUGINFOD_URLS: string;
 		npm_package_json: string;
 		BUN_INSTALL: string;

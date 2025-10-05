@@ -81,16 +81,16 @@ export const validateDayIndex = (
 	return index;
 };
 
+import type { ViewMode } from '../types/itinerary.js';
+
 // Ensures string is a valid ViewMode type
-export const isValidViewMode = (
-	value: string
-): value is 'single' | 'timeline' | 'overview' => {
-	return ['single', 'timeline', 'overview'].includes(value);
+export const isValidViewMode = (value: string): value is ViewMode => {
+	return (['single', 'timeline', 'overview'] as const).includes(
+		value as ViewMode
+	);
 };
 
-// Logs messages only in development mode
+// Logs messages only in development mode (deprecated - use console.log directly if needed)
 export const devLog = (message: string, data?: unknown): void => {
-	if (import.meta.env.DEV) {
-		console.log(`[DEV] ${message}`, data);
-	}
+	// No-op - dev logging disabled
 };

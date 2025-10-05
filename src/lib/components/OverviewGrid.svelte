@@ -26,15 +26,9 @@
 		<div class="mt-4 flex flex-wrap justify-center gap-3 text-xs">
 			<div class="flex items-center gap-1">
 				<div
-					class="w-4 h-4 bg-gradient-to-br from-blue-100 to-blue-200 border border-blue-400 rounded"
+					class="w-4 h-4 bg-gradient-to-br from-amber-100 to-amber-200 border border-amber-400 rounded"
 				></div>
 				<span>Excursions</span>
-			</div>
-			<div class="flex items-center gap-1">
-				<div
-					class="w-4 h-4 bg-gradient-to-br from-orange-100 to-orange-200 border border-orange-400 rounded"
-				></div>
-				<span>Dining</span>
 			</div>
 			<div class="flex items-center gap-1">
 				<div
@@ -44,25 +38,19 @@
 			</div>
 			<div class="flex items-center gap-1">
 				<div
-					class="w-4 h-4 bg-gradient-to-br from-green-100 to-green-200 border border-green-400 rounded"
-				></div>
-				<span>Nature</span>
-			</div>
-			<div class="flex items-center gap-1">
-				<div
-					class="w-4 h-4 bg-gradient-to-br from-yellow-100 to-yellow-200 border border-yellow-400 rounded"
+					class="w-4 h-4 bg-gradient-to-br from-sky-100 to-sky-200 border border-sky-400 rounded"
 				></div>
 				<span>Travel</span>
 			</div>
 			<div class="flex items-center gap-1">
 				<div
-					class="w-4 h-4 bg-gradient-to-br from-red-100 to-red-200 border border-red-400 rounded"
+					class="w-4 h-4 bg-gradient-to-br from-red-100 to-orange-200 border border-red-400 rounded"
 				></div>
 				<span>Meals</span>
 			</div>
 			<div class="flex items-center gap-1">
 				<div
-					class="w-4 h-4 bg-gradient-to-br from-gray-100 to-gray-200 border border-gray-400 rounded"
+					class="w-4 h-4 bg-gradient-to-br from-lime-100 to-lime-200 border border-lime-400 rounded"
 				></div>
 				<span>Free Time</span>
 			</div>
@@ -70,14 +58,15 @@
 	</div>
 
 	<div
-		class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 overview-grid"
+		class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 overview-grid"
 	>
 		{#each dailySchedule as day, index}
 			<button
 				onclick={() => onDaySelect(index)}
-				class="group p-6 bg-gradient-to-br from-blue-100 to-blue-200 backdrop-blur-sm border border-blue-400/50 rounded-2xl hover:border-blue-600 hover:shadow-xl transition-all duration-300 hover:scale-105 text-center cursor-pointer overview-card flex flex-col"
+				class="group p-6 bg-gradient-to-br from-blue-100 to-blue-200 backdrop-blur-sm border border-blue-400/50 rounded-2xl hover:border-blue-600 hover:shadow-xl transition-all duration-300 hover:scale-105 text-center cursor-pointer overview-card flex flex-col h-full min-h-[400px]"
 			>
-				<div class="text-center mb-4">
+				<!-- Header Section - Fixed Height -->
+				<div class="text-center mb-4 flex-shrink-0">
 					<div class="text-lg font-bold text-gray-800 mb-1">
 						Day {day.dayNumber}
 					</div>
@@ -86,7 +75,8 @@
 					</div>
 				</div>
 
-				<div class="flex justify-center mb-4">
+				<!-- Location Section - Fixed Height -->
+				<div class="flex justify-center mb-4 flex-shrink-0">
 					<div
 						onclick={(e) => {
 							e.stopPropagation();
@@ -100,30 +90,35 @@
 						}}
 						role="button"
 						tabindex="0"
-						class="flex items-center gap-2 text-blue-700 hover:text-blue-800 font-medium transition-colors cursor-pointer bg-blue-50 hover:bg-blue-100 rounded-lg px-3 py-2 border border-blue-300"
+						class="flex items-center gap-2 text-blue-700 hover:text-blue-800 font-medium transition-colors cursor-pointer bg-blue-50 hover:bg-blue-100 rounded-lg px-3 py-2 border border-blue-300 text-xs"
 					>
-						<span class="text-lg">📍</span>
-						<span class="font-semibold">{day.location}</span>
-						<span class="text-sm font-bold flex items-center gap-1"
-							>View Map <span class="text-xs">↗</span></span
+						<span class="text-base">📍</span>
+						<span class="font-semibold truncate max-w-[120px]"
+							>{day.location}</span
+						>
+						<span class="text-xs font-bold flex items-center gap-1"
+							>Map <span class="text-xs">↗</span></span
 						>
 					</div>
 				</div>
 
-				<div class="space-y-2 activity-list flex-1">
+				<!-- Activities Section - Flexible Height -->
+				<div class="space-y-2 activity-list flex-1 overflow-y-auto">
 					{#each day.timeSlots as slot}
 						<div
-							class="text-sm flex items-center justify-center gap-3 p-2 rounded-lg {getColorClass(
+							class="text-sm flex items-center p-3 rounded-lg {getColorClass(
 								slot
-							)} border shadow-sm"
+							)} border shadow-sm min-h-[3rem]"
 						>
 							<span
-								class="text-xs bg-white/60 px-2 py-1 rounded-full font-medium"
+								class="text-xs bg-white/60 px-2 py-1 rounded-full font-medium flex-shrink-0 mr-3"
 							>
 								{formatTime(slot.startTime)}
 							</span>
-							<span class="text-base">{slot.icon}</span>
-							<span class="font-medium text-center"
+							<span class="text-lg flex-shrink-0 mr-auto"
+								>{slot.icon}</span
+							>
+							<span class="font-medium text-right leading-tight"
 								>{slot.activity}</span
 							>
 						</div>

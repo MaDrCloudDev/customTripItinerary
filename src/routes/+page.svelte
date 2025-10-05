@@ -8,7 +8,6 @@
 		safeParseInt,
 		validateDayIndex,
 		isValidViewMode,
-		devLog,
 	} from '../lib/utils/errorHandling.js';
 
 	import CruiseHeader from '../lib/components/CruiseHeader.svelte';
@@ -22,8 +21,8 @@
 	let viewMode = $state<ViewMode>(VIEW_MODES.SINGLE);
 	let isInitialized = $state(false);
 
-	// Runs before DOM updates to prevent visual flicker
-	$effect.pre(() => {
+	// Simplified effect without .pre to avoid potential issues
+	$effect(() => {
 		if (typeof window === 'undefined') return;
 
 		if (!isInitialized) {
@@ -36,10 +35,7 @@
 
 			if (savedDayIndex) {
 				const dayIndex = safeParseInt(savedDayIndex, 0);
-				currentDayIndex = validateDayIndex(
-					dayIndex,
-					itineraryData.dailySchedule.length
-				);
+				currentDayIndex = validateDayIndex(dayIndex, totalDays);
 			}
 			if (savedViewMode && isValidViewMode(savedViewMode)) {
 				viewMode = savedViewMode;
@@ -47,10 +43,6 @@
 			isInitialized = true;
 		}
 
-		devLog('Persisting state to localStorage', {
-			currentDayIndex,
-			viewMode,
-		});
 		safeLocalStorage.setItem(
 			STORAGE_KEYS.DAY_INDEX,
 			currentDayIndex.toString()
@@ -59,34 +51,28 @@
 	});
 
 	const goToDay = (dayIndex: number): void => {
-		currentDayIndex = validateDayIndex(
-			dayIndex,
-			itineraryData.dailySchedule.length
-		);
+		currentDayIndex = validateDayIndex(dayIndex, totalDays);
 		viewMode = VIEW_MODES.SINGLE;
-		devLog('Navigated to specific day', {
-			requestedIndex: dayIndex,
-			actualIndex: currentDayIndex,
-		});
 	};
 
-	const handleNextDay = () => {
-		const maxIndex = itineraryData.dailySchedule.length - 1;
+	const handleNextDay = (): void => {
+		const maxIndex = totalDays - 1;
 		if (currentDayIndex < maxIndex) {
 			currentDayIndex += 1;
 		}
 	};
 
-	const handlePrevDay = () => {
+	const handlePrevDay = (): void => {
 		if (currentDayIndex > 0) {
 			currentDayIndex -= 1;
 		}
 	};
 
-	const handleViewChange = (event: CustomEvent<ViewMode>) => {
-		viewMode = event.detail;
+	const handleViewChange = (mode: ViewMode): void => {
+		viewMode = mode;
 	};
 
+	const totalDays = $derived(itineraryData.dailySchedule.length);
 	const currentDay = $derived(
 		itineraryData.dailySchedule[currentDayIndex]
 	);
@@ -105,11 +91,11 @@
 	<Navigation
 		{currentDay}
 		{currentDayIndex}
-		totalDays={itineraryData.dailySchedule.length}
+		{totalDays}
 		{viewMode}
-		on:prevday={handlePrevDay}
-		on:nextday={handleNextDay}
-		on:viewchange={handleViewChange}
+		onPrevDay={handlePrevDay}
+		onNextDay={handleNextDay}
+		onViewChange={handleViewChange}
 	/>
 
 	<main class="container mx-auto px-6 py-8">

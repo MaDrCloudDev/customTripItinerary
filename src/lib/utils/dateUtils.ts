@@ -1,5 +1,4 @@
 import { DATE_FORMAT_OPTIONS } from '../constants.js';
-import { devLog } from './errorHandling.js';
 
 /**
  * Converts ISO date string to human-readable format
@@ -21,11 +20,10 @@ export const formatDate = (dateStr: string): string => {
 			DATE_FORMAT_OPTIONS.LONG_DATE
 		);
 
-		devLog('Formatted date', { input: dateStr, output: formatted });
 		return formatted;
 	} catch (error) {
 		console.error('Failed to format date:', error);
-		devLog('Date formatting error', { dateStr, error });
+
 		return 'Invalid Date';
 	}
 };
@@ -52,11 +50,11 @@ export const formatTime = (time: string): string => {
 			hour === 0 ? 12 : hour > 12 ? hour - 12 : hour;
 
 		const formatted = `${displayHour}:${minutes} ${ampm}`;
-		devLog('Formatted time', { input: time, output: formatted });
+
 		return formatted;
 	} catch (error) {
 		console.error('Failed to format time:', error);
-		devLog('Time formatting error', { time, error });
+
 		return 'Invalid Time';
 	}
 };
@@ -103,10 +101,6 @@ export const calculateDuration = (
 		const diffMs = end.getTime() - start.getTime();
 
 		if (diffMs < 0) {
-			devLog('Warning: Negative duration detected', {
-				startTime,
-				endTime,
-			});
 			return '0min';
 		}
 
@@ -124,15 +118,10 @@ export const calculateDuration = (
 			formatted = `${diffHours}hr ${diffMinutes}min`;
 		}
 
-		devLog('Calculated duration', { startTime, endTime, formatted });
 		return formatted;
 	} catch (error) {
 		console.error('Failed to calculate duration:', error);
-		devLog('Duration calculation error', {
-			startTime,
-			endTime,
-			error,
-		});
+
 		return '0min';
 	}
 };
