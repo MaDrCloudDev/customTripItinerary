@@ -28,57 +28,59 @@
 	{/if}
 
 	<div
-		class="flex items-start gap-6 {colorClass} rounded-2xl p-6 border shadow-lg relative z-10 hover:shadow-xl transition-all duration-300 hover:scale-[1.02]"
+		class="flex flex-col md:flex-row items-start gap-4 md:gap-6 {colorClass} rounded-2xl p-4 md:p-6 border shadow-lg relative z-10 hover:shadow-xl transition-all duration-300 hover:scale-[1.02]"
 	>
 		<div
-			class="text-center min-w-32 bg-white/60 backdrop-blur-sm rounded-xl p-4 border border-white/40 shadow-sm"
+			class="w-full md:w-auto text-center md:min-w-32 bg-white/60 backdrop-blur-sm rounded-xl p-3 md:p-4 border border-white/40 shadow-sm flex md:flex-col items-center md:items-stretch justify-around md:justify-start gap-2 md:gap-0"
 		>
-			<div class="text-lg font-bold text-gray-800 mb-2">
-				{formatTime(slot.startTime)}
-			</div>
-			<div class="text-sm font-medium text-gray-600 mb-2">↓</div>
-			<div class="text-lg font-bold text-gray-800 mb-3">
-				{formatTime(slot.endTime)}
+			<div class="flex flex-col md:block">
+				<div class="text-base md:text-lg font-bold text-gray-800 md:mb-2">
+					{formatTime(slot.startTime)}
+				</div>
+				<div class="text-xs md:text-sm font-medium text-gray-600 md:mb-2">↓</div>
+				<div class="text-base md:text-lg font-bold text-gray-800 md:mb-3">
+					{formatTime(slot.endTime)}
+				</div>
 			</div>
 			<div
-				class="text-sm bg-white/70 rounded-full px-3 py-1 font-bold text-gray-700 border"
+				class="text-xs md:text-sm bg-white/70 rounded-full px-3 py-1 font-bold text-gray-700 border whitespace-nowrap"
 			>
 				{duration}
 			</div>
 		</div>
 
-		<div class="flex-1">
-			<div class="flex items-start gap-4 mb-4">
-				<span class="text-3xl drop-shadow-sm">{slot.icon}</span>
-				<div class="flex-1">
-					<h3 class="text-xl font-bold leading-tight mb-2">
+		<div class="flex-1 w-full md:w-auto">
+			<div class="flex items-start gap-3 md:gap-4 mb-3 md:mb-4">
+				<span class="text-2xl md:text-3xl drop-shadow-sm flex-shrink-0">{slot.icon}</span>
+				<div class="flex-1 min-w-0">
+					<h3 class="text-lg md:text-xl font-bold leading-tight mb-1 md:mb-2">
 						{slot.activity}
 					</h3>
-					<p class="text-base leading-relaxed opacity-90">
+					<p class="text-sm md:text-base leading-relaxed opacity-90">
 						{slot.description}
 					</p>
 				</div>
 			</div>
 
 			{#if slot.location || slot.cost || slot.notes}
-				<div class="space-y-3 mt-4 pt-4 border-t border-white/40">
+				<div class="space-y-2 md:space-y-3 mt-3 md:mt-4 pt-3 md:pt-4 border-t border-white/40">
 					{#if slot.location}
 						<button
 							onclick={() => openGoogleMaps(slot.location!)}
-							class="bg-blue-100/60 backdrop-blur-sm rounded-xl p-4 border-2 border-blue-300 hover:bg-blue-200/80 hover:border-blue-500 transition-all duration-300 cursor-pointer text-left w-full transform hover:scale-[1.02] shadow-md hover:shadow-lg"
+							class="bg-blue-100/60 backdrop-blur-sm rounded-xl p-3 md:p-4 border-2 border-blue-300 hover:bg-blue-200/80 hover:border-blue-500 transition-all duration-300 cursor-pointer text-left w-full transform hover:scale-[1.02] shadow-md hover:shadow-lg"
 						>
-							<div class="flex items-center gap-2">
-								<span class="text-lg">📍</span>
-								<div class="flex-1">
-									<div class="text-sm font-bold text-blue-800 mb-1">
+							<div class="flex items-start md:items-center gap-2 flex-wrap">
+								<span class="text-base md:text-lg flex-shrink-0">📍</span>
+								<div class="flex-1 min-w-0">
+									<div class="text-xs md:text-sm font-bold text-blue-800 mb-0.5 md:mb-1">
 										Location
 									</div>
-									<div class="text-base font-semibold text-blue-900">
+									<div class="text-sm md:text-base font-semibold text-blue-900 break-words">
 										{slot.location}
 									</div>
 								</div>
 								<span
-									class="text-sm font-bold bg-blue-200 px-3 py-1 rounded-full text-blue-800 flex items-center gap-1"
+									class="text-xs md:text-sm font-bold bg-blue-200 px-2 md:px-3 py-1 rounded-full text-blue-800 flex items-center gap-1 whitespace-nowrap"
 									>View Map <span class="text-xs">↗</span></span
 								>
 							</div>
@@ -86,15 +88,15 @@
 					{/if}
 					{#if slot.cost}
 						<div
-							class="bg-white/50 backdrop-blur-sm rounded-xl p-4 border border-white/40"
+							class="bg-white/50 backdrop-blur-sm rounded-xl p-3 md:p-4 border border-white/40"
 						>
 							<div class="flex items-center gap-2">
-								<span class="text-lg">💰</span>
-								<div>
-									<div class="text-sm font-bold text-gray-700 mb-1">
+								<span class="text-base md:text-lg flex-shrink-0">💰</span>
+								<div class="min-w-0">
+									<div class="text-xs md:text-sm font-bold text-gray-700 mb-0.5 md:mb-1">
 										Cost
 									</div>
-									<div class="text-base font-semibold text-gray-800">
+									<div class="text-sm md:text-base font-semibold text-gray-800">
 										{slot.cost}
 									</div>
 								</div>
@@ -103,16 +105,16 @@
 					{/if}
 					{#if slot.notes}
 						<div
-							class="bg-white/50 backdrop-blur-sm rounded-xl p-4 border border-white/40"
+							class="bg-white/50 backdrop-blur-sm rounded-xl p-3 md:p-4 border border-white/40"
 						>
 							<div class="flex items-start gap-2">
-								<span class="text-lg">📝</span>
-								<div>
-									<div class="text-sm font-bold text-gray-700 mb-1">
+								<span class="text-base md:text-lg flex-shrink-0">📝</span>
+								<div class="min-w-0 flex-1">
+									<div class="text-xs md:text-sm font-bold text-gray-700 mb-0.5 md:mb-1">
 										Notes
 									</div>
 									<div
-										class="text-base font-semibold text-gray-800 leading-relaxed"
+										class="text-sm md:text-base font-semibold text-gray-800 leading-relaxed break-words"
 									>
 										{slot.notes}
 									</div>

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { DaySchedule } from '../../app.d.ts';
+	import type { DaySchedule } from '../../app.js';
 	import {
 		formatTime,
 		calculateDuration,
@@ -13,6 +13,50 @@
 
 	let { currentDay }: Props = $props();
 </script>
+
+<style>
+	/* Ensure consistent timeline alignment across all devices */
+	.timeline-grid {
+		/* Fix for sub-pixel rendering issues and ensure smooth rendering */
+		position: relative;
+		transform: translateZ(0);
+		overflow: hidden;
+	}
+	
+	.timeline-hour {
+		/* Ensure exact 48px height regardless of browser */
+		height: 48px !important;
+		box-sizing: border-box;
+		flex-shrink: 0;
+	}
+	
+	.activity-card {
+		/* Ensure proper positioning and prevent layout shift */
+		position: absolute;
+		will-change: transform;
+		transform: translateZ(0);
+		box-sizing: border-box;
+	}
+	
+	/* Prevent horizontal scrolling on small screens */
+	@media (max-width: 640px) {
+		.timeline-grid {
+			overflow-x: auto;
+			-webkit-overflow-scrolling: touch;
+		}
+		
+		.activity-card {
+			/* Slightly reduce margins on mobile for better fit */
+			font-size: 0.875rem;
+		}
+	}
+	
+	/* Ensure consistent font rendering */
+	.activity-card * {
+		text-rendering: optimizeLegibility;
+		-webkit-font-smoothing: antialiased;
+	}
+</style>
 
 <div
 	class="bg-white/80 backdrop-blur-sm border border-blue-200/50 rounded-3xl p-8 shadow-xl shadow-blue-200/40"
@@ -72,16 +116,18 @@
 
 	<div class="max-w-5xl mx-auto">
 		<div
-			class="relative bg-white/50 rounded-2xl border-2 border-blue-200 overflow-hidden"
+			class="relative bg-white/50 rounded-2xl border-2 border-blue-200 overflow-hidden timeline-grid"
 		>
 			<div class="flex">
-				<div class="w-20 flex-shrink-0 bg-blue-50">
+				<!-- Time labels column - fixed width for consistency -->
+				<div class="w-20 sm:w-24 flex-shrink-0 bg-blue-50">
 					{#each Array.from({ length: 18 }, (_, i) => i + 6) as hour}
 						<div
-							class="h-12 flex items-center justify-center border-r-2 border-blue-300 border-b border-gray-200"
+							class="timeline-hour flex items-start justify-center pt-1 border-r-2 border-r-blue-300 border-b border-b-gray-200 relative"
+							style="height: 48px;"
 						>
 							<div
-								class="bg-blue-600 text-white rounded px-2 py-1 text-xs font-bold min-w-[50px] text-center"
+								class="bg-blue-600 text-white rounded px-1.5 sm:px-2 py-1 text-xs font-bold min-w-[45px] sm:min-w-[50px] text-center"
 							>
 								{hour === 12
 									? '12 PM'
@@ -95,93 +141,110 @@
 					{/each}
 				</div>
 
-				<div class="flex-1 relative">
-					{#each Array.from({ length: 18 }, (_, i) => i + 6) as hour}
+				<!-- Activity timeline column -->
+				<div class="flex-1 relative min-h-0">
+				<!-- Hour grid background with subtle alignment guides -->
+				{#each Array.from({ length: 18 }, (_, i) => i + 6) as hour}
+					<div
+						class="timeline-hour border-b border-gray-200 {hour % 2 === 0
+							? 'bg-gray-50/30'
+							: 'bg-white/30'} relative"
+						style="height: 48px;"
+					>
+						<!-- Subtle hour marker line for alignment verification -->
+						<div class="absolute left-0 top-0 w-full h-px bg-gray-300/40"></div>
+					</div>
+				{/each}					{#each currentDay.timeSlots as activity}
+						{@const startTimeParts = activity.startTime.split(':')}
+						{@const endTimeParts = activity.endTime.split(':')}
+						{@const startHour = parseInt(startTimeParts[0]) || 0}
+						{@const startMinute = parseInt(startTimeParts[1]) || 0}
+						{@const endHour = parseInt(endTimeParts[0]) || 0}
+						{@const endMinute = parseInt(endTimeParts[1]) || 0}
+
+					<!-- Calculate position relative to 6 AM start, with precise pixel alignment -->
+					{@const startTotalMinutes = startHour * 60 + startMinute}
+					{@const endTotalMinutes = endHour * 60 + endMinute}
+					{@const timelineStartMinutes = 6 * 60} <!-- 6 AM baseline -->
+					{@const timelineEndMinutes = 24 * 60} <!-- 12 AM (midnight) end -->
+					
+					<!-- Ensure activity falls within timeline bounds -->
+					{@const clampedStartMinutes = Math.max(startTotalMinutes, timelineStartMinutes)}
+					{@const clampedEndMinutes = Math.min(endTotalMinutes, timelineEndMinutes)}
+					
+					<!-- Calculate precise positioning -->
+					{@const startPosition = Math.round(((clampedStartMinutes - timelineStartMinutes) / 60) * 48)}
+					{@const duration = (clampedEndMinutes - clampedStartMinutes) / 60}
+					{@const height = Math.max(Math.round(duration * 48), 32)}
+					
+					<!-- Skip if activity is completely outside timeline bounds -->
+					{#if startTotalMinutes < timelineEndMinutes && endTotalMinutes > timelineStartMinutes}						<!-- Activity card positioned absolutely with precise alignment -->
 						<div
-							class="h-12 border-b border-gray-200 {hour % 2 === 0
-								? 'bg-gray-50/30'
-								: 'bg-white/30'}"
-						></div>
-					{/each}
-
-					{#each currentDay.timeSlots as activity}
-						{@const startHour = parseInt(
-							activity.startTime.split(':')[0]
-						)}
-						{@const startMinute = parseInt(
-							activity.startTime.split(':')[1]
-						)}
-						{@const endHour = parseInt(
-							activity.endTime.split(':')[0]
-						)}
-						{@const endMinute = parseInt(
-							activity.endTime.split(':')[1]
-						)}
-
-						{@const startPosition =
-							(startHour - 6) * 48 + (startMinute / 60) * 48}
-						{@const duration =
-							(endHour * 60 +
-								endMinute -
-								(startHour * 60 + startMinute)) /
-							60}
-						{@const height = Math.max(duration * 48, 40)}
-
-						<div
-							class="absolute left-2 right-2 {getColorClass(
+							class="activity-card left-1 right-1 sm:left-2 sm:right-2 {getColorClass(
 								activity
-							)} rounded-lg border-2 shadow-lg p-2 overflow-hidden hover:shadow-xl transition-shadow"
-							style="top: {startPosition}px; height: {height}px;"
+							)} rounded-xl border-2 shadow-lg overflow-hidden hover:shadow-xl transition-all duration-200 z-10"
+							style="top: {startPosition}px; height: {height}px; min-height: 40px;"
 						>
-							<div class="flex items-center gap-2 h-full">
-								<!-- Time Badge -->
-								<div
-									class="flex-shrink-0 bg-white/90 rounded px-2 py-1 text-xs font-bold text-gray-800 border"
-								>
-									{formatTime(activity.startTime)}
+							<div class="flex flex-col h-full p-2 sm:p-3 gap-2">
+								<!-- Time and Duration Row -->
+								<div class="flex justify-between items-center">
+									<div
+										class="flex-shrink-0 bg-white/95 backdrop-blur-sm rounded-lg px-2 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm font-bold text-gray-800 border border-gray-300/50 shadow-sm"
+									>
+										{formatTime(activity.startTime)}
+									</div>
+									<div
+										class="flex-shrink-0 bg-white/95 backdrop-blur-sm rounded-lg px-2 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm font-bold text-gray-800 border border-gray-300/50 shadow-sm"
+									>
+										{calculateDuration(
+											activity.startTime,
+											activity.endTime
+										)}
+									</div>
 								</div>
 
-								<!-- Activity Content -->
+								<!-- Activity Content Container -->
 								<div class="flex-1 min-w-0">
-									<div class="flex items-center gap-2">
-										<span class="text-base flex-shrink-0"
+									<div class="flex items-center gap-2 sm:gap-3 mb-2">
+										<span class="text-lg sm:text-xl flex-shrink-0"
 											>{activity.icon}</span
 										>
 										<h4
-											class="font-bold text-sm text-gray-800 leading-tight truncate"
+											class="font-bold text-sm sm:text-lg text-gray-800 leading-snug flex-1"
+											title={activity.activity}
 										>
 											{activity.activity}
 										</h4>
 									</div>
 
-									{#if height > 60 && activity.location}
-										<div class="flex gap-1 text-xs mt-1">
+									{#if activity.description && height > 64}
+										<div class="mb-2">
+											<p class="text-xs sm:text-sm text-gray-700 leading-relaxed italic opacity-90">
+												{activity.description}
+											</p>
+										</div>
+									{/if}
+
+									{#if height > 48 && activity.location}
+										<div class="flex gap-1">
 											<button
 												onclick={() =>
 													openGoogleMaps(activity.location)}
-												class="flex items-center gap-1 bg-white/70 hover:bg-white/90 rounded px-1 py-0.5 border transition-colors cursor-pointer"
+												class="flex items-center gap-1.5 bg-white/80 hover:bg-white/95 rounded-lg px-2 py-1 border border-gray-300/50 transition-all duration-200 cursor-pointer shadow-sm hover:shadow-md"
 											>
-												<span>📍</span>
+												<span class="text-sm">📍</span>
 												<span
-													class="font-medium truncate max-w-[80px]"
+													class="font-medium text-xs sm:text-sm text-gray-700 truncate max-w-[80px] sm:max-w-[120px]"
+													title={activity.location}
 													>{activity.location}</span
 												>
 											</button>
 										</div>
 									{/if}
 								</div>
-
-								<!-- Duration Badge -->
-								<div
-									class="flex-shrink-0 bg-white/90 rounded px-2 py-1 text-xs font-bold text-gray-800 border"
-								>
-									{calculateDuration(
-										activity.startTime,
-										activity.endTime
-									)}
-								</div>
 							</div>
 						</div>
+					{/if}
 					{/each}
 				</div>
 			</div>

@@ -149,36 +149,37 @@
 				</div>
 			</div>
 
-			<div class="flex items-center justify-between gap-2">
-				<div class="flex items-center gap-1">
-					<button
-						onclick={() => onViewChange('single')}
-						class="px-2 py-1 text-xs rounded-full font-medium transition-all duration-300 {viewMode ===
-						'single'
-							? 'bg-gradient-to-r from-blue-700 to-blue-800 text-white shadow-md'
-							: 'bg-blue-200 text-blue-800 hover:bg-blue-300'}"
-					>
-						📅
-					</button>
-					<button
-						onclick={() => onViewChange('timeline')}
-						class="px-2 py-1 text-xs rounded-full font-medium transition-all duration-300 {viewMode ===
-						'timeline'
-							? 'bg-gradient-to-r from-blue-700 to-blue-800 text-white shadow-md'
-							: 'bg-blue-200 text-blue-800 hover:bg-blue-300'}"
-					>
-						🕐
-					</button>
-					<button
-						onclick={() => onViewChange('overview')}
-						class="px-2 py-1 text-xs rounded-full font-medium transition-all duration-300 {viewMode ===
-						'overview'
-							? 'bg-gradient-to-r from-blue-700 to-blue-800 text-white shadow-md'
-							: 'bg-blue-200 text-blue-800 hover:bg-blue-300'}"
-					>
-						📊
-					</button>
-				</div>
+			<div class="flex items-center justify-center gap-2">
+				<button
+					onclick={() => onViewChange('single')}
+					class="px-3 py-2 text-xs rounded-lg font-medium transition-all duration-300 flex flex-col items-center gap-0.5 min-w-[70px] {viewMode ===
+					'single'
+						? 'bg-gradient-to-r from-blue-700 to-blue-800 text-white shadow-md'
+						: 'bg-blue-200 text-blue-800 hover:bg-blue-300'}"
+				>
+					<span class="text-base">📅</span>
+					<span class="text-[10px] leading-tight">Day</span>
+				</button>
+				<button
+					onclick={() => onViewChange('timeline')}
+					class="px-3 py-2 text-xs rounded-lg font-medium transition-all duration-300 flex flex-col items-center gap-0.5 min-w-[70px] {viewMode ===
+					'timeline'
+						? 'bg-gradient-to-r from-blue-700 to-blue-800 text-white shadow-md'
+						: 'bg-blue-200 text-blue-800 hover:bg-blue-300'}"
+				>
+					<span class="text-base">🕐</span>
+					<span class="text-[10px] leading-tight">Timeline</span>
+				</button>
+				<button
+					onclick={() => onViewChange('overview')}
+					class="px-3 py-2 text-xs rounded-lg font-medium transition-all duration-300 flex flex-col items-center gap-0.5 min-w-[70px] {viewMode ===
+					'overview'
+						? 'bg-gradient-to-r from-blue-700 to-blue-800 text-white shadow-md'
+						: 'bg-blue-200 text-blue-800 hover:bg-blue-300'}"
+				>
+					<span class="text-base">📊</span>
+					<span class="text-[10px] leading-tight">Overview</span>
+				</button>
 			</div>
 		</div>
 	</div>
