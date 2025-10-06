@@ -17,7 +17,7 @@ export const itineraryData: ItineraryData = {
 		{
 			dayNumber: 0,
 			date: '2025-01-15',
-			dayName: 'Monday',
+			dayName: 'Tuesday',
 			location: 'Cairo',
 			timeSlots: [
 				{
@@ -53,7 +53,7 @@ export const itineraryData: ItineraryData = {
 		{
 			dayNumber: 1,
 			date: '2025-01-16',
-			dayName: 'Tuesday',
+			dayName: 'Wednesday',
 			location: 'Cairo',
 			timeSlots: [
 				{
@@ -89,7 +89,7 @@ export const itineraryData: ItineraryData = {
 		{
 			dayNumber: 2,
 			date: '2025-01-17',
-			dayName: 'Wednesday',
+			dayName: 'Thursday',
 			location: 'Cairo',
 			timeSlots: [
 				{
@@ -129,7 +129,7 @@ export const itineraryData: ItineraryData = {
 		{
 			dayNumber: 3,
 			date: '2025-01-18',
-			dayName: 'Thursday',
+			dayName: 'Friday',
 			location: 'Cairo/Giza',
 			timeSlots: [
 				{
@@ -183,7 +183,7 @@ export const itineraryData: ItineraryData = {
 		{
 			dayNumber: 4,
 			date: '2025-01-19',
-			dayName: 'Friday',
+			dayName: 'Saturday',
 			location: 'Cairo to Luxor',
 			timeSlots: [
 				{
@@ -233,7 +233,7 @@ export const itineraryData: ItineraryData = {
 		{
 			dayNumber: 5,
 			date: '2025-01-20',
-			dayName: 'Saturday',
+			dayName: 'Sunday',
 			location: 'Luxor/Qena',
 			timeSlots: [
 				{
@@ -272,7 +272,7 @@ export const itineraryData: ItineraryData = {
 		{
 			dayNumber: 6,
 			date: '2025-01-21',
-			dayName: 'Sunday',
+			dayName: 'Monday',
 			location: 'Valley of the Kings',
 			timeSlots: [
 				{
@@ -313,7 +313,7 @@ export const itineraryData: ItineraryData = {
 		{
 			dayNumber: 7,
 			date: '2025-01-22',
-			dayName: 'Monday',
+			dayName: 'Tuesday',
 			location: 'Esna',
 			timeSlots: [
 				{
@@ -353,7 +353,7 @@ export const itineraryData: ItineraryData = {
 		{
 			dayNumber: 8,
 			date: '2025-01-23',
-			dayName: 'Tuesday',
+			dayName: 'Wednesday',
 			location: 'Abu Simbel',
 			timeSlots: [
 				{
@@ -393,7 +393,7 @@ export const itineraryData: ItineraryData = {
 		{
 			dayNumber: 9,
 			date: '2025-01-24',
-			dayName: 'Wednesday',
+			dayName: 'Thursday',
 			location: 'Aswan',
 			timeSlots: [
 				{
@@ -434,7 +434,7 @@ export const itineraryData: ItineraryData = {
 		{
 			dayNumber: 10,
 			date: '2025-01-25',
-			dayName: 'Thursday',
+			dayName: 'Friday',
 			location: 'Edfu',
 			timeSlots: [
 				{
@@ -473,7 +473,7 @@ export const itineraryData: ItineraryData = {
 		{
 			dayNumber: 11,
 			date: '2025-01-26',
-			dayName: 'Friday',
+			dayName: 'Saturday',
 			location: 'Cairo',
 			timeSlots: [
 				{
@@ -508,11 +508,11 @@ export const itineraryData: ItineraryData = {
 				},
 			],
 		},
-		// Day 12: Nov 30 - Cairo Egypt - Departure
+		// Day 12: Nov 29 - Cairo Egypt - Departure
 		{
 			dayNumber: 12,
 			date: '2025-01-27',
-			dayName: 'Saturday',
+			dayName: 'Sunday',
 			location: 'Cairo',
 			timeSlots: [
 				{

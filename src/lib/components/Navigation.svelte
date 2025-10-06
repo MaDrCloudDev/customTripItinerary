@@ -49,7 +49,7 @@
 				<div
 					class="text-base font-bold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent"
 				>
-					Day {currentDay.dayNumber} of {totalDays}
+					Day {currentDay.dayNumber} of {totalDays - 1}
 				</div>
 				<div class="text-sm text-gray-700 font-medium">
 					{currentDay.dayName} • {currentDay.location}
@@ -127,7 +127,7 @@
 						<div
 							class="text-sm font-bold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent"
 						>
-							Day {currentDay.dayNumber} of {totalDays}
+							Day {currentDay.dayNumber} of {totalDays - 1}
 						</div>
 						<div class="text-xs text-gray-700 font-medium">
 							{currentDay.dayName} • {currentDay.location}

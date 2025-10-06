@@ -8,14 +8,14 @@
     "dates": {
       "start": "2025-01-15",
       "end": "2025-01-27",
-      "totalDays": 12
+      "totalDays": 13
     }
   },
   "dailySchedule": [
     {
       "dayNumber": 0,
       "date": "2025-01-15",
-      "dayName": "Monday",
+      "dayName": "Tuesday",
       "location": "Cairo",
       "timeSlots": {
         "morning": {
@@ -44,7 +44,7 @@
     {
       "dayNumber": 1,
       "date": "2025-01-16",
-      "dayName": "Tuesday",
+      "dayName": "Wednesday",
       "location": "Cairo",
       "timeSlots": {
         "morning": {
@@ -77,7 +77,7 @@
     {
       "dayNumber": 2,
       "date": "2025-01-17",
-      "dayName": "Wednesday",
+      "dayName": "Thursday",
       "location": "Cairo/Giza",
       "timeSlots": {
         "morning": {
@@ -110,7 +110,7 @@
     {
       "dayNumber": 3,
       "date": "2025-01-18",
-      "dayName": "Thursday",
+      "dayName": "Friday",
       "location": "Cairo to Luxor",
       "timeSlots": {
         "morning": {
@@ -143,7 +143,7 @@
     {
       "dayNumber": 4,
       "date": "2025-01-19",
-      "dayName": "Friday",
+      "dayName": "Saturday",
       "location": "Luxor/Qena",
       "timeSlots": {
         "morning": {
@@ -176,7 +176,7 @@
     {
       "dayNumber": 5,
       "date": "2025-01-20",
-      "dayName": "Saturday",
+      "dayName": "Sunday",
       "location": "Valley of the Kings",
       "timeSlots": {
         "morning": {
@@ -209,7 +209,7 @@
     {
       "dayNumber": 6,
       "date": "2025-01-21",
-      "dayName": "Sunday",
+      "dayName": "Monday",
       "location": "Esna",
       "timeSlots": {
         "morning": {
@@ -242,7 +242,7 @@
     {
       "dayNumber": 7,
       "date": "2025-01-22",
-      "dayName": "Monday",
+      "dayName": "Tuesday",
       "location": "Abu Simbel",
       "timeSlots": {
         "morning": {
@@ -276,7 +276,7 @@
     {
       "dayNumber": 8,
       "date": "2025-01-23",
-      "dayName": "Tuesday",
+      "dayName": "Wednesday",
       "location": "Aswan",
       "timeSlots": {
         "morning": {
@@ -309,7 +309,7 @@
     {
       "dayNumber": 9,
       "date": "2025-01-24",
-      "dayName": "Wednesday",
+      "dayName": "Thursday",
       "location": "Edfu",
       "timeSlots": {
         "morning": {
@@ -342,7 +342,7 @@
     {
       "dayNumber": 10,
       "date": "2025-01-25",
-      "dayName": "Thursday",
+      "dayName": "Friday",
       "location": "Cairo",
       "timeSlots": {
         "morning": {
@@ -375,7 +375,36 @@
     {
       "dayNumber": 11,
       "date": "2025-01-26",
-      "dayName": "Friday",
+      "dayName": "Saturday",
+      "location": "Cairo",
+      "timeSlots": {
+        "morning": {
+          "time": "Morning",
+          "activity": "Old Cairo & Coptic Quarter",
+          "description": "Historic Christian Cairo, Coptic Museum, and ancient sites",
+          "type": "excursion",
+          "icon": "⛪"
+        },
+        "afternoon": {
+          "time": "Afternoon",
+          "activity": "Free Time in Cairo",
+          "description": "Final evening in Egypt",
+          "type": "free",
+          "icon": "🌃"
+        },
+        "evening": {
+          "time": "Evening",
+          "activity": "Free Time in Cairo",
+          "description": "Final evening in Egypt",
+          "type": "free",
+          "icon": "🌃"
+        }
+      }
+    },
+    {
+      "dayNumber": 12,
+      "date": "2025-01-27",
+      "dayName": "Sunday",
       "location": "Cairo",
       "timeSlots": {
         "morning": {
