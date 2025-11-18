@@ -111,14 +111,14 @@
 							)} border shadow-sm min-h-[3rem]"
 						>
 							<span
-								class="text-xs bg-white/60 px-2 py-1 rounded-full font-medium flex-shrink-0 mr-3"
+								class="text-xs bg-white/60 px-2 py-1 rounded-full font-medium flex-shrink-0 mr-3 whitespace-nowrap"
 							>
 								{formatTime(slot.startTime)}
 							</span>
-							<span class="text-lg flex-shrink-0 mr-auto"
+							<span class="text-lg flex-shrink-0 mr-2"
 								>{slot.icon}</span
 							>
-							<span class="font-medium text-right leading-tight"
+							<span class="font-medium text-right leading-tight break-words overflow-wrap-anywhere flex-1 min-w-0"
 								>{slot.activity}</span
 							>
 						</div>
@@ -128,3 +128,36 @@
 		{/each}
 	</div>
 </div>
+
+<style>
+	.overflow-wrap-anywhere {
+		overflow-wrap: anywhere;
+		word-wrap: anywhere;
+		word-break: break-word;
+	}
+
+	/* Ensure activity list items don't overflow */
+	.activity-list > div {
+		overflow: hidden;
+	}
+
+	.activity-list > div > span:last-child {
+		word-break: break-word;
+		hyphens: auto;
+		-webkit-hyphens: auto;
+		-moz-hyphens: auto;
+	}
+
+	/* Mobile optimizations */
+	@media (max-width: 768px) {
+		.activity-list > div {
+			padding: 0.5rem;
+			gap: 0.5rem;
+		}
+
+		.activity-list > div > span:last-child {
+			font-size: 0.8rem;
+			line-height: 1.2;
+		}
+	}
+</style>

@@ -49,14 +49,14 @@
 			</div>
 		</div>
 
-		<div class="flex-1 w-full md:w-auto">
+		<div class="flex-1 w-full md:w-auto min-w-0">
 			<div class="flex items-start gap-3 md:gap-4 mb-3 md:mb-4">
 				<span class="text-2xl md:text-3xl drop-shadow-sm flex-shrink-0">{slot.icon}</span>
-				<div class="flex-1 min-w-0">
-					<h3 class="text-lg md:text-xl font-bold leading-tight mb-1 md:mb-2">
+				<div class="flex-1 min-w-0 overflow-hidden">
+					<h3 class="text-lg md:text-xl font-bold leading-tight mb-1 md:mb-2 break-words overflow-wrap-anywhere">
 						{slot.activity}
 					</h3>
-					<p class="text-sm md:text-base leading-relaxed opacity-90">
+					<p class="text-sm md:text-base leading-relaxed opacity-90 break-words overflow-wrap-anywhere">
 						{slot.description}
 					</p>
 				</div>
@@ -127,3 +127,22 @@
 		</div>
 	</div>
 </div>
+
+<style>
+	.overflow-wrap-anywhere {
+		overflow-wrap: anywhere;
+		word-wrap: anywhere;
+		word-break: break-word;
+	}
+
+	/* Mobile-specific text handling */
+	@media (max-width: 768px) {
+		h3, p {
+			word-break: break-word;
+			overflow-wrap: break-word;
+			hyphens: auto;
+			-webkit-hyphens: auto;
+			-moz-hyphens: auto;
+		}
+	}
+</style>

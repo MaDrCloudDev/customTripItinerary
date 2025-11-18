@@ -151,122 +151,75 @@
 							Math.round(duration * 48),
 							80
 						)}
-						{@const height =
-							activity.activity === 'Village of Esna by Foot'
-								? baseHeight - 8
-								: baseHeight}
+						{@const height = baseHeight}
 
 						<!-- Skip if activity is completely outside timeline bounds -->
 						{#if startTotalMinutes < timelineEndMinutes && endTotalMinutes > timelineStartMinutes}
-							{@const isVeryShort = height < 100}
-							{@const isShort = height < 150}
 							<!-- Activity card positioned absolutely with precise alignment -->
 							<div
 								class="activity-card left-1 right-1 sm:left-2 sm:right-2 {getColorClass(
 									activity
-								)} rounded-xl border-2 shadow-lg overflow-hidden hover:shadow-xl transition-all duration-200 z-10"
+								)} rounded-xl border-2 shadow-lg hover:shadow-xl transition-all duration-200 z-10 overflow-auto"
 								style="top: {startPosition}px; height: {height}px; min-height: 40px;"
 							>
-								<div
-									class="flex flex-col h-full p-1.5 sm:p-2 {isVeryShort
-										? 'gap-0.5'
-										: 'gap-1'}"
-								>
-									{#if !isVeryShort}
-										<!-- Time and Duration Row for normal activities -->
+								<div class="flex flex-col h-full p-1.5 sm:p-2 gap-1">
+									<!-- Time and Duration Row - Always shown -->
+									<div class="flex justify-between items-center mb-1 flex-shrink-0">
 										<div
-											class="flex justify-between items-center mb-1"
+											class="flex-shrink-0 bg-white/95 backdrop-blur-sm rounded px-1.5 py-0.5 text-xs font-bold text-gray-800 border border-gray-300/50 shadow-sm"
 										>
-											<div
-												class="flex-shrink-0 bg-white/95 backdrop-blur-sm rounded-lg px-2 py-1 text-xs font-bold text-gray-800 border border-gray-300/50 shadow-sm"
-											>
-												{formatTime(activity.startTime)}
-											</div>
-											<div
-												class="flex-shrink-0 bg-white/95 backdrop-blur-sm rounded-lg px-2 py-1 text-xs font-bold text-gray-800 border border-gray-300/50 shadow-sm"
-											>
-												{calculateDuration(
-													activity.startTime,
-													activity.endTime
-												)}
-											</div>
+											{formatTime(activity.startTime)}
 										</div>
-									{/if}
+										<div
+											class="flex-shrink-0 bg-white/95 backdrop-blur-sm rounded px-1.5 py-0.5 text-xs font-bold text-gray-800 border border-gray-300/50 shadow-sm"
+										>
+											{calculateDuration(
+												activity.startTime,
+												activity.endTime
+											)}
+										</div>
+									</div>
 
 									<!-- Activity Content Container -->
 									<div class="flex-1 min-w-0 flex flex-col">
-										{#if isVeryShort}
-											<!-- Compact layout for very short activities -->
-											<div
-												class="flex items-center justify-between gap-1 mb-1"
+										<!-- Activity title and description -->
+										<div class="flex items-start gap-2 mb-1 min-h-0 flex-shrink-0">
+											<span class="text-base sm:text-lg flex-shrink-0 mt-0.5"
+												>{activity.icon}</span
 											>
-												<div
-													class="text-xs font-bold text-gray-800 bg-white/80 rounded px-1 py-0.5"
-												>
-													{formatTime(activity.startTime)}
-												</div>
-												<div
-													class="text-xs font-bold text-gray-800 bg-white/80 rounded px-1 py-0.5"
-												>
-													{calculateDuration(
-														activity.startTime,
-														activity.endTime
-													)}
-												</div>
-											</div>
-											<div class="flex items-center gap-1.5 flex-1">
-												<span class="text-sm flex-shrink-0"
-													>{activity.icon}</span
-												>
+											<div class="flex-1 min-w-0 overflow-hidden">
 												<h4
-													class="font-bold text-xs text-gray-800 leading-tight flex-1 line-clamp-2"
+													class="font-bold text-xs sm:text-sm text-gray-800 leading-tight mb-1 break-words overflow-wrap-anywhere hyphens-auto"
 													title={activity.activity}
 												>
 													{activity.activity}
 												</h4>
-											</div>
-										{:else}
-											<!-- Normal layout for longer activities -->
-											<div class="flex items-start gap-2 mb-1">
-												<span
-													class="text-base sm:text-lg flex-shrink-0 mt-0.5"
-													>{activity.icon}</span
-												>
-												<div class="flex-1 min-w-0">
-													<h4
-														class="font-bold {isShort
-															? 'text-xs'
-															: 'text-xs sm:text-sm'} text-gray-800 leading-tight mb-1"
-														title={activity.activity}
+												{#if activity.description}
+													<p
+														class="text-xs text-gray-700 leading-tight opacity-90 mb-1 break-words overflow-wrap-anywhere"
 													>
-														{activity.activity}
-													</h4>
-													{#if activity.description && !isShort}
-														<p
-															class="text-xs text-gray-700 leading-tight opacity-90 line-clamp-2 mb-1"
-														>
-															{activity.description}
-														</p>
-													{/if}
-												</div>
+														{activity.description}
+													</p>
+												{/if}
 											</div>
+										</div>
 
-											{#if activity.location}
-												<div class="mt-auto">
-													<button
-														onclick={() =>
-															openGoogleMaps(activity.location)}
-														class="flex items-center gap-1 bg-white/80 hover:bg-white/95 rounded px-1.5 py-0.5 border border-gray-300/50 transition-all duration-200 cursor-pointer shadow-sm hover:shadow-md text-xs"
+										<!-- Location badge -->
+										{#if activity.location}
+											<div class="mt-auto pt-1 flex-shrink-0">
+												<button
+													onclick={() =>
+														openGoogleMaps(activity.location)}
+													class="flex items-center gap-1 bg-white/80 hover:bg-white/95 rounded px-1.5 py-0.5 border border-gray-300/50 transition-all duration-200 cursor-pointer shadow-sm hover:shadow-md text-xs w-full"
+												>
+													<span class="text-xs flex-shrink-0">📍</span>
+													<span
+														class="font-medium text-gray-700 truncate flex-1 min-w-0 text-left"
+														title={activity.location}
+														>{activity.location}</span
 													>
-														<span class="text-xs">📍</span>
-														<span
-															class="font-medium text-gray-700 truncate max-w-[60px] sm:max-w-[100px]"
-															title={activity.location}
-															>{activity.location}</span
-														>
-													</button>
-												</div>
-											{/if}
+												</button>
+											</div>
 										{/if}
 									</div>
 								</div>
@@ -340,5 +293,68 @@
 		line-clamp: 2;
 		-webkit-box-orient: vertical;
 		overflow: hidden;
+	}
+
+	.line-clamp-3 {
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		line-clamp: 3;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+	/* Better text wrapping for activity titles */
+	.overflow-wrap-anywhere {
+		overflow-wrap: anywhere;
+		word-wrap: anywhere;
+		word-break: break-word;
+	}
+
+	.hyphens-auto {
+		hyphens: auto;
+		-webkit-hyphens: auto;
+		-moz-hyphens: auto;
+	}
+
+	/* Ensure proper sizing on mobile */
+	@media (max-width: 640px) {
+		.activity-card {
+			left: 0.25rem;
+			right: 0.25rem;
+		}
+
+		.activity-card h4 {
+			font-size: 0.7rem;
+			line-height: 1.1;
+		}
+
+		.activity-card p {
+			font-size: 0.65rem;
+			line-height: 1.2;
+		}
+	}
+
+	/* Subtle scrollbar styling for activity cards */
+	.activity-card {
+		scrollbar-width: thin;
+		scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+	}
+
+	.activity-card::-webkit-scrollbar {
+		width: 4px;
+		height: 4px;
+	}
+
+	.activity-card::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	.activity-card::-webkit-scrollbar-thumb {
+		background: rgba(0, 0, 0, 0.2);
+		border-radius: 2px;
+	}
+
+	.activity-card::-webkit-scrollbar-thumb:hover {
+		background: rgba(0, 0, 0, 0.3);
 	}
 </style>
