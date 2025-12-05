@@ -1,5 +1,6 @@
 <script lang="ts">
-	import type { CruiseInfo, ViewMode } from '../../app.d.ts';
+	import type { CruiseInfo } from '../../app.d.ts';
+	import InfoCard from './InfoCard.svelte';
 
 	interface Props {
 		cruiseInfo: CruiseInfo;
@@ -42,35 +43,21 @@
 		<div
 			class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto"
 		>
-			<div
-				class="bg-white/20 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-white/30"
-			>
-				<div class="text-2xl mb-2">📋</div>
-				<div class="text-sm text-blue-100 font-medium">
-					Booking Number
-				</div>
-				<div class="text-lg font-bold text-white">
-					{cruiseInfo.bookingNumber}
-				</div>
-			</div>
-			<div
-				class="bg-white/20 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-white/30"
-			>
-				<div class="text-2xl mb-2">👥</div>
-				<div class="text-sm text-blue-100 font-medium">Travelers</div>
-				<div class="text-lg font-bold text-white">
-					{cruiseInfo.passengers}
-				</div>
-			</div>
-			<div
-				class="bg-white/20 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-white/30"
-			>
-				<div class="text-2xl mb-2">🏠</div>
-				<div class="text-sm text-blue-100 font-medium">Stateroom</div>
-				<div class="text-lg font-bold text-white">
-					{cruiseInfo.stateroom}
-				</div>
-			</div>
+			<InfoCard
+				icon="📋"
+				label="Booking Number"
+				value={cruiseInfo.bookingNumber}
+			/>
+			<InfoCard
+				icon="👥"
+				label="Travelers"
+				value={cruiseInfo.passengers}
+			/>
+			<InfoCard
+				icon="🏠"
+				label="Stateroom"
+				value={cruiseInfo.stateroom}
+			/>
 		</div>
 	</div>
 </header>

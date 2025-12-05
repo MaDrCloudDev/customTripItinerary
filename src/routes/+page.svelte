@@ -43,7 +43,6 @@
 		safeLocalStorage.setItem(STORAGE_KEYS.VIEW_MODE, viewMode);
 	});
 
-	// Simple keyboard navigation (helpful for parents)
 	$effect(() => {
 		if (typeof window === 'undefined') return;
 

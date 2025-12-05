@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { DaySchedule, ViewMode } from '../../app.d.ts';
 	import { formatDate } from '../utils/dateUtils.js';
+	import Button from './Button.svelte';
 
 	interface Props {
 		currentDay: DaySchedule;
@@ -31,17 +32,15 @@
 >
 	<div class="container mx-auto px-6">
 		<div class="hidden md:flex items-center justify-between gap-4">
-			<button
-				type="button"
-				onclick={onPrevDay}
+			<Button
+				variant="primary"
 				disabled={isPrevDisabled}
-				class="group px-3 py-2 rounded-full bg-gradient-to-r from-blue-700 to-blue-800 text-white font-medium disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed transition-all duration-300 hover:shadow-lg hover:scale-105 flex items-center gap-2"
+				onclick={onPrevDay}
+				class="group"
 			>
-				<span class="group-hover:-translate-x-1 transition-transform"
-					>←</span
-				>
+				<span class="group-hover:-translate-x-1 transition-transform">←</span>
 				<span>Previous</span>
-			</button>
+			</Button>
 
 			<div
 				class="text-center flex-1 bg-blue-100/80 backdrop-blur-sm rounded-xl py-2 px-4 border border-blue-400/50"
@@ -60,126 +59,100 @@
 			</div>
 
 			<div class="flex items-center gap-2">
-				<button
-					type="button"
+				<Button
+					variant={viewMode === 'single' ? 'active' : 'secondary'}
 					onclick={() => onViewChange('single')}
-					class="px-3 py-1.5 text-xs rounded-full font-medium transition-all duration-300 {viewMode ===
-					'single'
-						? 'bg-gradient-to-r from-blue-700 to-blue-800 text-white shadow-md'
-						: 'bg-blue-200 text-blue-800 hover:bg-blue-300'}"
 				>
 					📅 Day
-				</button>
-				<button
-					type="button"
+				</Button>
+				<Button
+					variant={viewMode === 'timeline' ? 'active' : 'secondary'}
 					onclick={() => onViewChange('timeline')}
-					class="px-3 py-1.5 text-xs rounded-full font-medium transition-all duration-300 {viewMode ===
-					'timeline'
-						? 'bg-gradient-to-r from-blue-700 to-blue-800 text-white shadow-md'
-						: 'bg-blue-200 text-blue-800 hover:bg-blue-300'}"
 				>
 					🕐 Timeline
-				</button>
-				<button
-					type="button"
+				</Button>
+				<Button
+					variant={viewMode === 'overview' ? 'active' : 'secondary'}
 					onclick={() => onViewChange('overview')}
-					class="px-3 py-1.5 text-xs rounded-full font-medium transition-all duration-300 {viewMode ===
-					'overview'
-						? 'bg-gradient-to-r from-blue-700 to-blue-800 text-white shadow-md'
-						: 'bg-blue-200 text-blue-800 hover:bg-blue-300'}"
 				>
 					📊 Overview
-				</button>
+				</Button>
 			</div>
 
-			<button
-				type="button"
-				onclick={onNextDay}
+			<Button
+				variant="primary"
 				disabled={isNextDisabled}
-				class="group px-3 py-2 rounded-full bg-gradient-to-r from-blue-700 to-blue-800 text-white font-medium disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed transition-all duration-300 hover:shadow-lg hover:scale-105 flex items-center gap-2"
+				onclick={onNextDay}
+				class="group"
 			>
 				<span>Next</span>
-				<span class="group-hover:translate-x-1 transition-transform"
-					>→</span
-				>
-			</button>
+				<span class="group-hover:translate-x-1 transition-transform">→</span>
+			</Button>
 		</div>
 
 		<div class="md:hidden space-y-2">
-			<div class="items-center justify-between gap-2 flex-nowrap">
-				<div class="justify-between flex">
-					<button
-						onclick={onPrevDay}
-						disabled={isPrevDisabled}
-						class="group px-3 py-2 rounded-full bg-gradient-to-r from-blue-700 to-blue-800 text-white font-medium disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed transition-all duration-300 hover:shadow-lg hover:scale-105 flex items-center gap-2 flex-shrink-0"
-					>
-						<span
-							class="group-hover:-translate-x-1 transition-transform"
-							>←</span
-						>
-						<span class="hidden sm:inline">Previous</span>
-						<span class="sm:hidden">Prev</span>
-					</button>
+			<div class="flex justify-between">
+				<Button
+					variant="nav"
+					disabled={isPrevDisabled}
+					onclick={onPrevDay}
+					class="group flex-shrink-0"
+				>
+					<span class="group-hover:-translate-x-1 transition-transform">←</span>
+					<span class="hidden sm:inline">Previous</span>
+					<span class="sm:hidden">Prev</span>
+				</Button>
 
+				<div
+					class="text-center flex-1 bg-blue-100/80 backdrop-blur-sm rounded-xl py-2 px-3 mx-3 border border-blue-400/50"
+				>
 					<div
-						class="text-center flex-1 bg-blue-100/80 backdrop-blur-sm rounded-xl py-2 px-3 mx-3 border border-blue-400/50"
+						class="text-sm font-bold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent"
 					>
-						<div
-							class="text-sm font-bold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent"
-						>
-							Day {currentDay.dayNumber} of {totalDays - 1}
-						</div>
-						<div class="text-xs text-gray-700 font-medium">
-							{currentDay.dayName} • {currentDay.location}
-						</div>
+						Day {currentDay.dayNumber} of {totalDays - 1}
 					</div>
-
-					<button
-						onclick={onNextDay}
-						disabled={isNextDisabled}
-						class="group px-3 py-2 rounded-full bg-gradient-to-r from-blue-700 to-blue-800 text-white font-medium disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed transition-all duration-300 hover:shadow-lg hover:scale-105 flex items-center gap-2 flex-shrink-0"
-					>
-						<span class="hidden sm:inline">Next</span>
-						<span class="sm:hidden">Next</span>
-						<span
-							class="group-hover:translate-x-1 transition-transform"
-							>→</span
-						>
-					</button>
+					<div class="text-xs text-gray-700 font-medium">
+						{currentDay.dayName} • {currentDay.location}
+					</div>
 				</div>
+
+				<Button
+					variant="nav"
+					disabled={isNextDisabled}
+					onclick={onNextDay}
+					class="group flex-shrink-0"
+				>
+					<span class="hidden sm:inline">Next</span>
+					<span class="sm:hidden">Next</span>
+					<span class="group-hover:translate-x-1 transition-transform">→</span>
+				</Button>
 			</div>
 
 			<div class="flex items-center justify-center gap-2">
-				<button
+				<Button
+					variant={viewMode === 'single' ? 'active' : 'icon'}
+					class="bg-blue-200 text-blue-800 hover:bg-blue-300"
 					onclick={() => onViewChange('single')}
-					class="px-3 py-2 text-xs rounded-lg font-medium transition-all duration-300 flex flex-col items-center gap-0.5 min-w-[70px] {viewMode ===
-					'single'
-						? 'bg-gradient-to-r from-blue-700 to-blue-800 text-white shadow-md'
-						: 'bg-blue-200 text-blue-800 hover:bg-blue-300'}"
 				>
 					<span class="text-base">📅</span>
 					<span class="text-[10px] leading-tight">Day</span>
-				</button>
-				<button
+				</Button>
+				<Button
+					variant={viewMode === 'timeline' ? 'active' : 'icon'}
+					class="bg-blue-200 text-blue-800 hover:bg-blue-300"
 					onclick={() => onViewChange('timeline')}
-					class="px-3 py-2 text-xs rounded-lg font-medium transition-all duration-300 flex flex-col items-center gap-0.5 min-w-[70px] {viewMode ===
-					'timeline'
-						? 'bg-gradient-to-r from-blue-700 to-blue-800 text-white shadow-md'
-						: 'bg-blue-200 text-blue-800 hover:bg-blue-300'}"
 				>
 					<span class="text-base">🕐</span>
 					<span class="text-[10px] leading-tight">Timeline</span>
-				</button>
-				<button
+				</Button>
+				<Button
+					variant={viewMode === 'overview' ? 'active' : 'icon'}
+					class="bg-blue-200 text-blue-800 hover:bg-blue-300"
 					onclick={() => onViewChange('overview')}
-					class="px-3 py-2 text-xs rounded-lg font-medium transition-all duration-300 flex flex-col items-center gap-0.5 min-w-[70px] {viewMode ===
-					'overview'
-						? 'bg-gradient-to-r from-blue-700 to-blue-800 text-white shadow-md'
-						: 'bg-blue-200 text-blue-800 hover:bg-blue-300'}"
 				>
 					<span class="text-base">📊</span>
 					<span class="text-[10px] leading-tight">Overview</span>
-				</button>
+				</Button>
 			</div>
 		</div>
 	</div>

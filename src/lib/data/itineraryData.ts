@@ -13,7 +13,6 @@ export const itineraryData: ItineraryData = {
 		},
 	},
 	dailySchedule: [
-		// Day 0: Nov 18 - Arrival
 		{
 			dayNumber: 0,
 			date: '2025-01-15',
@@ -49,7 +48,6 @@ export const itineraryData: ItineraryData = {
 				},
 			],
 		},
-		// Day 1: Nov 19 - Cairo Egypt
 		{
 			dayNumber: 1,
 			date: '2025-01-16',
@@ -85,7 +83,6 @@ export const itineraryData: ItineraryData = {
 				},
 			],
 		},
-		// Day 2: Nov 20 - Cairo Egypt - 6pm Khan el-Khalili Market and Dinner
 		{
 			dayNumber: 2,
 			date: '2025-01-17',
@@ -125,7 +122,6 @@ export const itineraryData: ItineraryData = {
 				},
 			],
 		},
-		// Day 3: Nov 21 - Cairo Egypt - 9am Giza Pyramid and Grand Egyptian Museum
 		{
 			dayNumber: 3,
 			date: '2025-01-18',
@@ -136,8 +132,7 @@ export const itineraryData: ItineraryData = {
 					startTime: '7:00',
 					endTime: '9:00',
 					activity: 'Breakfast & Checkout',
-					description:
-						'Check out of Hotel, prepare for day trip',
+					description: 'Check out of Hotel, prepare for day trip',
 					type: 'meals',
 					color: 'meals',
 					icon: '☕',
@@ -171,15 +166,13 @@ export const itineraryData: ItineraryData = {
 					startTime: '17:00',
 					endTime: '21:00',
 					activity: 'Return to Hotel & Dinner',
-					description:
-						'Return to Hotel for evening meal',
+					description: 'Return to Hotel for evening meal',
 					type: 'meals',
 					color: 'meals',
 					icon: '🍽️',
 				},
 			],
 		},
-		// Day 4: Nov 22 - Luxor Egypt - 5:30pm Luxor Temple
 		{
 			dayNumber: 4,
 			date: '2025-01-19',
@@ -190,8 +183,7 @@ export const itineraryData: ItineraryData = {
 					startTime: '7:00',
 					endTime: '10:00',
 					activity: 'Breakfast at Hotel & Flight to Luxor',
-					description:
-						'Check out of Hotel, fly to Luxor',
+					description: 'Check out of Hotel, fly to Luxor',
 					type: 'travel',
 					color: 'travel',
 					icon: '✈️',
@@ -229,7 +221,6 @@ export const itineraryData: ItineraryData = {
 				},
 			],
 		},
-		// Day 5: Nov 23 - Luxor Egypt - 1pm Dendera Temple Exploration
 		{
 			dayNumber: 5,
 			date: '2025-01-20',
@@ -268,7 +259,6 @@ export const itineraryData: ItineraryData = {
 				},
 			],
 		},
-		// Day 6: Nov 24 - Qena Egypt - 8am Valley of the Kings, Hatshepsut and Queen Nefertiti Tomb
 		{
 			dayNumber: 6,
 			date: '2025-01-21',
@@ -309,7 +299,6 @@ export const itineraryData: ItineraryData = {
 				},
 			],
 		},
-		// Day 7: Nov 25 - Esna Egypt - 8:15am Village of Esna by Foot
 		{
 			dayNumber: 7,
 			date: '2025-01-22',
@@ -349,7 +338,6 @@ export const itineraryData: ItineraryData = {
 				},
 			],
 		},
-		// Day 8: Nov 26 - Aswan Egypt - 7:30am The Temples of Abu Simbel
 		{
 			dayNumber: 8,
 			date: '2025-01-23',
@@ -389,7 +377,6 @@ export const itineraryData: ItineraryData = {
 				},
 			],
 		},
-		// Day 9: Nov 27 - Aswan Egypt - 8am Nubian Village, Philae Temple, and the Papyrus Institute
 		{
 			dayNumber: 9,
 			date: '2025-01-24',
@@ -430,7 +417,6 @@ export const itineraryData: ItineraryData = {
 				},
 			],
 		},
-		// Day 10: Nov 28 - Edfu Egypt - 8:30am Edfu Temple
 		{
 			dayNumber: 10,
 			date: '2025-01-25',
@@ -469,7 +455,6 @@ export const itineraryData: ItineraryData = {
 				},
 			],
 		},
-		// Day 11: Nov 29 - Cairo Egypt - 2pm Old Cairo and its Coptic Quarters
 		{
 			dayNumber: 11,
 			date: '2025-01-26',
@@ -508,7 +493,6 @@ export const itineraryData: ItineraryData = {
 				},
 			],
 		},
-		// Day 12: Nov 29 - Cairo Egypt - Departure
 		{
 			dayNumber: 12,
 			date: '2025-01-27',

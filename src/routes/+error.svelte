@@ -4,7 +4,6 @@
 	
 	let { error, status } = $props();
 
-	// Default cruise info for error page
 	const defaultCruiseInfo = {
 		title: 'Cruise Itinerary',
 		subtitle: 'Ancient Wonders of the Nile',

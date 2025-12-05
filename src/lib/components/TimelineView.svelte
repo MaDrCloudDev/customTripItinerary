@@ -244,23 +244,19 @@
 </div>
 
 <style>
-	/* Ensure consistent timeline alignment across all devices */
 	.timeline-grid {
-		/* Fix for sub-pixel rendering issues and ensure smooth rendering */
 		position: relative;
 		transform: translateZ(0);
 		overflow: hidden;
 	}
 
 	.timeline-hour {
-		/* Ensure exact 48px height regardless of browser */
 		height: 48px !important;
 		box-sizing: border-box;
 		flex-shrink: 0;
 	}
 
 	.activity-card {
-		/* Ensure proper positioning and prevent layout shift */
 		position: absolute;
 		will-change: transform;
 		transform: translateZ(0);
@@ -275,7 +271,6 @@
 		}
 
 		.activity-card {
-			/* Slightly reduce margins on mobile for better fit */
 			font-size: 0.875rem;
 		}
 	}
@@ -286,7 +281,6 @@
 		-webkit-font-smoothing: antialiased;
 	}
 
-	/* Text truncation for better layout */
 	.line-clamp-2 {
 		display: -webkit-box;
 		-webkit-line-clamp: 2;
@@ -303,7 +297,6 @@
 		overflow: hidden;
 	}
 
-	/* Better text wrapping for activity titles */
 	.overflow-wrap-anywhere {
 		overflow-wrap: anywhere;
 		word-wrap: anywhere;
@@ -316,7 +309,6 @@
 		-moz-hyphens: auto;
 	}
 
-	/* Ensure proper sizing on mobile */
 	@media (max-width: 640px) {
 		.activity-card {
 			left: 0.25rem;
@@ -334,7 +326,6 @@
 		}
 	}
 
-	/* Subtle scrollbar styling for activity cards */
 	.activity-card {
 		scrollbar-width: thin;
 		scrollbar-color: rgba(0, 0, 0, 0.2) transparent;

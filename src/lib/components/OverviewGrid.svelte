@@ -3,6 +3,7 @@
 	import { formatTime } from '../utils/dateUtils.js';
 	import { openGoogleMaps } from '../utils/mapsUtils.js';
 	import { getColorClass } from '../utils/styleUtils.js';
+	import LegendItem from './LegendItem.svelte';
 
 	interface Props {
 		dailySchedule: DaySchedule[];
@@ -24,36 +25,11 @@
 		<p class="text-gray-700">Your 12-day Egyptian adventure</p>
 
 		<div class="mt-4 flex flex-wrap justify-center gap-3 text-xs">
-			<div class="flex items-center gap-1">
-				<div
-					class="w-4 h-4 bg-gradient-to-br from-amber-100 to-amber-200 border border-amber-400 rounded"
-				></div>
-				<span>Excursions</span>
-			</div>
-			<div class="flex items-center gap-1">
-				<div
-					class="w-4 h-4 bg-gradient-to-br from-purple-100 to-purple-200 border border-purple-400 rounded"
-				></div>
-				<span>Cultural</span>
-			</div>
-			<div class="flex items-center gap-1">
-				<div
-					class="w-4 h-4 bg-gradient-to-br from-sky-100 to-sky-200 border border-sky-400 rounded"
-				></div>
-				<span>Travel</span>
-			</div>
-			<div class="flex items-center gap-1">
-				<div
-					class="w-4 h-4 bg-gradient-to-br from-red-100 to-orange-200 border border-red-400 rounded"
-				></div>
-				<span>Meals</span>
-			</div>
-			<div class="flex items-center gap-1">
-				<div
-					class="w-4 h-4 bg-gradient-to-br from-lime-100 to-lime-200 border border-lime-400 rounded"
-				></div>
-				<span>Free Time</span>
-			</div>
+			<LegendItem color="excursion" label="Excursions" />
+			<LegendItem color="cultural" label="Cultural" />
+			<LegendItem color="travel" label="Travel" />
+			<LegendItem color="meals" label="Meals" />
+			<LegendItem color="free" label="Free Time" />
 		</div>
 	</div>
 
@@ -136,7 +112,6 @@
 		word-break: break-word;
 	}
 
-	/* Ensure activity list items don't overflow */
 	.activity-list > div {
 		overflow: hidden;
 	}
@@ -148,7 +123,6 @@
 		-moz-hyphens: auto;
 	}
 
-	/* Mobile optimizations */
 	@media (max-width: 768px) {
 		.activity-list > div {
 			padding: 0.5rem;

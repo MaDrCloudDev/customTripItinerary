@@ -135,7 +135,6 @@
 		word-break: break-word;
 	}
 
-	/* Mobile-specific text handling */
 	@media (max-width: 768px) {
 		h3, p {
 			word-break: break-word;
