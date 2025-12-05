@@ -1,5 +1,12 @@
 declare global {
-	namespace App {}
+	namespace App {
+		interface PageData {
+			itinerary: ItineraryData;
+			meta: {
+				totalDays: number;
+			};
+		}
+	}
 }
 
 export interface TimeSlot {

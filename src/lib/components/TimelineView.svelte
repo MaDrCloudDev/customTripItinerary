@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { DaySchedule } from '../../app.js';
+	import type { DaySchedule } from '../../app.d.ts';
 	import {
 		formatTime,
 		calculateDuration,
@@ -208,8 +208,11 @@
 										{#if activity.location}
 											<div class="mt-auto pt-1 flex-shrink-0">
 												<button
-													onclick={() =>
-														openGoogleMaps(activity.location)}
+													onclick={() => {
+														if (activity.location) {
+															openGoogleMaps(activity.location);
+														}
+													}}
 													class="flex items-center gap-1 bg-white/80 hover:bg-white/95 rounded px-1.5 py-0.5 border border-gray-300/50 transition-all duration-200 cursor-pointer shadow-sm hover:shadow-md text-xs w-full"
 												>
 													<span class="text-xs flex-shrink-0">📍</span>

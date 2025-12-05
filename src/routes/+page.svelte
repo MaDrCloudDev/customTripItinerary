@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ViewMode, ItineraryData } from '../lib/data/index.js';
+	import type { ViewMode } from '../app.d.ts';
 
 	import { STORAGE_KEYS, VIEW_MODES } from '../lib/constants.js';
 	import {
@@ -16,7 +16,7 @@
 	import OverviewGrid from '../lib/components/OverviewGrid.svelte';
 	import CruiseFooter from '../lib/components/CruiseFooter.svelte';
 
-	let { data }: { data: { itinerary: ItineraryData; meta: { totalDays: number } } } = $props();
+	let { data }: { data: App.PageData } = $props();
 
 	let currentDayIndex = $state(0);
 	let viewMode = $state<ViewMode>(VIEW_MODES.SINGLE);

@@ -8,10 +8,10 @@
 		onclick?: () => void;
 		onkeydown?: (e: KeyboardEvent) => void;
 		class?: string;
-		children?: any;
+		children: any;
 	}
 
-	let { variant = 'primary', disabled = false, type = 'button', onclick, class: className = '', onkeydown }: Props = $props();
+	let { variant = 'primary', disabled = false, type = 'button', onclick, class: className = '', onkeydown, children }: Props = $props();
 
 	const variantClasses = {
 		primary: 'px-3 py-2 rounded-full bg-gradient-to-r from-blue-700 to-blue-800 text-white font-medium disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed transition-all duration-300 hover:shadow-lg hover:scale-105',
@@ -31,5 +31,5 @@
 	{onkeydown}
 	class="{baseClass} {className}"
 >
-	<slot />
+	{@render children()}
 </button>
