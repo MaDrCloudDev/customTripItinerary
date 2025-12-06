@@ -9,6 +9,12 @@ export const handle: Handle = async ({ event, resolve }) => {
 	);
 	response.headers.set('X-Frame-Options', 'DENY');
 	response.headers.set('X-Content-Type-Options', 'nosniff');
+	response.headers.set(
+		'Cache-Control',
+		'no-cache, no-store, must-revalidate, max-age=0'
+	);
+	response.headers.set('Pragma', 'no-cache');
+	response.headers.set('Expires', '0');
 
 	return response;
 };

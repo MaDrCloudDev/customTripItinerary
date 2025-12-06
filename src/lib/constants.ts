@@ -1,6 +1,8 @@
+export const APP_VERSION = 'v2.0.0';
+
 export const STORAGE_KEYS = {
-	DAY_INDEX: 'cruise-day-index',
-	VIEW_MODE: 'cruise-view-mode',
+	DAY_INDEX: `cruise-day-index-${APP_VERSION}`,
+	VIEW_MODE: `cruise-view-mode-${APP_VERSION}`,
 } as const;
 
 export const VIEW_MODES = {

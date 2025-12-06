@@ -19,7 +19,7 @@
 </script>
 
 <svelte:head>
-	<title>Error - Viking Egypt Cruise Itinerary</title>
+	<title>Error - Egypt Cruise Itinerary</title>
 </svelte:head>
 
 <div class="min-h-screen">

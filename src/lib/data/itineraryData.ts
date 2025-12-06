@@ -191,9 +191,9 @@ export const itineraryData: ItineraryData = {
 				{
 					startTime: '10:00',
 					endTime: '15:00',
-					activity: 'Board Viking Ship',
+					activity: 'Board Ship',
 					description:
-						'Finally board Viking ship after arriving in Luxor',
+						'Finally board the ship after arriving in Luxor',
 					type: 'embarkation',
 					color: 'travel',
 					icon: '🚢',
@@ -214,7 +214,7 @@ export const itineraryData: ItineraryData = {
 					startTime: '19:30',
 					endTime: '21:00',
 					activity: 'First Dinner Aboard Ship',
-					description: 'Welcome dinner aboard Viking ship',
+					description: 'Welcome dinner aboard the ship',
 					type: 'meals',
 					color: 'meals',
 					icon: '🍽️',

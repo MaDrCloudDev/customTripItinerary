@@ -16,6 +16,7 @@
 		font-size: 18px;
 		scroll-behavior: smooth;
 		background-color: #bfdbfe;
+		height: 100%;
 	}
 
 	body {
@@ -28,7 +29,8 @@
 			#bfdbfe 50%,
 			#dcfce7 100%
 		);
-		min-height: 100vh;
+		background-attachment: fixed;
+		min-height: 100%;
 		color: #374151;
 		padding: 0;
 		margin: 0;

@@ -23,7 +23,7 @@
 			></div>
 		</div>
 		<p class="text-lg font-semibold text-white drop-shadow-sm mb-2">
-			Viking Egypt Cruise Itinerary
+			Egypt Cruise Itinerary
 		</p>
 		<p class="text-blue-100 font-medium">
 			{cruiseInfo.passengers}

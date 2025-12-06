@@ -48,11 +48,7 @@ export const openGoogleMaps = (location: string): void => {
 		}
 
 		const url = createGoogleMapsUrl(location);
-		const opened = window.open(
-			url,
-			'_blank',
-			MAPS_CONFIG.WINDOW_FEATURES
-		);
+		window.open(url, '_blank', MAPS_CONFIG.WINDOW_FEATURES);
 	} catch (error) {
 		console.error('Failed to open Google Maps:', error);
 	}

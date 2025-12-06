@@ -1,5 +1,6 @@
 <script lang="ts">
-	import type { DaySchedule, ViewMode } from '../../app.d.ts';
+	import { page } from '$app/state';
+	import type { DaySchedule } from '../../app.d.ts';
 	import { formatDate } from '../utils/dateUtils.js';
 	import Button from './Button.svelte';
 
@@ -7,21 +8,19 @@
 		currentDay: DaySchedule;
 		currentDayIndex: number;
 		totalDays: number;
-		viewMode: ViewMode;
 		onPrevDay: () => void;
 		onNextDay: () => void;
-		onViewChange: (mode: ViewMode) => void;
 	}
 
 	let {
 		currentDay,
 		currentDayIndex,
 		totalDays,
-		viewMode,
 		onPrevDay,
 		onNextDay,
-		onViewChange,
 	}: Props = $props();
+
+	let pathname = $derived(page.url.pathname);
 
 	const isPrevDisabled = $derived(currentDayIndex === 0);
 	const isNextDisabled = $derived(currentDayIndex >= totalDays - 1);
@@ -59,24 +58,21 @@
 			</div>
 
 			<div class="flex items-center gap-2">
-				<Button
-					variant={viewMode === 'single' ? 'active' : 'secondary'}
-					onclick={() => onViewChange('single')}
-				>
-					📅 Day
-				</Button>
-				<Button
-					variant={viewMode === 'timeline' ? 'active' : 'secondary'}
-					onclick={() => onViewChange('timeline')}
-				>
-					🕐 Timeline
-				</Button>
-				<Button
-					variant={viewMode === 'overview' ? 'active' : 'secondary'}
-					onclick={() => onViewChange('overview')}
-				>
-					📊 Overview
-				</Button>
+				<a href="/">
+					<Button variant={pathname === '/' ? 'active' : 'secondary'}>
+						📅 Day
+					</Button>
+				</a>
+				<a href="/timeline">
+					<Button variant={pathname === '/timeline' ? 'active' : 'secondary'}>
+						🕐 Timeline
+					</Button>
+				</a>
+				<a href="/overview">
+					<Button variant={pathname === '/overview' ? 'active' : 'secondary'}>
+						📊 Overview
+					</Button>
+				</a>
 			</div>
 
 			<Button
@@ -129,30 +125,30 @@
 			</div>
 
 			<div class="flex items-center justify-center gap-2">
-				<Button
-					variant={viewMode === 'single' ? 'active' : 'icon'}
-					class="bg-blue-200 text-blue-800 hover:bg-blue-300"
-					onclick={() => onViewChange('single')}
-				>
-					<span class="text-base">📅</span>
-					<span class="text-[10px] leading-tight">Day</span>
-				</Button>
-				<Button
-					variant={viewMode === 'timeline' ? 'active' : 'icon'}
-					class="bg-blue-200 text-blue-800 hover:bg-blue-300"
-					onclick={() => onViewChange('timeline')}
-				>
-					<span class="text-base">🕐</span>
-					<span class="text-[10px] leading-tight">Timeline</span>
-				</Button>
-				<Button
-					variant={viewMode === 'overview' ? 'active' : 'icon'}
-					class="bg-blue-200 text-blue-800 hover:bg-blue-300"
-					onclick={() => onViewChange('overview')}
-				>
-					<span class="text-base">📊</span>
-					<span class="text-[10px] leading-tight">Overview</span>
-				</Button>
+				<a href="/">
+					<Button
+						variant={pathname === '/' ? 'icon-active' : 'icon'}
+					>
+						<span class="text-base">📅</span>
+						<span class="text-[10px] leading-tight">Day</span>
+					</Button>
+				</a>
+				<a href="/timeline">
+					<Button
+						variant={pathname === '/timeline' ? 'icon-active' : 'icon'}
+					>
+						<span class="text-base">🕐</span>
+						<span class="text-[10px] leading-tight">Timeline</span>
+					</Button>
+				</a>
+				<a href="/overview">
+					<Button
+						variant={pathname === '/overview' ? 'icon-active' : 'icon'}
+					>
+						<span class="text-base">📊</span>
+						<span class="text-[10px] leading-tight">Overview</span>
+					</Button>
+				</a>
 			</div>
 		</div>
 	</div>
